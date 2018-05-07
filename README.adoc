@@ -1,0 +1,4 @@
+= ImgLibrary
+[2017 2018] [L2 Info] [Nathanael Bayard]
+
+Banque d'image gérée par tags, écrite en Java.
