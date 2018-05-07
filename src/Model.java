@@ -7,35 +7,49 @@ import java.util.Observable;
 public class Model extends Observable {
 	Paths path;
 	//String[] allSessions = {"a", "b", "c"};
-	ArrayList<String> sessionsList;
+	ArrayList<String> sessionsList = new ArrayList<String>();
 	ArrayList<Session> allSessions = new ArrayList<Session>();
 	// public String[] getSessions() {
 	
 	Model(Paths p) {
 		path = p;
 		readSessionsList();
-		createSession("a");
-		createSession("b");
-		createSession("c");
-		createSession("d");
+		//createSession("a");
+		//createSession("b");
+		//createSession("c");
+		//createSession("d");
 	}
 	
 	
 	private void readSessionsList() {
-		ArrayList<String> o;
+		ArrayList<String> list;
 		try {
-			o = (ArrayList<String>)U.fromXML(path.sessionsList);
+			list = (ArrayList<String>)U.fromXML(path.sessionsList);
 		} catch (ClassCastException cce) {
 			U.log("readSessionsList: cast impossible");
-			o = null;
+			list = null;
 		}
-		if (o == null) {
+		if (list == null) {
 			U.log("sessionsList null");
-			sessionsList = new ArrayList<String>();
+			//sessionsList = new ArrayList<String>();
 		}
 		else {
 			U.log("sessionsList not null");
-			sessionsList = o;
+			//sessionsList = o;
+			for (int i = 0; i < list.size(); i++) {
+				String name = list.get(i);
+				Session session;
+				try {
+					session = (Session) U.fromXML(path.sessionFile(name));
+				} catch (ClassCastException cce) {
+					U.log("readSessionsList: cast impossible for session " + name);
+					session = null;
+				}
+				if (session != null) {
+					sessionsList.add(name);
+					allSessions.add(session);
+				}
+			}
 		}
 	}
 	
@@ -65,10 +79,18 @@ public class Model extends Observable {
 	// The output is a report on potential failure.
 	public int renameSession(String name, int sessionIndex) {
 		Session s = allSessions.get(sessionIndex);
+		String oldName = s.name;
 		int report = nameSession(name, s, sessionIndex);
 		
-		setChanged();
-		notifyObservers();
+		if (report == U.OK) {
+			File oldSessionFile = new File(path.sessionFile(oldName));
+			if (oldSessionFile.exists()) {
+				U.log("renameSession: old file exists");
+				oldSessionFile.delete();
+			}
+			setChanged();
+			notifyObservers();
+		}
 		
 		return report;
 	}
@@ -112,5 +134,9 @@ public class Model extends Observable {
 
 	public void save() {
 		U.toXML(sessionsList, path.sessionsList);
+		for (int i = 0; i < sessionsList.size(); i++) {
+			Session session = allSessions.get(i);
+			U.toXML(session, path.sessionFile(session.name));
+		}
 	}
 }
