@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -56,7 +57,7 @@ public class SessionManager extends JDialog implements Observer {
 			inside.add(north, BorderLayout.NORTH);
 
 		// Center
-			sessions = new JList(model.getSessionsList().toArray());
+			sessions = new JList();
 			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			sessionsPane = new JScrollPane (sessions);
@@ -94,11 +95,12 @@ public class SessionManager extends JDialog implements Observer {
 			inside.add(south, BorderLayout.SOUTH);
 			
 		model.addObserver(this);
+		refreshData();
 	}
 	
 	private void refreshData() {
 		U.log("refreshData called");
-		Object[] array = model.getSessionsList().toArray();
+		Object[] array = model.getSessionsNames();
 		sessions.setListData(array);
 		//sessions.validate();
 	}
@@ -182,7 +184,7 @@ public class SessionManager extends JDialog implements Observer {
 					}
 					// else
 					U.log("renaming done");
-					U.log("sessionsList: " + model.getSessionsList().toString());
+					U.log("sessionsList: " + Arrays.toString(model.getSessionsNames()));
 					// the SessionManager dialog should now get refreshed automatically
 					// thanks to the Observer pattern
 				}

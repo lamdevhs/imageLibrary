@@ -1,13 +1,13 @@
 
-public class Paths {
+public class Locator {
 	public String root;
 	public String sessionsFolder = "sessions";
-	public String sessionsList = "all_sessions.xml";
+	public String all_sessions = "all_sessions.xml";
 	
-	Paths(String root_) {
+	Locator(String root_) {
 		root = root_;
 		sessionsFolder = U.catPaths(root, sessionsFolder);
-		sessionsList = U.catPaths(sessionsFolder, sessionsList);
+		all_sessions = U.catPaths(sessionsFolder, all_sessions);
 	}
 	
 	// returns the path of the file of the session whose

@@ -2,10 +2,14 @@
 
 == fixes
 - [x] SessionUI -> SessionManager
+- [ ] forbid a session to be called all_sessions (or put that file elsewhere)
+- [ ] put all the live data of the app inside a "live/root/config/data" subfolder
+- [x] get rid of sessionsList: redundancy is evil
+- [x] TODO remove sessionIndex argument from nameSession()
 
 == Model
 
-- [ ] reading/writing SessionFile
+- [x] reading/writing SessionFile
 - [x] create Session
 - [x] rename Session
 - [x] delete Session

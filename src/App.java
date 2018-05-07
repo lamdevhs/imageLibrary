@@ -3,9 +3,9 @@ public class App {
 	Model model;
 	
 	App(String rootpath) {
-		Paths path = new Paths(rootpath);
-		model = new Model(path);
-		new MainUI(model, this);
+		Locator locator = new Locator(rootpath);
+		model = new Model(locator);
+		new MainFrame(model, this);
 	}
 	
 	public void quit() {

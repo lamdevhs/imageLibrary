@@ -1,11 +1,11 @@
 import javax.swing.*;
 
 
-public class MainUI extends JFrame {
+public class MainFrame extends JFrame {
 	private App app;
 	private Model model;
 	
-	MainUI(Model model_, App app_){
+	MainFrame(Model model_, App app_){
 		model = model_;
 		app = app_;
 		
