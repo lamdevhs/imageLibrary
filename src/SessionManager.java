@@ -1,12 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
 
-public class SessionManager extends JDialog {
-	
+public class SessionManager extends JDialog implements Observer {
+
+	private App app;
 	private Model model;
 	private int returnValue = U.INVALID;
 
@@ -34,10 +37,11 @@ public class SessionManager extends JDialog {
 		private JPanel north = new JPanel();
 		private JLabel text = new JLabel("Session Manager");
 	
-	public SessionManager(JFrame owner, Model model_) {
+	public SessionManager(JFrame owner, App app_, Model model_) {
 		super(owner, true);
 		
 		model = model_;
+		app = app_;
 		Dimension oneButton = new JButton("MMMMM").getPreferredSize();
 
 		setTitle("Session Manager");
@@ -52,7 +56,7 @@ public class SessionManager extends JDialog {
 			inside.add(north, BorderLayout.NORTH);
 
 		// Center
-			sessions = new JList(model.getSessions().toArray());
+			sessions = new JList(model.getSessionsList().toArray());
 			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			sessionsPane = new JScrollPane (sessions);
@@ -88,6 +92,20 @@ public class SessionManager extends JDialog {
 			south.add(Box.createGlue());
 			south.add(open);
 			inside.add(south, BorderLayout.SOUTH);
+			
+		model.addObserver(this);
+	}
+	
+	private void refreshData() {
+		U.log("refreshData called");
+		Object[] array = model.getSessionsList().toArray();
+		sessions.setListData(array);
+		//sessions.validate();
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		refreshData();
 	}
 	
 	// Open the session manager
@@ -97,10 +115,11 @@ public class SessionManager extends JDialog {
 	// or, if the manager was closed by the user, closes the program.
 	public int open() {
 		setVisible(true);
-		
-		// after the dialog is closed:
+		// after the session manager is closed
+		// by the user:
 		if (returnValue == U.INVALID) {
-			return U.quitApp();
+			app.quit();
+			return 42; // will never be reached anyway
 		}
 		else return returnValue;
 	}
@@ -112,6 +131,7 @@ public class SessionManager extends JDialog {
 		// closes the dialog
 		// the flow continues inside this.openSession()
 	}
+
 
 	private class Listener implements ActionListener {
 
@@ -135,10 +155,10 @@ public class SessionManager extends JDialog {
 					return;
 				}
 				// else
-				SessionManager.this.close(sessionIndex);
+				//SessionManager.this.close(sessionIndex);
 			}
-			if (src == quit) {
-				U.quitApp();
+			else if (src == quit) {
+				app.quit();
 			}
 			else { // open, delete or rename
 				int sessionIndex = sessions.getSelectedIndex();
@@ -162,6 +182,7 @@ public class SessionManager extends JDialog {
 					}
 					// else
 					U.log("renaming done");
+					U.log("sessionsList: " + model.getSessionsList().toString());
 					// the SessionManager dialog should now get refreshed automatically
 					// thanks to the Observer pattern
 				}
@@ -196,16 +217,6 @@ public class SessionManager extends JDialog {
 			U.error(SessionManager.this, errmsg);
 		}
 		
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Model model = new Model();
-		new MainUI(model);
-		//ui.setVisible(true);
 	}
 
 }

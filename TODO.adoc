@@ -5,12 +5,12 @@
 
 == Model
 
-- reading/writing SessionFile
-- create Session
-- rename Session
-- delete Session
+- [ ] reading/writing SessionFile
+- [x] create Session
+- [x] rename Session
+- [x] delete Session
 
-- Observable
+- [x] Observable
 
 == View
 
@@ -26,4 +26,5 @@
 
 == App
 
-=== class Main
+- [x] class App
+- [x] class Paths

@@ -1,3 +1,12 @@
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -8,9 +17,14 @@ public class U {
 	public static int INVALID = -2;
 	public static int OK = 0;
 
+	public static String catPaths(String head, String tail) {
+		return head + "/" + tail;
+	}
+
 	public static void log(String string) {
 		System.out.println("[LOG] " + string);
 	}
+	
 
 	public static void error(JFrame owner, String errmsg) {
 		JOptionPane.showMessageDialog(owner, errmsg, "User Error",
@@ -38,11 +52,62 @@ public class U {
 		return JOptionPane.showConfirmDialog(owner, msg, "Confirmation",
 			JOptionPane.YES_NO_OPTION);
 	}
-
-	public static int quitApp() {
-		U.log("quit app");
-		System.exit(0);
-		return 0; // will of course never be reached
+	
+	// return null in case of failure
+	public static Object fromXML(String path) {
+		Object o;
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+		XMLDecoder decoder = null;
+		
+		try {
+			fis = new FileInputStream(path);
+		} catch (FileNotFoundException e1) {
+			U.log("fromXML: FileNotFoundException");
+			//e1.printStackTrace();
+			return null;
+		}
+		bis = new BufferedInputStream(fis);
+		decoder = new XMLDecoder(bis);
+		o = decoder.readObject();
+		decoder.close();
+		try {
+			bis.close();
+			fis.close();
+		} catch (IOException e) {
+			U.log("fromXML: IOException");
+			//e.printStackTrace();
+		}
+		return o;
+	}
+	
+	// returns false if failed
+	public static boolean toXML(Object o, String path) {
+		FileOutputStream fos = null;
+		BufferedOutputStream bos = null;
+		XMLEncoder encoder = null;
+		try {
+			fos = new FileOutputStream(path);
+		} catch (FileNotFoundException e) {
+			U.log("toXML: FileNotFoundException");
+			//e.printStackTrace();
+			return false;
+		}
+		bos = new BufferedOutputStream(fos);
+		encoder = new XMLEncoder(bos);
+		
+		encoder.writeObject(o);
+		encoder.flush();
+		encoder.close();
+		try {
+			bos.close();
+			fos.close();
+		} catch (IOException e) {
+			U.log("toXML: IOException");
+			//e.printStackTrace();
+			return false; // or true?
+		}
+		return true;
 	}
 
 }
