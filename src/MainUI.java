@@ -9,8 +9,8 @@ public class MainUI extends JFrame {
 		
 		setSize(200,200);
 
-		SessionUI sessionUI = new SessionUI(this, model);
-		int res = sessionUI.openSession();
+		SessionManager sessionManager = new SessionManager(this, model);
+		int res = sessionManager.open();
 		U.log("MainUI: res: " + res);
 		setVisible(true);
 	}

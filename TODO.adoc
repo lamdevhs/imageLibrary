@@ -1,0 +1,29 @@
+= TODO
+
+== fixes
+- [x] SessionUI -> SessionManager
+
+== Model
+
+- reading/writing SessionFile
+- create Session
+- rename Session
+- delete Session
+
+- Observable
+
+== View
+
+- SessionManager
+** Model Observer
+
+- MainFrame
+** layout
+** menus
+** Picture View
+
+- Picture info window
+
+== App
+
+=== class Main

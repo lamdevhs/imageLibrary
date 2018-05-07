@@ -5,7 +5,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 
-public class SessionUI extends JDialog {
+public class SessionManager extends JDialog {
 	
 	private Model model;
 	private int returnValue = U.INVALID;
@@ -34,7 +34,7 @@ public class SessionUI extends JDialog {
 		private JPanel north = new JPanel();
 		private JLabel text = new JLabel("Session Manager");
 	
-	public SessionUI(JFrame owner, Model model_) {
+	public SessionManager(JFrame owner, Model model_) {
 		super(owner, true);
 		
 		model = model_;
@@ -90,7 +90,12 @@ public class SessionUI extends JDialog {
 			inside.add(south, BorderLayout.SOUTH);
 	}
 	
-	public int openSession() {
+	// Open the session manager
+	// Works in a modal way: the function is paused as soon as
+	// `this` is `setVisible(true)`. Once `this` stops being visible,
+	// open() continues on and returns the index of the session that was chosen
+	// or, if the manager was closed by the user, closes the program.
+	public int open() {
 		setVisible(true);
 		
 		// after the dialog is closed:
@@ -99,9 +104,9 @@ public class SessionUI extends JDialog {
 		}
 		else return returnValue;
 	}
-	
 
-	public void closeDialog(int sessionIndex) {
+	// Close (hide) the session manager
+	public void close(int sessionIndex) {
 		returnValue = sessionIndex;
 		this.setVisible(false);
 		// closes the dialog
@@ -116,7 +121,7 @@ public class SessionUI extends JDialog {
 			if (src == create) {
 				U.log("create session");
 				String msg = "Name for the new session :";
-				String name = U.input(SessionUI.this, msg);
+				String name = U.input(SessionManager.this, msg);
 				if (name == null) {
 					U.log("abandon");
 					return;
@@ -130,7 +135,7 @@ public class SessionUI extends JDialog {
 					return;
 				}
 				// else
-				SessionUI.this.closeDialog(sessionIndex);
+				SessionManager.this.close(sessionIndex);
 			}
 			if (src == quit) {
 				U.quitApp();
@@ -139,12 +144,12 @@ public class SessionUI extends JDialog {
 				int sessionIndex = sessions.getSelectedIndex();
 				U.log("index selected: " + sessions.getSelectedIndex());
 				if (sessionIndex == -1) {
-					U.error(SessionUI.this, "No session was selected.");
+					U.error(SessionManager.this, "No session was selected.");
 					return;
 				}
 				if (src == rename) {
 					U.log("rename");
-					String newName = U.input(SessionUI.this, "New name for the session :");
+					String newName = U.input(SessionManager.this, "New name for the session :");
 					if (newName == null) {
 						U.log("abandon");
 						return;
@@ -157,12 +162,12 @@ public class SessionUI extends JDialog {
 					}
 					// else
 					U.log("renaming done");
-					// the SessionUI should now get refreshed automatically
+					// the SessionManager dialog should now get refreshed automatically
 					// thanks to the Observer pattern
 				}
 				else if (src == delete) {
 					U.log("delete");
-					int answer = U.confirm(SessionUI.this, "Deleting a session cannot be undone. Proceed?");
+					int answer = U.confirm(SessionManager.this, "Deleting a session cannot be undone. Proceed?");
 					if (answer != JOptionPane.YES_OPTION) {
 						U.log("abandon");
 						return;
@@ -170,12 +175,12 @@ public class SessionUI extends JDialog {
 					// else
 					model.deleteSession(sessionIndex);
 					U.log("deleting done");
-					// the SessionUI should now get refreshed automatically
+					// the SessionManager dialog should now get refreshed automatically
 					// thanks to the Observer pattern
 				}
 				else if (src == open) {
 					U.log("open");
-					SessionUI.this.closeDialog(sessionIndex);
+					SessionManager.this.close(sessionIndex);
 				}
 			}
 		}
@@ -188,7 +193,7 @@ public class SessionUI extends JDialog {
 			else if (error == U.INVALID) {
 				errmsg = "The given name is not a valid session name.";
 			}
-			U.error(SessionUI.this, errmsg);
+			U.error(SessionManager.this, errmsg);
 		}
 		
 	}
