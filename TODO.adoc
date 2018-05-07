@@ -6,7 +6,7 @@
 - [x] put all the live data of the app inside a "appdata" subfolder
 - [x] get rid of sessionsList: redundancy is evil
 - [x] TODO remove sessionIndex argument from nameSession()
-- [ ] move "new" button of SessionManager to West panel
+- [x] move "new" button of SessionManager to West panel
 
 == Model
 

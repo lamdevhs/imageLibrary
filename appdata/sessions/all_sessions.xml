@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_162" class="java.beans.XMLDecoder">
+ <array class="java.lang.String" length="3">
+  <void index="0">
+   <string>ss2</string>
+  </void>
+  <void index="1">
+   <string>ss3.2</string>
+  </void>
+  <void index="2">
+   <string>zzzss</string>
+  </void>
+ </array>
+</java>

@@ -24,14 +24,13 @@ public class SessionManager extends JDialog implements Observer {
 
 	// West
 		private JPanel west = new JPanel();
-		//private Box west = Box.createVerticalBox();
 		private JButton rename = new JButton("Rename");
 		private JButton delete = new JButton("Delete");
+		private JButton create = new JButton("New");
 
 	// South
 		private Box south = Box.createHorizontalBox();
 		private JButton quit = new JButton("Quit");
-		private JButton create = new JButton("New");
 		private JButton open = new JButton("Open");
 
 	// North
@@ -52,44 +51,42 @@ public class SessionManager extends JDialog implements Observer {
 		inside.setLayout(new BorderLayout());
 		inside.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+		// Widgets
+			rename.setPreferredSize(oneButton);
+			delete.setPreferredSize(oneButton);
+			create.setPreferredSize(oneButton);
+			quit.setPreferredSize(oneButton);
+			open.setPreferredSize(oneButton);
+
+			rename.addActionListener(listener);
+			delete.addActionListener(listener);
+			create.addActionListener(listener);
+			quit.addActionListener(listener);
+			open.addActionListener(listener);
+
+			sessions = new JList();
+			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		// North
 			north.add(text);
 			inside.add(north, BorderLayout.NORTH);
 
 		// Center
-			sessions = new JList();
-			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
 			sessionsPane = new JScrollPane (sessions);
-			sessions.setVisibleRowCount(6);
+			//sessions.setVisibleRowCount(6);
 			sessionsPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			inside.add(sessionsPane, BorderLayout.CENTER);
 
 		// West
-			rename.setPreferredSize(oneButton);
-			delete.setPreferredSize(oneButton);
-
-			rename.addActionListener(listener);
-			delete.addActionListener(listener);
-
 			west.setLayout(new FlowLayout());
 			west.setPreferredSize(oneButton);
 			west.add(rename);
 			west.add(delete);
+			west.add(create);
 			inside.add(west, BorderLayout.WEST);
 
 		// South
-			quit.setPreferredSize(oneButton);
-			create.setPreferredSize(oneButton);
-			open.setPreferredSize(oneButton);
-
-			quit.addActionListener(listener);
-			create.addActionListener(listener);
-			open.addActionListener(listener);
-
 			south.add(quit);
-			south.add(Box.createGlue());
-			south.add(create);
 			south.add(Box.createGlue());
 			south.add(open);
 			inside.add(south, BorderLayout.SOUTH);
