@@ -2,12 +2,14 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -107,6 +109,23 @@ public class U {
 			return false; // or true?
 		}
 		return true;
+	}
+
+	public static File folderDialog(JFrame owner, String title, File dir) {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+		chooser.setDialogTitle(title);
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setCurrentDirectory(new File("/opt/pics"));
+		// if (dir != null) chooser.setCurrentDirectory(dir);
+		// ^ to uncomment in the end
+		
+		int report = chooser.showOpenDialog(owner);
+		if (report != JFileChooser.APPROVE_OPTION) return null;
+
+		File result = chooser.getSelectedFile();
+		if (!result.exists() || !result.isDirectory()) return null;
+		else return result;
 	}
 
 }

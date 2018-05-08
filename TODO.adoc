@@ -1,5 +1,9 @@
 = TODO
 
+== in the end
+
+- [ ] remove the /opt/pics thing
+
 == misc fixing
 - [x] SessionUI -> SessionManager
 - [x] get rid of sessionsList: redundancy is evil

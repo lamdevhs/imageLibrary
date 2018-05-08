@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
@@ -9,7 +10,7 @@ import javax.swing.border.*;
 
 
 public class SessionManager extends JFrame implements Observer {
-	public void log(String string) {
+	public static void log(String string) {
 		U.log("(MainFrame) " + string);
 	}
 
@@ -106,6 +107,89 @@ public class SessionManager extends JFrame implements Observer {
 		sessions.setListData(array);
 	}
 
+	public void createSession() {
+		log("create session");
+		String msg = "Name for the new session :";
+		String name = U.input(SessionManager.this, msg);
+		if (name == null) {
+			log("abandon");
+			return;
+		}
+		// else
+		log("name chosen: " + name);
+
+		int report = model.checkNewSessionName(name, null);
+		log("report on name chosen: " + report);
+		if (report != U.OK) {
+			namingSessionError(report);
+			return;
+		}
+
+		// else
+		File folder = U.folderDialog(this,
+			"Choose the session's image folder", null);
+		if (folder == null
+			|| !folder.exists()
+			|| !folder.isDirectory())
+		{
+			log("folderDialog -> null");
+			U.error((JFrame)null, "A valid folder is required to " +
+				"create a new session.");
+			return;
+		}
+		// else
+		log("folderDialog -> "+ folder.getAbsolutePath());
+		model.addNewSession(name, folder);
+
+		// nothing to do -- Observer pattern will update
+		// `this` session manager
+	}
+
+	public void renameSession(int sessionIndex) {
+		log("rename");
+		String newName = U.input(SessionManager.this, "New name for the session :");
+		if (newName == null) {
+			log("abandon");
+			return;
+		}
+		// else
+		int report = model.renameSession(newName, sessionIndex);
+		if (report != U.OK) {
+			this.namingSessionError(report);
+			return;
+		}
+		// else
+		log("renaming done");
+		log("sessionsList: " + Arrays.toString(model.getSessionsNames()));
+		// the SessionManager dialog should now get refreshed automatically
+		// thanks to the Observer pattern
+	}
+
+	public void deleteSession(int sessionIndex) {
+		log("delete");
+		int answer = U.confirm(SessionManager.this, "Deleting a session cannot be undone. Proceed?");
+		if (answer != JOptionPane.YES_OPTION) {
+			log("abandon");
+			return;
+		}
+		// else
+		model.deleteSession(sessionIndex);
+		log("deleting done");
+		// the SessionManager dialog should now get refreshed automatically
+		// thanks to the Observer pattern
+	}
+
+	public void namingSessionError(int error) {
+		String errmsg = "A user error was encountered.";
+		if (error == U.IMPOSSIBLE) {
+			errmsg = "A session with that name already exists.";
+		}
+		else if (error == U.INVALID) {
+			errmsg = "The given name is not a valid session name.";
+		}
+		U.error(this, errmsg);
+	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		readModel();
@@ -123,24 +207,7 @@ public class SessionManager extends JFrame implements Observer {
 		public void actionPerformed(ActionEvent ev) {
 			Object source = ev.getSource();
 			if (source == create) {
-				log("create session");
-				String msg = "Name for the new session :";
-				String name = U.input(SessionManager.this, msg);
-				if (name == null) {
-					log("abandon");
-					return;
-				}
-				// else
-				log("name given: " + name);
-				int sessionIndex = model.createSession(name);
-				log("matching session index: " + sessionIndex);
-				if (sessionIndex < 0) {
-					this.namingSessionError(sessionIndex);
-					return;
-				}
-				// else
-				// nothing to do -- Observer patter will update
-				// the manager
+				createSession();
 			}
 			else if (source == quit) {
 				app.quit(SessionManager.this);
@@ -153,36 +220,10 @@ public class SessionManager extends JFrame implements Observer {
 					return;
 				}
 				if (source == rename) {
-					log("rename");
-					String newName = U.input(SessionManager.this, "New name for the session :");
-					if (newName == null) {
-						log("abandon");
-						return;
-					}
-					// else
-					int report = model.renameSession(newName, sessionIndex);
-					if (report < 0) {
-						this.namingSessionError(report);
-						return;
-					}
-					// else
-					log("renaming done");
-					log("sessionsList: " + Arrays.toString(model.getSessionsNames()));
-					// the SessionManager dialog should now get refreshed automatically
-					// thanks to the Observer pattern
+					renameSession(sessionIndex);
 				}
 				else if (source == delete) {
-					log("delete");
-					int answer = U.confirm(SessionManager.this, "Deleting a session cannot be undone. Proceed?");
-					if (answer != JOptionPane.YES_OPTION) {
-						log("abandon");
-						return;
-					}
-					// else
-					model.deleteSession(sessionIndex);
-					log("deleting done");
-					// the SessionManager dialog should now get refreshed automatically
-					// thanks to the Observer pattern
+					deleteSession(sessionIndex);
 				}
 				else if (source == open) {
 					log("open");
@@ -191,20 +232,10 @@ public class SessionManager extends JFrame implements Observer {
 			}
 		}
 		
-		public void namingSessionError(int error) {
-			String errmsg = "A user error was encountered.";
-			if (error == U.IMPOSSIBLE) {
-				errmsg = "A session with that name already exists.";
-			}
-			else if (error == U.INVALID) {
-				errmsg = "The given name is not a valid session name.";
-			}
-			U.error(SessionManager.this, errmsg);
-		}
-		
 		@Override
 		public void windowClosing(WindowEvent ev) {
 			app.quit(SessionManager.this);
+			SessionManager.this.setVisible(true);
 		}
 		
 	}

@@ -1,9 +1,10 @@
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class Session {
+public class Session extends Observable {
 	/**
 	 * 
 	 */
@@ -31,12 +32,20 @@ public class Session {
 		return data;
 	}
 
-	public int setFolder(File folder) {
-		return 0;
-		// test if exists,
-		// if folder
-		// if already is in list
-		// returns warning accordingly
+	public int setFolder(File folder_) {
+		if (folder_ == null)
+			// should never happen...
+			return U.INVALID;
+		if (!folder_.exists() || !folder_.isDirectory())
+			// should never happen...
+			return U.INVALID;
+
+		folder = folder_;
+		
+		setChanged();
+		notifyObservers();
+
+		return U.OK;
 	}
 
 }

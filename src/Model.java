@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 public class Model extends Observable {
-	public void log(String string) {
+	public static void log(String string) {
 		U.log("(Model) " + string);
 	}
 
@@ -57,15 +57,14 @@ public class Model extends Observable {
 		return names;
 	}
 
-	public int createSession(String name) {
+	// this function should never be called without first
+	// having checked the validity of name and folder.
+	public int addNewSession(String name, File folder) {
 		// creating new session
 		Session s = new Session();
-		int report = this.nameSession(name, s);
-		if (report != U.OK)
-			// name given is not usable, aborting
-			return report;
-		
-		// else: add new session
+		s.name = name;
+		s.folder = folder;
+
 		int index = allSessions.size();
 		allSessions.add(s);
 		
@@ -79,9 +78,9 @@ public class Model extends Observable {
 	public int renameSession(String name, int sessionIndex) {
 		Session s = allSessions.get(sessionIndex);
 		String oldName = s.name;
-		int report = nameSession(name, s);
+		int report = checkNewSessionName(name, s);
 		
-		if (report == U.OK) {
+		if (report == U.OK) { // valid new name
 			File oldSessionFile = new File(locator.sessionFile(oldName));
 			if (oldSessionFile.exists()) {
 				log("renameSession: old file exists");
@@ -93,9 +92,11 @@ public class Model extends Observable {
 		
 		return report;
 	}
-	
-	// The output is a report on potential failure.
-	private int nameSession(String name, Session s) {
+
+		// may gods above and below have mercy on your
+		// computer if this function isn't called before
+		// (re)naming a session...
+	public int checkNewSessionName(String name, Session s) {
 		if (name == null || name.compareTo("") == 0)
 			return U.INVALID;
 		
@@ -107,8 +108,6 @@ public class Model extends Observable {
 				return U.IMPOSSIBLE;
 			}
 		}
-		
-		s.name = name;
 		
 		return U.OK;
 	}

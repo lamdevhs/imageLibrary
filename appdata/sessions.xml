@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_162" class="java.beans.XMLDecoder">
- <array class="java.lang.String" length="2">
+ <array class="java.lang.String" length="1">
   <void index="0">
-   <string>bar</string>
-  </void>
-  <void index="1">
-   <string>bla</string>
+   <string>foo</string>
   </void>
  </array>
 </java>

@@ -1,3 +1,5 @@
+import java.io.File;
+
 import javax.swing.*;
 
 
@@ -6,7 +8,7 @@ public class App {
 		new App("appdata");
 	}
 
-	public void log(String string) {
+	public static void log(String string) {
 		U.log("(App) " + string);
 	}
 
@@ -42,7 +44,15 @@ public class App {
 		log("openSession: sessionIndex = " + sessionIndex);
 			// TODO test sessionIndex is a valid index before getting session
 		Session session = model.allSessions.get(sessionIndex);
+
 		new MainFrame(this, session);
 	}
+
+	public void closeSession(JFrame caller) {
+		if (caller != null) caller.dispose();
+		log("close session");
+		openSessionManager(null);
+	}
+
 
 }
