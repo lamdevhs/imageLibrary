@@ -2,10 +2,10 @@
 <java version="1.8.0_162" class="java.beans.XMLDecoder">
  <array class="java.lang.String" length="2">
   <void index="0">
-   <string>turtle</string>
+   <string>bar</string>
   </void>
   <void index="1">
-   <string>boo</string>
+   <string>bla</string>
   </void>
  </array>
 </java>

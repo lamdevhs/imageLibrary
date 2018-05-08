@@ -1,19 +1,14 @@
 = Ideas
 
-== Main Menu
+== Session
 
-. Session
-  - Close session
-  - Close app
-  - Rename session ?
-  - Delete session ?
-  - -------------------
-  - (Manage) image folders (add, delete, etc) +
-    or maybe we put it on a toolbar?
-. Image
-  - Delete (for real)
-  - Rename
-  - display/modify Infos/Metadata
-  - refresh automatic tags (or just one button refresh for the whole session?)
-. Tags
-  - new
+- There could be just one folder per session, then the app extracts all the images from its subfolders.
+- we check if a file is an image by trying to read an image from it (ImageIcon?)
+
+== Tags
+
+- user can choose what kind of automatic tags to create
+
+== View
+
+- vertical filter panel

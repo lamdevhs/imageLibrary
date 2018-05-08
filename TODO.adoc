@@ -7,10 +7,10 @@
 - [x] put all the live data of the app inside a "appdata" subfolder
 - [x] move "new" button of SessionManager to West panel
 - [x] put all_sessions.xml outside sessions / folder
+- [x] ? all_sessions.xml -> sessions.xml
 - [ ] ? write accessor to get a session from its index? (and return null if fails)
 - [ ] model must check all_sessions.xml doesn contain twice the same session name
 - [ ] friendly message to guide the user in the session manager
-- [ ] ? all_sessions.xml -> sessions.xml
 
 == Model
 

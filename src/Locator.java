@@ -2,7 +2,7 @@
 public class Locator {
 	public String root;
 	public String sessionsFolder = "sessions";
-	public String all_sessions = "all_sessions.xml";
+	public String all_sessions = "sessions.xml";
 	
 	Locator(String root_) {
 		root = root_;

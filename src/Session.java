@@ -10,22 +10,28 @@ public class Session {
 	private static final long serialVersionUID = 1L;
 
 	public String name;
-	public ArrayList<File> folders;
+	public File folder;
 	
 	// new empty session
 	public Session() {}
 
-	public Session(SessionFile file) {
-		name = file.name;
+	public Session(SessionData data) {
+		name = data.name;
+		if (data.folder != null)
+			folder = new File(data.folder);
 	}
 
-	public SessionFile toFile() {
-		SessionFile file = new SessionFile();
-		file.name = name;
-		return file;
+	public SessionData data() {
+		SessionData data = new SessionData();
+		data.name = name;
+		if (folder != null)
+			data.folder = folder.getAbsolutePath();
+		else
+			data.folder = null;
+		return data;
 	}
 
-	public int addFolder(File folder) {
+	public int setFolder(File folder) {
 		return 0;
 		// test if exists,
 		// if folder

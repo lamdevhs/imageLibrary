@@ -33,16 +33,16 @@ public class Model extends Observable {
 			log("session_list not null");
 			for (int i = 0; i < session_list.length; i++) {
 				String sessionName = session_list[i];
-				SessionFile sessionFile;
+				SessionData sessionData;
 				String sessionPath = locator.sessionFile(sessionName);
 				try {
-					sessionFile = (SessionFile) U.fromXML(sessionPath);
+					sessionData = (SessionData) U.fromXML(sessionPath);
 				} catch (ClassCastException cce) {
-					log("read: cast impossible for sessionFile " + sessionName);
-					sessionFile = null;
+					log("read: cast impossible for sessionData " + sessionName);
+					sessionData = null;
 				}
-				if (sessionFile != null) {
-					allSessions.add(new Session(sessionFile));
+				if (sessionData != null) {
+					allSessions.add(new Session(sessionData));
 				}
 			}
 		}
@@ -131,7 +131,7 @@ public class Model extends Observable {
 		U.toXML(getSessionsNames(), locator.all_sessions);
 		for (int i = 0; i < allSessions.size(); i++) {
 			Session session = allSessions.get(i);
-			U.toXML(session.toFile(), locator.sessionFile(session.name));
+			U.toXML(session.data(), locator.sessionFile(session.name));
 		}
 	}
 }

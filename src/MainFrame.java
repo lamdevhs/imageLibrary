@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
 		
 		upperPanel = new UpperPanel(session_);
 		add(upperPanel, BorderLayout.NORTH);
+
 		
 		setVisible(true);
 		//openSessionManager();
