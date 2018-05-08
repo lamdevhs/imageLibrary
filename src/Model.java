@@ -5,6 +5,10 @@ import java.util.Observable;
 
 
 public class Model extends Observable {
+	public void log(String string) {
+		U.log("(Model) " + string);
+	}
+
 	Locator locator;
 	ArrayList<Session> allSessions = new ArrayList<Session>();
 	
@@ -19,25 +23,26 @@ public class Model extends Observable {
 		try {
 			session_list = (String[])U.fromXML(locator.all_sessions);
 		} catch (ClassCastException cce) {
-			U.log("read: cast impossible");
+			log("read: cast impossible");
 			session_list = null;
 		}
 		if (session_list == null) {
-			U.log("session_list null");
+			log("session_list null");
 		}
 		else {
-			U.log("session_list not null");
+			log("session_list not null");
 			for (int i = 0; i < session_list.length; i++) {
 				String sessionName = session_list[i];
-				Session session;
+				SessionFile sessionFile;
+				String sessionPath = locator.sessionFile(sessionName);
 				try {
-					session = (Session) U.fromXML(locator.sessionFile(sessionName));
+					sessionFile = (SessionFile) U.fromXML(sessionPath);
 				} catch (ClassCastException cce) {
-					U.log("read: cast impossible for session " + sessionName);
-					session = null;
+					log("read: cast impossible for sessionFile " + sessionName);
+					sessionFile = null;
 				}
-				if (session != null) {
-					allSessions.add(session);
+				if (sessionFile != null) {
+					allSessions.add(new Session(sessionFile));
 				}
 			}
 		}
@@ -79,7 +84,7 @@ public class Model extends Observable {
 		if (report == U.OK) {
 			File oldSessionFile = new File(locator.sessionFile(oldName));
 			if (oldSessionFile.exists()) {
-				U.log("renameSession: old file exists");
+				log("renameSession: old file exists");
 				oldSessionFile.delete();
 			}
 			setChanged();
@@ -114,7 +119,7 @@ public class Model extends Observable {
 		allSessions.remove(sessionIndex);
 		File sessionFile = new File(locator.sessionFile(s.name));
 		if (sessionFile.exists()) {
-			U.log("deleteSession: session file exists - deleting it");
+			log("deleteSession: session file exists - deleting it");
 			sessionFile.delete();
 		}
 		setChanged();
@@ -126,7 +131,7 @@ public class Model extends Observable {
 		U.toXML(getSessionsNames(), locator.all_sessions);
 		for (int i = 0; i < allSessions.size(); i++) {
 			Session session = allSessions.get(i);
-			U.toXML(session, locator.sessionFile(session.name));
+			U.toXML(session.toFile(), locator.sessionFile(session.name));
 		}
 	}
 }

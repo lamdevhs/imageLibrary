@@ -1,12 +1,16 @@
 = TODO
 
-== fixes
+== misc fixing
 - [x] SessionUI -> SessionManager
-- [ ] forbid a session to be called all_sessions (or put that file elsewhere)
-- [x] put all the live data of the app inside a "appdata" subfolder
 - [x] get rid of sessionsList: redundancy is evil
 - [x] TODO remove sessionIndex argument from nameSession()
+- [x] put all the live data of the app inside a "appdata" subfolder
 - [x] move "new" button of SessionManager to West panel
+- [x] put all_sessions.xml outside sessions / folder
+- [ ] ? write accessor to get a session from its index? (and return null if fails)
+- [ ] model must check all_sessions.xml doesn contain twice the same session name
+- [ ] friendly message to guide the user in the session manager
+- [ ] ? all_sessions.xml -> sessions.xml
 
 == Model
 
@@ -16,6 +20,14 @@
 - [x] delete Session
 
 - [x] Observable
+
+== Session
+
+- [ ] folders
+- [ ] add/delete/fix folders
+- [ ] warning when a folder can't be read
+- [ ] view to manage folders
+- [ ] images from folders
 
 == View
 
@@ -29,26 +41,17 @@
 
 - Picture info window
 
-== App
+== Global (app-wise)
 
 - [x] class App
 - [x] class Paths
 
-== Main Menu
+== README
 
-. Session
-  - Close session
-  - Close app
-  - Rename session ?
-  - Delete session ?
-  - -------------------
-  - (Manage) image folders (add, delete, etc) +
-    or maybe we put it on a toolbar?
-. Image
-  - Delete (for real)
-  - Rename
-  - display/modify Infos/Metadata
-  - refresh automatic tags (or just one button refresh for the whole session?)
-. Tags
-  - new
-  -
+What to mention.
+
+- Layout (WrapLayout too)
+- structure of app (MVC, etc)
+- Functionalities (esp: popup menus)
+- appdata + how to try the demo
+- basic program flow

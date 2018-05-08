@@ -1,0 +1,19 @@
+= Ideas
+
+== Main Menu
+
+. Session
+  - Close session
+  - Close app
+  - Rename session ?
+  - Delete session ?
+  - -------------------
+  - (Manage) image folders (add, delete, etc) +
+    or maybe we put it on a toolbar?
+. Image
+  - Delete (for real)
+  - Rename
+  - display/modify Infos/Metadata
+  - refresh automatic tags (or just one button refresh for the whole session?)
+. Tags
+  - new

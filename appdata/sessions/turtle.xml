@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_162" class="java.beans.XMLDecoder">
- <object class="Session" id="Session0">
-  <void class="Session" method="getField">
+ <object class="SessionFile" id="SessionFile0">
+  <void class="SessionFile" method="getField">
    <string>name</string>
    <void method="set">
-    <object idref="Session0"/>
-    <string>ss3.2</string>
+    <object idref="SessionFile0"/>
+    <string>turtle</string>
    </void>
   </void>
  </object>

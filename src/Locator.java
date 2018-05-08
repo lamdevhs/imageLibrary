@@ -7,7 +7,7 @@ public class Locator {
 	Locator(String root_) {
 		root = root_;
 		sessionsFolder = U.catPaths(root, sessionsFolder);
-		all_sessions = U.catPaths(sessionsFolder, all_sessions);
+		all_sessions = U.catPaths(root, all_sessions);
 	}
 	
 	// returns the path of the file of the session whose

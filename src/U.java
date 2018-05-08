@@ -22,9 +22,8 @@ public class U {
 	}
 
 	public static void log(String string) {
-		System.out.println("[LOG] " + string);
+		System.out.println("[log]\t" + string);
 	}
-	
 
 	public static void error(JFrame owner, String errmsg) {
 		JOptionPane.showMessageDialog(owner, errmsg, "User Error",
@@ -40,15 +39,15 @@ public class U {
 		return JOptionPane.showInputDialog(owner, msg);
 	}
 	
-	public static String input(JDialog owner, String msg) {
-		return JOptionPane.showInputDialog(owner, msg);
-	}
+	// public static String input(JDialog owner, String msg) {
+	// 	return JOptionPane.showInputDialog(owner, msg);
+	// }
 
-	public static int confirm(JFrame owner, String msg) {
-		return JOptionPane.showConfirmDialog(owner, msg);
-	}
+	// public static int confirm(JFrame owner, String msg) {
+	// 	return JOptionPane.showConfirmDialog(owner, msg);
+	// }
 	
-	public static int confirm(JDialog owner, String msg) {
+	public static int confirm(JFrame owner, String msg) {
 		return JOptionPane.showConfirmDialog(owner, msg, "Confirmation",
 			JOptionPane.YES_NO_OPTION);
 	}
