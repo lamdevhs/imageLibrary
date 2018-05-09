@@ -12,12 +12,13 @@ public class ImagesPanel extends JPanel {
 	
 	private Session session;
 	private ArrayList<ImageView> images = new ArrayList<ImageView>();
-	private Listener listener = new Listener();
+	public Listener listener = new Listener();
 //	private ImageView foo;
 //	private ImageView bar;
 //	private JButton b;
 	private int hpadding;
 	private int vpadding;
+	public Container container;
 	private int ncol;
 
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
@@ -41,7 +42,7 @@ public class ImagesPanel extends JPanel {
 //		add(foo);
 //		b = new JButton("foo");
 //		add(b);
-		this.addComponentListener(listener);
+		
 	}
 	
 	public void setDimensions() {
@@ -60,8 +61,10 @@ public class ImagesPanel extends JPanel {
 	}
 	
 	public void refresh() {
-		Dimension dim = getSize();
-		int panelWidth = (int) dim.getWidth();
+		Dimension dim = container.getSize();
+		//log(this.getSize() + "" + this.getPreferredSize() + "" + this.getMaximumSize() + "" + this.getMinimumSize());
+		//log(container.getSize() + "" + container.getPreferredSize() + "" + container.getMaximumSize() + "" + container.getMinimumSize());
+		int panelWidth = (int) dim.width - 18;
 		int imgSize = ((panelWidth - hpadding) / ncol) - hpadding;
 		
 		for (int i = 0; i < images.size(); i++) {
@@ -79,7 +82,7 @@ public class ImagesPanel extends JPanel {
 			newHeight = (images.size() / ncol)*(vpadding + imgSize) + vpadding; 
 		else
 			newHeight = ((images.size() / ncol) + 1)*(vpadding + imgSize) + vpadding; 
-		setPreferredSize(new Dimension(dim.width, newHeight));
+		setPreferredSize(new Dimension(dim.width - 18, newHeight));
 		revalidate();
 	}
 

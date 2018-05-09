@@ -29,12 +29,16 @@ public class MainFrame extends JFrame {
 		setSize(600,600);
 		setLocationRelativeTo(null); // center frame on screen
 		addWindowListener(listener);
-
+		
+		//JPanel centerPanel = new JPanel();
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
 		JScrollPane imagesScroller = new JScrollPane(imagesPanel);
+		imagesPanel.container = imagesScroller;
+		imagesScroller.addComponentListener(imagesPanel.listener);
 		imagesPanel.setPreferredSize(imagesScroller.getPreferredSize());
 		imagesScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		imagesScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//centerPanel.add(imagesScroller, BorderLayout.CENTER);
 		add(imagesScroller, BorderLayout.CENTER);
 		
 
