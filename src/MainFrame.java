@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 
 	private Listener listener = new Listener();
 	
-	private TagPanel tagPanel;
+	private TagsPanel tagPanel;
 	private ImagesPanel imagesPanel;
 	//private StatusBar statusBar;
 	private UpperPanel upperPanel;
@@ -32,8 +32,7 @@ public class MainFrame extends JFrame {
 		
 		//JPanel centerPanel = new JPanel();
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
-		JScrollPane imagesScroller = new JScrollPane(imagesPanel);
-		imagesPanel.container = imagesScroller;
+		JScrollPane imagesScroller = imagesPanel.container;
 		imagesScroller.addComponentListener(imagesPanel.listener);
 		imagesPanel.setPreferredSize(imagesScroller.getPreferredSize());
 		imagesScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -42,15 +41,13 @@ public class MainFrame extends JFrame {
 		add(imagesScroller, BorderLayout.CENTER);
 		
 
-		tagPanel = new TagPanel(session_);
+		tagPanel = new TagsPanel(session_);
 		add(tagPanel, BorderLayout.WEST);
 		
 		upperPanel = new UpperPanel(session_);
 		add(upperPanel, BorderLayout.NORTH);
 
 		setVisible(true);
-		
-		imagesPanel.setDimensions();
 
 		readSession();
 	}

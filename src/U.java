@@ -7,11 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class U {
@@ -134,6 +137,12 @@ public class U {
 			|| !folder.isDirectory())
 			return U.INVALID;
 		else return U.OK;
+	}
+	
+	public static JPanel centered(JComponent component){
+		JPanel wrapper = new JPanel();
+		wrapper.add(component);
+		return wrapper;
 	}
 
 }

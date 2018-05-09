@@ -1,24 +1,26 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
 
-public class ImagesPanel extends JPanel {
+public class ImagesPanel extends JPanel implements Observer {
 	public static void log(String string) {
 		U.log("(ImagesPanel) " + string);
 	}
 	
 	private Session session;
-	private ArrayList<ImageView> images = new ArrayList<ImageView>();
+	private ArrayList<ImageView> images;
 	public Listener listener = new Listener();
 //	private ImageView foo;
 //	private ImageView bar;
 //	private JButton b;
 	private int hpadding;
 	private int vpadding;
-	public Container container;
+	public JScrollPane container;
 	private int ncol;
 
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
@@ -27,29 +29,23 @@ public class ImagesPanel extends JPanel {
 		vpadding = vpadding_;
 		ncol = ncol_;
 
+		container = new JScrollPane(this);
 		setLayout(null);
-		getImages();
 		setBackground(Color.WHITE);
-		//foo = new ImageView("foo", 5);
-//		foo = new JLabel("bla");
-//		foo.setBackground(Color.RED);
-//		//bar = new ImageView("bar", 5);
-//		bar = new JLabel("bar");
-//		bar.setBackground(Color.BLUE);
-//		add(foo);
-//		add(bar);
-//		add(foo);
-//		add(foo);
-//		b = new JButton("foo");
-//		add(b);
+		session.addObserver(this);
 		
+		readSession();
 	}
 	
-	public void setDimensions() {
-		
+	public void readSession() {
+		this.removeAll();
+		this.repaint();
+		getImages();
+		refreshLayout();
 	}
 	
 	public void getImages() {
+		images = new ArrayList<ImageView>();
 		ArrayList<ImageModel> imodels = session.getImages();
 		if (imodels == null) log("imodels null !");
 		else log("noooooooooo");
@@ -60,7 +56,7 @@ public class ImagesPanel extends JPanel {
 		}
 	}
 	
-	public void refresh() {
+	public void refreshLayout() {
 		Dimension dim = container.getSize();
 		//log(this.getSize() + "" + this.getPreferredSize() + "" + this.getMaximumSize() + "" + this.getMinimumSize());
 		//log(container.getSize() + "" + container.getPreferredSize() + "" + container.getMaximumSize() + "" + container.getMinimumSize());
@@ -86,6 +82,13 @@ public class ImagesPanel extends JPanel {
 		revalidate();
 	}
 
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		readSession();
+		
+	}
+	
 	private class Listener
 	implements ComponentListener
 	{
@@ -104,7 +107,7 @@ public class ImagesPanel extends JPanel {
 
 		@Override
 		public void componentResized(ComponentEvent arg0) {
-			refresh();
+			refreshLayout();
 		}
 
 		@Override
@@ -114,4 +117,5 @@ public class ImagesPanel extends JPanel {
 		}
 		
 	}
+
 }
