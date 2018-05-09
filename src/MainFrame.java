@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 	private Listener listener = new Listener();
 	
 	private TagPanel tagPanel;
-	//private MainPanel mainPanel;
+	private ImagesPanel imagesPanel;
 	//private StatusBar statusBar;
 	private UpperPanel upperPanel;
 
@@ -30,6 +30,14 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null); // center frame on screen
 		addWindowListener(listener);
 
+		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
+		JScrollPane imagesScroller = new JScrollPane(imagesPanel);
+		imagesPanel.setPreferredSize(imagesScroller.getPreferredSize());
+		imagesScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		imagesScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(imagesScroller, BorderLayout.CENTER);
+		
+
 		tagPanel = new TagPanel(session_);
 		add(tagPanel, BorderLayout.WEST);
 		
@@ -37,6 +45,8 @@ public class MainFrame extends JFrame {
 		add(upperPanel, BorderLayout.NORTH);
 
 		setVisible(true);
+		
+		imagesPanel.setDimensions();
 
 		readSession();
 	}

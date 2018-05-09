@@ -42,7 +42,7 @@ public class Model extends Observable {
 					sessionData = null;
 				}
 				if (sessionData != null) {
-					allSessions.add(new Session(sessionData));
+					allSessions.add(Session.fromData(sessionData));
 				}
 			}
 		}
@@ -61,9 +61,9 @@ public class Model extends Observable {
 	// having checked the validity of name and folder.
 	public int addNewSession(String name, File folder) {
 		// creating new session
-		Session s = new Session();
-		s.name = name;
-		s.folder = folder;
+		Session s = new Session(name, folder);
+		// s.name = name;
+		// s.folder = folder;
 
 		int index = allSessions.size();
 		allSessions.add(s);

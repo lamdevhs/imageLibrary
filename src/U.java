@@ -32,10 +32,10 @@ public class U {
 			JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static void error(JDialog owner, String errmsg) {
-		JOptionPane.showMessageDialog(owner, errmsg, "User Error",
-			JOptionPane.ERROR_MESSAGE);
-	}
+	// public static void error(JDialog owner, String errmsg) {
+	// 	JOptionPane.showMessageDialog(owner, errmsg, "User Error",
+	// 		JOptionPane.ERROR_MESSAGE);
+	// }
 	
 	public static String input(JFrame owner, String msg) {
 		return JOptionPane.showInputDialog(owner, msg);
@@ -126,6 +126,14 @@ public class U {
 		File result = chooser.getSelectedFile();
 		if (!result.exists() || !result.isDirectory()) return null;
 		else return result;
+	}
+
+	public static int checkValidFolder(File folder) {
+		if (folder == null
+			|| !folder.exists()
+			|| !folder.isDirectory())
+			return U.INVALID;
+		else return U.OK;
 	}
 
 }

@@ -1,10 +1,15 @@
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Observable;
 
 
 public class Session extends Observable {
+	public static void log(String string) {
+		U.log("(Session) " + string);
+	}
 	/**
 	 * 
 	 */
@@ -12,14 +17,30 @@ public class Session extends Observable {
 
 	public String name;
 	public File folder;
+
+	public HashMap<String, ImageModel> images;
 	
-	// new empty session
 	public Session() {}
 
-	public Session(SessionData data) {
-		name = data.name;
-		if (data.folder != null)
-			folder = new File(data.folder);
+	public Session(String name_, File folder_) {
+		name = name_;
+		folder = folder_;
+	}
+
+	public static Session fromData(SessionData data) {
+		return new Session(data.name, new File(data.folder));
+	}
+
+	public int refresh() {
+		int report = U.checkValidFolder(folder);
+		if (report != U.OK) {
+			return report;
+		}
+		// else
+		images = new HashMap<String, ImageModel>();
+		extractImages(folder, images);
+		log("extractImages: " + images.toString());
+		return U.OK;
 	}
 
 	public SessionData data() {
@@ -32,20 +53,31 @@ public class Session extends Observable {
 		return data;
 	}
 
-	public int setFolder(File folder_) {
-		if (folder_ == null)
-			// should never happen...
-			return U.INVALID;
-		if (!folder_.exists() || !folder_.isDirectory())
-			// should never happen...
-			return U.INVALID;
+	public ArrayList<ImageModel> getImages() {
+		ArrayList<ImageModel> output = new ArrayList<ImageModel>();
+		Iterator<String> iiter = images.keySet().iterator();
+		while(iiter.hasNext()) {
+			String key = iiter.next();
+			output.add(images.get(key));
+		}
+		return output;
+	}
 
-		folder = folder_;
-		
-		setChanged();
-		notifyObservers();
-
-		return U.OK;
+	private void extractImages(File dir,
+		HashMap<String, ImageModel> images)
+	{
+		File[] files = dir.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()){
+				extractImages(file, images);
+			}
+			else {
+				ImageModel image = ImageModel.fromFile(file);
+				if (image != null) { // valid image
+					images.put(image.getKey(folder.getAbsolutePath()), image);
+				}
+			}
+		}
 	}
 
 }

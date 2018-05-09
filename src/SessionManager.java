@@ -128,9 +128,7 @@ public class SessionManager extends JFrame implements Observer {
 		// else
 		File folder = U.folderDialog(this,
 			"Choose the session's image folder", null);
-		if (folder == null
-			|| !folder.exists()
-			|| !folder.isDirectory())
+		if (U.checkValidFolder(folder) != U.OK)
 		{
 			log("folderDialog -> null");
 			U.error((JFrame)null, "A valid folder is required to " +

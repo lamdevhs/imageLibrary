@@ -40,11 +40,17 @@ public class App {
 	}
 
 	public void openSession(JFrame caller, int sessionIndex) {
-		if (caller != null) caller.dispose();
 		log("openSession: sessionIndex = " + sessionIndex);
 			// TODO test sessionIndex is a valid index before getting session
 		Session session = model.allSessions.get(sessionIndex);
-
+		int report = session.refresh();
+		if (report != U.OK) {
+			U.error(caller, "The folder of this session is invalid. "
+				+ "You must fix it from the Session Manager before opening it.");
+			return;
+		}
+		// else
+		if (caller != null) caller.dispose();
 		new MainFrame(this, session);
 	}
 

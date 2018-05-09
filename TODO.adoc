@@ -4,7 +4,7 @@
 
 - [ ] remove the /opt/pics thing
 
-== misc fixing
+== general
 - [x] SessionUI -> SessionManager
 - [x] get rid of sessionsList: redundancy is evil
 - [x] TODO remove sessionIndex argument from nameSession()
@@ -15,6 +15,11 @@
 - [ ] ? write accessor to get a session from its index? (and return null if fails)
 - [ ] model must check all_sessions.xml doesn contain twice the same session name
 - [ ] friendly message to guide the user in the session manager
+- [ ] add button in session manager to change a session's folder
+- [ ] check validity of SessionData before creating a session out of it!!!
+- [ ] only add images whose relative paths truly put them in the given folder (aka no symlinks) +
+  or... make so the relative path is the key unless it is a symlinked image
+  (in which case we give its absolute path)
 
 == Model
 
