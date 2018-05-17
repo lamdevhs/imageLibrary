@@ -8,20 +8,24 @@ import javax.swing.ImageIcon;
 
 public class ImageModel {
 
-	private File file;
+	public String key;
+	public File file;
 	public BufferedImage buffered;
 	
-	public ImageModel(File file_, BufferedImage buffered_) {
-		file = file_;
-		buffered = buffered_;
+//	public ImageModel(String key_, File file_) {
+//		this(key_);
+//		file = file_;
+//	}
+	
+	public ImageModel(String key_) {
+		key = key_;
 	}
 	
-	public static ImageModel fromFile(File file) {
+	public static BufferedImage readImage(File file) {
 		try {
-			BufferedImage buffered = ImageIO.read(file);
-			ImageModel image = new ImageModel(file, buffered);
-			// TODO Auto-generated method stub
-			return image;
+			BufferedImage bim = ImageIO.read(file);
+			//buffered = buffered_;
+			return bim;
 		}
 		catch (IOException ioe) {
 			return null; // error: file is probably not an image
@@ -31,12 +35,12 @@ public class ImageModel {
 		}
 	}
 
-	public String getKey(String rootPath) {
+	public static String getImageKey(String rootPath, File file) {
 		String path = file.getAbsolutePath();
 		if (path.startsWith(rootPath)) {
 			return path.substring(rootPath.length() + 1);
-			// ^ to catch the '/' separator in between the relative path
-			// and the rootPath
+			// ^ to trim the '/' which separates
+			// the relative path from the rootPath
 		}
 		else return path; // incase of symlinked images: return absolute path
 	}

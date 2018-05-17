@@ -11,7 +11,7 @@ import javax.swing.border.*;
 
 public class SessionManager extends JFrame implements Observer {
 	public static void log(String string) {
-		U.log("(MainFrame) " + string);
+		U.log("(SessionManager) " + string);
 	}
 
 	private App app;
@@ -42,7 +42,6 @@ public class SessionManager extends JFrame implements Observer {
 		private JLabel text = new JLabel("Session Manager");
 	
 	public SessionManager(App app_, Model model_) {
-		// super(owner, true);
 		
 		model = model_;
 		app = app_;

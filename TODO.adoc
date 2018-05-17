@@ -1,9 +1,5 @@
 = TODO
 
-== in the end
-
-- [ ] remove the /opt/pics thing
-
 == general
 - [x] SessionUI -> SessionManager
 - [x] get rid of sessionsList: redundancy is evil
@@ -20,6 +16,7 @@
 - [ ] only add images whose relative paths truly put them in the given folder (aka no symlinks) +
   or... make so the relative path is the key unless it is a symlinked image
   (in which case we give its absolute path)
+- [ ] create a demo_area, put the pics inside
 
 == Model
 
@@ -30,13 +27,21 @@
 
 - [x] Observable
 
-== Session
+== Session Manager
 
-- [ ] folders
-- [ ] add/delete/fix folders
-- [ ] warning when a folder can't be read
-- [ ] view to manage folders
-- [ ] images from folders
+- [x] folders
+- [x] add/delete
+- [ ] fix folders
+- [x] warning when a folder can't be read
+- [ ] ? view to manage folders
+- [x] images from folders
+
+== ImageModel
+
+- [x] maybe allow ImageModels to know of the tags they are tagged with.
+  It would make deleteOldImages() much more efficient,
+  and it'll probably be useful at some further point.
+
 
 == View
 

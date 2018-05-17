@@ -48,7 +48,7 @@ public class ImagesPanel extends JPanel implements Observer {
 		images = new ArrayList<ImageView>();
 		ArrayList<ImageModel> imodels = session.getImages();
 		if (imodels == null) log("imodels null !");
-		else log("noooooooooo");
+		else log("imodels not null");
 		for (int i = 0; i < imodels.size(); i++) {
 			ImageView iview = new ImageView(imodels.get(i));
 			images.add(iview);

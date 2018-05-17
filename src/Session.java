@@ -1,10 +1,14 @@
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Observable;
+import java.util.Set;
 
 
 
@@ -29,19 +33,49 @@ public class Session extends Observable {
 	
 	public ArrayList<Filter> filters =
 			new ArrayList<Filter>();
-	
-	public Session() {}
 
 	public Session(String name_, File folder_) {
 		name = name_;
 		folder = folder_;
-		newTag("City: New York City: New York City: ...");
-		newTag("Ci Size");
-		newTag("Color: red");
+		//newTag("City: New York City: New York City: ...");
+		//newTag("Ci Size");
+		//newTag("Color: red");
 	}
 
 	public static Session fromData(SessionData data) {
-		return new Session(data.name, new File(data.folder));
+		Session s = new Session(data.name, new File(data.folder));
+		s.readTagsData(data.tags);
+		return s;
+	}
+	
+
+	private void readTagsData(HashMap<String, ArrayList<String>> tagsData){
+		Iterator<String> iter = tagsData.keySet().iterator();
+		while(iter.hasNext()) {
+		// for each tagName
+			String tagName = iter.next();
+			Tag tag = new Tag(tagName);
+			ArrayList<String> imagesKeys = tagsData.get(tagName);
+			for (int i = 0; i < imagesKeys.size(); i++) {
+			// for each image key (== relative path)
+				String key = imagesKeys.get(i);
+				ImageModel imodel;
+				if (images.containsKey(key)) {
+					imodel = images.get(key);
+					// get imodel if exists:
+					// one unique ImageModel per image key
+				}
+				else {
+					imodel = new ImageModel(key);
+					images.put(key, imodel);
+					// add image to known images
+				}
+				tag.images.add(imodel);
+				// link tag to image and vice versa
+			}
+			tags.put(tagName, tag);
+			// add tag to known tags
+		}
 	}
 
 	public int refresh() {
@@ -51,18 +85,36 @@ public class Session extends Observable {
 			return report;
 		}
 		// else
-		extractImages(folder, images);
-		log("extractImages: " + images.toString());
+		HashMap<String, ImageModel> newImages = new HashMap<String, ImageModel>();
+		readFolder(folder, newImages);
+		//HashMap<String, ImageModel> oldImages = this.images;
+		this.images = newImages;
+		deleteOldImages(); {
+
+		}
+		log("readFolder says: " + newImages.toString());
 		return U.OK;
 	}
 
 	public SessionData data() {
 		SessionData data = new SessionData();
 		data.name = name;
-		if (folder != null)
+		if (folder != null && U.checkValidFolder(folder) == U.OK)
 			data.folder = folder.getAbsolutePath();
 		else
 			data.folder = null;
+		data.tags = saveTags();
+		return data;
+	}
+	
+	private HashMap<String, ArrayList<String>> saveTags() {
+		HashMap<String,ArrayList<String>> data = new HashMap<String,ArrayList<String>>();
+		Iterator<String> tag_iter = tags.keySet().iterator();
+		while(tag_iter.hasNext()) {
+			String tagName = tag_iter.next();
+			Tag tag = tags.get(tagName);
+			data.put(tagName, tag.data());
+		}
 		return data;
 	}
 
@@ -85,19 +137,6 @@ public class Session extends Observable {
 //			intersectKeySets(keys, filters.get(i).tag.images);
 //		}
 //		return keysToImages(keys);
-	}
-	
-	private void intersectKeySets(ArrayList<String> keys, ArrayList<String> otherKeys) {
-		ArrayList<String> output;
-//		
-//		for (int i = 0; i < keys.size(); i++) {
-//			String key = keys.get(i);
-//			boolean hasIt = false;
-//			for (int j = 0; j < otherKeys.size(); i++) {
-//				if (Objects.equals(key, otherKeys.get(i))
-//			}
-//		}
-//		
 	}
 
 	public ArrayList<ImageModel> keysToImages(ArrayList<String> keys) {
@@ -122,21 +161,56 @@ public class Session extends Observable {
 		tags.put(tagname, new Tag(tagname));
 		return U.OK;
 	}
-
-	private void extractImages(File dir,
-		HashMap<String, ImageModel> images)
+	
+	private void readFolder(File dir, Map<String, ImageModel> newImages)
 	{
 		File[] files = dir.listFiles();
 		for (File file : files) {
 			if (file.isDirectory()){
-				extractImages(file, images);
+				// recursive scan
+				readFolder(file, newImages);
 			}
 			else {
-				ImageModel image = ImageModel.fromFile(file);
-				if (image != null) { // valid image
-					images.put(image.getKey(folder.getAbsolutePath()), image);
+				// is it an image?
+				BufferedImage buffered = ImageModel.readImage(file);
+				if (buffered == null) continue;
+				
+				// else: it's an image
+				ImageModel image;
+				String key = ImageModel.getImageKey(this.folder.getAbsolutePath(), file);
+
+				// do we aleady know this image?
+				if (this.images.containsKey(key)) {
+					image = this.images.get(key);
+				}
+				else {
+					image = new ImageModel(key);
+					image.buffered = buffered;
+					image.file = file;
+				}
+				
+				// put this image in the new images
+				newImages.put(key, image);
+			}
+		}
+	}
+	
+	private void deleteOldImages() {
+		Iterator<String> tag_iter = tags.keySet().iterator();
+		while(tag_iter.hasNext()) {
+		// for each tag: remove all images which don't exist anymore
+			Tag tag = tags.get(tag_iter.next());
+			List<ImageModel> toRemove = new ArrayList<ImageModel>();
+			Iterator<ImageModel> img_iter = tag.images.iterator();
+			while(img_iter.hasNext()) {
+			// for each image known to that tag:
+				ImageModel img = img_iter.next();
+				if (!this.images.containsKey(img.key)) {
+				// if the image is no longer in this.images:
+					toRemove.add(img);
 				}
 			}
+			tag.images.removeAll(toRemove);
 		}
 	}
 

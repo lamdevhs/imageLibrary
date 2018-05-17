@@ -16,4 +16,23 @@
    </void>
   </void>
  </object>
+<void class="SessionData" id="Field0" method="getField">
+ <string>tags</string>
+ <void id="HashMap0" method="get">
+  <object idref="SessionData0"/>
+  <void method="put">
+   <string>Color: red</string>
+   <object class="java.util.ArrayList"/>
+  </void>
+  <void method="put">
+   <string>City: New York City: New York City: ...</string>
+   <object class="java.util.ArrayList"/>
+  </void>
+  <void method="put">
+   <string>Ci Size</string>
+   <object class="java.util.ArrayList"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap0"/>
 </java>
