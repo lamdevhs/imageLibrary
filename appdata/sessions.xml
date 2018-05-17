@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_162" class="java.beans.XMLDecoder">
+<java version="1.8.0_171" class="java.beans.XMLDecoder">
  <array class="java.lang.String" length="1">
   <void index="0">
    <string>foo</string>

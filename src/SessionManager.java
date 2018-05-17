@@ -51,6 +51,7 @@ public class SessionManager extends JFrame implements Observer {
 		setTitle("Session Manager");
 		setSize(300,400);
 		setLocationRelativeTo(null); // center frame on screen
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(listener);
 
 		getContentPane().add(inside);
@@ -233,7 +234,7 @@ public class SessionManager extends JFrame implements Observer {
 		@Override
 		public void windowClosing(WindowEvent ev) {
 			app.quit(SessionManager.this);
-			SessionManager.this.setVisible(true);
+			//SessionManager.this.setVisible(true);
 		}
 		
 	}

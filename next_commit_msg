@@ -1,0 +1,9 @@
+Fix SessionManager closing on yes *and* on no
+
+Before this commit :
+When the user clicked on the cross to close the
+SessionManager and quit the App, it would ask the
+user for confirmation.
+Yet if the user chose "no", App.quit() would
+be cancelled, however the JFrame would still
+vanish (due to default behavior).
