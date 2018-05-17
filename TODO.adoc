@@ -18,6 +18,8 @@
   (in which case we give its absolute path)
 - [ ] create a demo_area, put the pics inside
 
+- [x] user can choose zoom value
+
 == Model
 
 - [x] reading/writing SessionFile

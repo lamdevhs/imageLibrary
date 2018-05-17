@@ -15,13 +15,13 @@ public class ImagesPanel extends JPanel implements Observer {
 	private Session session;
 	private ArrayList<ImageView> images;
 	public Listener listener = new Listener();
-//	private ImageView foo;
-//	private ImageView bar;
-//	private JButton b;
 	private int hpadding;
 	private int vpadding;
 	public JScrollPane container;
 	private int ncol;
+	// ^ number of columns to use to display the image thumbnails
+
+	private int imageSize = 50;
 
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
 		session = session_;
@@ -35,6 +35,12 @@ public class ImagesPanel extends JPanel implements Observer {
 		session.addObserver(this);
 		
 		readSession();
+
+		container.addComponentListener(this.listener);
+		this.addMouseWheelListener(listener);
+		this.setPreferredSize(container.getPreferredSize());
+		container.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		container.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	}
 	
 	public void readSession() {
@@ -58,10 +64,8 @@ public class ImagesPanel extends JPanel implements Observer {
 	
 	public void refreshLayout() {
 		Dimension dim = container.getSize();
-		//log(this.getSize() + "" + this.getPreferredSize() + "" + this.getMaximumSize() + "" + this.getMinimumSize());
-		//log(container.getSize() + "" + container.getPreferredSize() + "" + container.getMaximumSize() + "" + container.getMinimumSize());
-		int panelWidth = (int) dim.width - 18;
-		int imgSize = ((panelWidth - hpadding) / ncol) - hpadding;
+		int thisWidth = (int) dim.width - 18;
+		int imgSize = ((thisWidth - hpadding) / ncol) - hpadding;
 		
 		for (int i = 0; i < images.size(); i++) {
 			ImageView image = images.get(i);
@@ -74,9 +78,9 @@ public class ImagesPanel extends JPanel implements Observer {
 			image.display(imgSize);
 		}
 		int newHeight;
-		if (images.size() % ncol == 0)
+		if (images.size() % ncol == 0) // last row of images is full
 			newHeight = (images.size() / ncol)*(vpadding + imgSize) + vpadding; 
-		else
+		else // last row of images is only partially filled
 			newHeight = ((images.size() / ncol) + 1)*(vpadding + imgSize) + vpadding; 
 		setPreferredSize(new Dimension(dim.width - 18, newHeight));
 		revalidate();
@@ -90,7 +94,7 @@ public class ImagesPanel extends JPanel implements Observer {
 	}
 	
 	private class Listener
-	implements ComponentListener
+	implements ComponentListener, MouseWheelListener
 	{
 
 		@Override
@@ -114,6 +118,14 @@ public class ImagesPanel extends JPanel implements Observer {
 		public void componentShown(ComponentEvent arg0) {
 			// TODO Auto-generated method stub
 			
+		}
+
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent ev) {
+			int notches = ev.getWheelRotation();
+			ncol = Math.max(ncol + notches, 1);
+			refreshLayout();
+			log(notches + " - " + ncol);
 		}
 		
 	}
