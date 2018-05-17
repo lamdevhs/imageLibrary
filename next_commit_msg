@@ -1,8 +1,0 @@
-Add: ImageView resized via mouse wheel
-
-The user can now change the number of columns
-to be used to display the images in the ImagePanel,
-which resizes them consequently.
-
-Moved some code related to ImagePanel's JScrollPane,
-from MainFrame.java to ImagePanel.java.
