@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_171" class="java.beans.XMLDecoder">
- <array class="java.lang.String" length="3">
+ <array class="java.lang.String" length="4">
   <void index="0">
    <string>foo</string>
   </void>
@@ -9,6 +9,9 @@
   </void>
   <void index="2">
    <string>test_sorting_byname</string>
+  </void>
+  <void index="3">
+   <string>starfish_sorting_bysize</string>
   </void>
  </array>
 </java>

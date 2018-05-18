@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_171" class="java.beans.XMLDecoder">
+ <object class="SessionData" id="SessionData0">
+  <void class="SessionData" method="getField">
+   <string>name</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>starfish_sorting_bysize</string>
+   </void>
+  </void>
+  <void class="SessionData" method="getField">
+   <string>folder</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>/opt/demo_area.ln/starfish</string>
+   </void>
+  </void>
+ </object>
+</java>

@@ -12,3 +12,5 @@
 == View
 
 - vertical filter panel
+- reverse order of images
+- sort by height, width

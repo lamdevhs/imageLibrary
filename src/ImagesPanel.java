@@ -21,9 +21,12 @@ public class ImagesPanel extends JPanel implements Observer {
 	private int ncol;
 	// ^ number of columns to use to display the image thumbnails
 	
-	private JPopupMenu panelMenu = new JPopupMenu("Test");
+	private JPopupMenu panelMenu = new JPopupMenu();
 	private JMenuItem sortByName = new JMenuItem("Name");
+	private JMenuItem sortByPath = new JMenuItem("Path");
 	private JMenuItem sortBySize = new JMenuItem("Size");
+	private JMenuItem sortByHeight = new JMenuItem("Height");
+	private JMenuItem sortByWidth = new JMenuItem("Width");
 	
 	private int sortedBy = ImageViewList.BY_NAME;
 
@@ -38,10 +41,16 @@ public class ImagesPanel extends JPanel implements Observer {
 		JMenuItem sortBy = new JMenuItem("Sort by:");
 		sortBy.setEnabled(false);
 		sortByName.addActionListener(listener);
+		sortByPath.addActionListener(listener);
 		sortBySize.addActionListener(listener);
+		sortByHeight.addActionListener(listener);
+		sortByWidth.addActionListener(listener);
 		panelMenu.add(sortBy);
 		panelMenu.add(sortByName);
+		panelMenu.add(sortByPath);
 		panelMenu.add(sortBySize);
+		panelMenu.add(sortByHeight);
+		panelMenu.add(sortByWidth);
 
 		scroller = new JScrollPane(this);
 		setLayout(null);
@@ -128,8 +137,23 @@ public class ImagesPanel extends JPanel implements Observer {
 				sortImages();
 				refreshLayout();
 			}
+			else if (source == sortByPath) {
+				sortedBy = ImageViewList.BY_PATH;
+				sortImages();
+				refreshLayout();
+			}
 			else if (source == sortBySize) {
 				sortedBy = ImageViewList.BY_SIZE;
+				sortImages();
+				refreshLayout();
+			}
+			else if (source == sortByHeight) {
+				sortedBy = ImageViewList.BY_HEIGHT;
+				sortImages();
+				refreshLayout();
+			}
+			else if (source == sortByWidth) {
+				sortedBy = ImageViewList.BY_WIDTH;
 				sortImages();
 				refreshLayout();
 			}

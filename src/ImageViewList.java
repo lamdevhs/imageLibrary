@@ -6,6 +6,10 @@ public class ImageViewList extends ArrayList<ImageView> {
 	public static int BY_NAME = 0;
 	public static int BY_SIZE = 1;
 	public static int NONE = 2;
+	public static int BY_PATH = 3;
+	public static int BY_WIDTH = 4;
+	public static int BY_HEIGHT = 5;
+	
 	
 	
 	public void quickSort(int criterion) {
@@ -37,10 +41,40 @@ public class ImageViewList extends ArrayList<ImageView> {
 	// if a >= b --> compare(a,b) >= 0
 	private int compare (ImageView a, ImageView b, int criterion) {
 		if (criterion == BY_NAME) {
-			int nameCmp = a.model.file.getName().compareTo(b.model.file.getName());
-			return nameCmp;
+			int cmp = a.model.file.getName()
+				.compareTo(
+					b.model.file.getName());
+			return cmp;
 		}
-		return 0;
+		else if (criterion == BY_PATH) {
+			int cmp = a.model.key
+					.compareTo(
+						b.model.key);	
+			return cmp;
+		}
+		else {
+			long aSize, bSize;
+			if (criterion == BY_SIZE) {
+				aSize = ((long)a.model.buffered.getHeight())
+					* ((long)a.model.buffered.getWidth());
+				bSize = ((long)b.model.buffered.getHeight())
+					* ((long)b.model.buffered.getWidth());
+			}
+			else if (criterion == BY_WIDTH) {
+				aSize = a.model.buffered.getWidth();
+				bSize = b.model.buffered.getWidth();
+			}
+			else  // if (criterion == BY_HEIGHT)
+			{
+				aSize = a.model.buffered.getHeight();
+				bSize = b.model.buffered.getHeight();
+			}
+			long cmp = aSize - bSize;
+			if (cmp > 0) return 1;
+			else if (cmp < 0) return -1;
+			else return 0;
+		}
+		//return 0;
 		
 	}
 	
