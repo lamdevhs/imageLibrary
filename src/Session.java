@@ -37,7 +37,7 @@ public class Session extends Observable {
 	public Session(String name_, File folder_) {
 		name = name_;
 		folder = folder_;
-		//newTag("City: New York City: New York City: ...");
+		for (int i = 0; i < 200; i++) newTag("Tag " + i);
 		//newTag("Ci Size");
 		//newTag("Color: red");
 	}

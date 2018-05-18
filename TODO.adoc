@@ -1,5 +1,11 @@
 = TODO
 
+== Minimal objective
+
+- add/remove/create/delete tags -- requires selecting images
+- show images' names
+- sort images by name/extension/size
+
 == general
 - [x] SessionUI -> SessionManager
 - [x] get rid of sessionsList: redundancy is evil
@@ -19,6 +25,7 @@
 - [ ] create a demo_area, put the pics inside
 
 - [x] user can choose zoom value
+- [ ] remove TagsPanel.refreshLayout() and the corresponding Listener if not used in the end
 
 == Model
 

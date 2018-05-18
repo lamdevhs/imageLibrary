@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,44 +13,55 @@ public class TagsPanel extends JPanel implements Observer {
 		U.log("(TagsPanel) " + s);
 	}
 	Session session;
+	public JScrollPane scroller; 
 	private Listener listener = new Listener();
 
 	// westPanel
-		private JPanel westPanel = new JPanel();
-		private JPanel westPanelHeader = new JPanel();
-		private JTextField searchBox = new JTextField(13);
-		private Box tagsBox = Box.createVerticalBox();
-		private Box filtersBox = Box.createVerticalBox();
+	private JPanel wrapper = new JPanel();
+	private JPanel aboveTagsBox = new JPanel();
+	private JTextField searchBox = new JTextField(13);
+	
+	private JPanel tagsPanel = new JPanel();
+	private Box tagsBox = Box.createVerticalBox();
+	
 
 	// eastPanel
-		private JPanel eastPanel = new JPanel();
+	private JPanel filtersPanel = new JPanel();
+	private Box filtersBox = Box.createVerticalBox();
 	
 	public TagsPanel(Session session_) {
 		session = session_;
-
+		JLabel padding =  new JLabel("                               ");
+		JLabel padding2 = new JLabel("                               ");
 		
-		// westPanel
-			westPanel.setLayout(new BorderLayout());
-			westPanel.setBorder(BorderFactory.createTitledBorder("All Tags"));
-			
-			westPanelHeader.setLayout(new BorderLayout());
-			westPanelHeader.add(U.centered(new JButton("New")), BorderLayout.NORTH);
-			westPanelHeader.add(U.centered(new JLabel("Search:")), BorderLayout.CENTER);
-			westPanelHeader.add(searchBox, BorderLayout.SOUTH);
-
-			westPanel.add(westPanelHeader, BorderLayout.NORTH);
-			westPanel.add(new JLabel("                          "), BorderLayout.CENTER);
-			westPanel.add(tagsBox, BorderLayout.SOUTH);
-			
-			add(westPanel, BorderLayout.WEST);	
+		wrapper.setLayout(new BorderLayout());
 		
-		// eastPanel
-			eastPanel.setLayout(new BorderLayout());
-			eastPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
-			eastPanel.add(new JLabel("                          "), BorderLayout.NORTH);
-			eastPanel.add(filtersBox, BorderLayout.SOUTH);
-			
-			add(eastPanel, BorderLayout.EAST);
+		aboveTagsBox.setLayout(new BorderLayout());
+		//aboveTagsBox.add(U.centered(new JButton("New")), BorderLayout.NORTH);
+		aboveTagsBox.add(U.centered(new JLabel("Search:")), BorderLayout.CENTER);
+		aboveTagsBox.add(searchBox, BorderLayout.SOUTH);
+		wrapper.add(aboveTagsBox, BorderLayout.CENTER);
+		
+		
+		tagsPanel.setLayout(new BorderLayout());
+		tagsPanel.setBorder(BorderFactory.createTitledBorder("Tags"));
+		tagsPanel.add(padding2, BorderLayout.NORTH);
+		tagsPanel.add(tagsBox, BorderLayout.SOUTH);
+		wrapper.add(tagsPanel, BorderLayout.SOUTH);
+		
+		filtersPanel.setLayout(new BorderLayout());
+		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
+		filtersPanel.add(padding, BorderLayout.NORTH);
+		filtersPanel.add(filtersBox, BorderLayout.SOUTH);
+		
+		wrapper.add(filtersPanel, BorderLayout.NORTH);
+		
+		add(wrapper, BorderLayout.CENTER);
+		
+		scroller = new JScrollPane(this);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//scroller.addComponentListener(listener);
 		
 		searchBox.getDocument().addDocumentListener(listener);
 		session.addObserver(this);
@@ -90,7 +99,7 @@ public class TagsPanel extends JPanel implements Observer {
 			filtersBox.add(filterview);
 		}
 		
-		if (filters.size() == 0);
+		//if (filters.size() == 0);
 			//filtersBox.add(new JLabel("(empty)"));
 		
 		revalidate();
@@ -100,9 +109,31 @@ public class TagsPanel extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		refresh();
 	}
+	
+	public void refreshLayout() {
+		log("ping refresh layout");
+//		tagsBox.repaint();
+//		tagsBox.revalidate();
+		//wrapper.repaint();
+		//wrapper.revalidate();
+		//scroller.validate();
+		return;
+//		Dimension dim = scroller.getSize();
+//		log("dim --->" + dim.toString() + scroller.getMaximumSize());
+//		this.setPreferredSize(new Dimension(dim.width - 18, dim.height));
+//		//this.tagsBox.setPreferredSize(new Dimension(dim.width - 18 - 5, (int)tagsBox.getPreferredSize().getHeight()));
+//		//westPanel.revalidate();
+//		scroller.validate();
+	}
 
 	private class Listener
-	implements DocumentListener, MouseListener {
+	implements DocumentListener, MouseListener, ActionListener, ComponentListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 
 		@Override
 		public void changedUpdate(DocumentEvent arg0) {
@@ -162,6 +193,35 @@ public class TagsPanel extends JPanel implements Observer {
 			// TODO Auto-generated method stub
 			
 		}
+
+
+		@Override
+		public void componentHidden(ComponentEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void componentMoved(ComponentEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void componentResized(ComponentEvent arg0) {
+			refreshLayout();
+			
+		}
+
+
+		@Override
+		public void componentShown(ComponentEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
 		
 	}
 

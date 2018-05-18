@@ -30,13 +30,15 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null); // center frame on screen
 		addWindowListener(listener);
 		
-
-		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
-		JScrollPane imagesScroller = imagesPanel.container;
-		add(imagesScroller, BorderLayout.CENTER);
 		
+		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
 		tagPanel = new TagsPanel(session_);
-		add(tagPanel, BorderLayout.WEST);
+		
+		
+		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tagPanel.scroller, imagesPanel.scroller);
+		
+		//add(jsp, BorderLayout.WEST);
+		add(center, BorderLayout.CENTER);
 		
 		upperPanel = new UpperPanel(session_);
 		add(upperPanel, BorderLayout.NORTH);

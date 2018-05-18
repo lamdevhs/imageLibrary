@@ -17,7 +17,7 @@ public class ImagesPanel extends JPanel implements Observer {
 	public Listener listener = new Listener();
 	private int hpadding;
 	private int vpadding;
-	public JScrollPane container;
+	public JScrollPane scroller;
 	private int ncol;
 	// ^ number of columns to use to display the image thumbnails
 
@@ -29,18 +29,18 @@ public class ImagesPanel extends JPanel implements Observer {
 		vpadding = vpadding_;
 		ncol = ncol_;
 
-		container = new JScrollPane(this);
+		scroller = new JScrollPane(this);
 		setLayout(null);
 		setBackground(Color.WHITE);
 		session.addObserver(this);
 		
 		readSession();
 
-		container.addComponentListener(this.listener);
+		scroller.addComponentListener(this.listener);
 		this.addMouseWheelListener(listener);
-		this.setPreferredSize(container.getPreferredSize());
-		container.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		container.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.setPreferredSize(scroller.getPreferredSize());
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	}
 	
 	public void readSession() {
@@ -63,7 +63,7 @@ public class ImagesPanel extends JPanel implements Observer {
 	}
 	
 	public void refreshLayout() {
-		Dimension dim = container.getSize();
+		Dimension dim = scroller.getSize();
 		int thisWidth = (int) dim.width - 18;
 		int imgSize = ((thisWidth - hpadding) / ncol) - hpadding;
 		
