@@ -13,21 +13,35 @@ public class ImagesPanel extends JPanel implements Observer {
 	}
 	
 	private Session session;
-	private ArrayList<ImageView> images;
+	private ImageViewList images;
 	public Listener listener = new Listener();
 	private int hpadding;
 	private int vpadding;
 	public JScrollPane scroller;
 	private int ncol;
 	// ^ number of columns to use to display the image thumbnails
+	
+	private JPopupMenu panelMenu = new JPopupMenu("Test");
+	private JMenuItem sortByName = new JMenuItem("Name");
+	private JMenuItem sortBySize = new JMenuItem("Size");
+	
+	private int sortedBy = ImageViewList.BY_NAME;
 
-	private int imageSize = 50;
+	//private int imageSize = 50;
 
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
 		session = session_;
 		hpadding = hpadding_;
 		vpadding = vpadding_;
 		ncol = ncol_;
+		
+		JMenuItem sortBy = new JMenuItem("Sort by:");
+		sortBy.setEnabled(false);
+		sortByName.addActionListener(listener);
+		sortBySize.addActionListener(listener);
+		panelMenu.add(sortBy);
+		panelMenu.add(sortByName);
+		panelMenu.add(sortBySize);
 
 		scroller = new JScrollPane(this);
 		setLayout(null);
@@ -38,6 +52,7 @@ public class ImagesPanel extends JPanel implements Observer {
 
 		scroller.addComponentListener(this.listener);
 		this.addMouseWheelListener(listener);
+		this.addMouseListener(listener);
 		this.setPreferredSize(scroller.getPreferredSize());
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -47,19 +62,26 @@ public class ImagesPanel extends JPanel implements Observer {
 		this.removeAll();
 		this.repaint();
 		getImages();
+		sortImages();
 		refreshLayout();
 	}
 	
 	public void getImages() {
-		images = new ArrayList<ImageView>();
-		ArrayList<ImageModel> imodels = session.getImages();
+		images = new ImageViewList();
+		ArrayList<ImageModel> imodels = session.getImages(this.sortedBy);
 		if (imodels == null) log("imodels null !");
 		else log("imodels not null");
 		for (int i = 0; i < imodels.size(); i++) {
 			ImageView iview = new ImageView(imodels.get(i));
 			images.add(iview);
 			this.add(iview);
+			iview.addMouseListener(listener);
 		}
+	}
+	
+	public void sortImages() {
+		log("ping sortImages()");
+		images.quickSort(this.sortedBy);
 	}
 	
 	public void refreshLayout() {
@@ -94,8 +116,24 @@ public class ImagesPanel extends JPanel implements Observer {
 	}
 	
 	private class Listener
-	implements ComponentListener, MouseWheelListener
+	implements ComponentListener, MouseWheelListener,
+		ActionListener, MouseListener
 	{
+
+		@Override
+		public void actionPerformed(ActionEvent ev) {
+			Object source = ev.getSource();
+			if (source == sortByName) {
+				sortedBy = ImageViewList.BY_NAME;
+				sortImages();
+				refreshLayout();
+			}
+			else if (source == sortBySize) {
+				sortedBy = ImageViewList.BY_SIZE;
+				sortImages();
+				refreshLayout();
+			}
+		}
 
 		@Override
 		public void componentHidden(ComponentEvent arg0) {
@@ -126,6 +164,38 @@ public class ImagesPanel extends JPanel implements Observer {
 			ncol = Math.max(ncol + notches, 1);
 			refreshLayout();
 			log(notches + " - " + ncol);
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent ev) {
+			Object source = ev.getSource();
+			if (SwingUtilities.isRightMouseButton(ev) && source == ImagesPanel.this) {
+				panelMenu.show(ev.getComponent(), ev.getX(), ev.getY());
+			}
 		}
 		
 	}

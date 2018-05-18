@@ -21,6 +21,7 @@ public class Session extends Observable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	public String name;
 	public File folder;
 
@@ -37,13 +38,12 @@ public class Session extends Observable {
 	public Session(String name_, File folder_) {
 		name = name_;
 		folder = folder_;
-		for (int i = 0; i < 200; i++) newTag("Tag " + i);
-		//newTag("Ci Size");
-		//newTag("Color: red");
+		//for (int i = 0; i < 200; i++) newTag("Tag " + i);
 	}
 
 	public static Session fromData(SessionData data) {
-		Session s = new Session(data.name, new File(data.folder));
+		File sessionFolder = (data.folder == null) ? null : new File(data.folder);
+		Session s = new Session(data.name, sessionFolder);
 		s.readTagsData(data.tags);
 		return s;
 	}
@@ -128,10 +128,11 @@ public class Session extends Observable {
 		return output;
 	}
 	
-	public ArrayList<ImageModel> getImages() {
-		if (filters.size() == 0) return getAllImages();
-		// else
-		return new ArrayList<ImageModel>();
+	public ArrayList<ImageModel> getImages(int sortedBy) {
+		ArrayList<ImageModel> r;
+		if (filters.size() == 0) r = getAllImages();
+		else r = new ArrayList<ImageModel>();
+		return r;
 //		ArrayList<String> keys = filters.get(0).tag.images;
 //		for (int i = 0; i < filters.size(); i++) {
 //			intersectKeySets(keys, filters.get(i).tag.images);
@@ -240,16 +241,6 @@ public class Session extends Observable {
 	}
 
 	public void removeFilter(Filter filter) {
-//		int index = -1;
-//		for (int i = 0; i < filters.size(); i++) {
-//			Filter other = filters.get(i);
-//			if (other.negated == filter.negated
-//			&& other.tag.name == filter.tag.name)
-//			{
-//				index = i;
-//			}
-//		}
-//		if (index >= 0)
 		filters.remove(filter);
 		this.setChanged();
 		this.notifyObservers();

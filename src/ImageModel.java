@@ -1,6 +1,7 @@
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -11,11 +12,6 @@ public class ImageModel {
 	public String key;
 	public File file;
 	public BufferedImage buffered;
-	
-//	public ImageModel(String key_, File file_) {
-//		this(key_);
-//		file = file_;
-//	}
 	
 	public ImageModel(String key_) {
 		key = key_;

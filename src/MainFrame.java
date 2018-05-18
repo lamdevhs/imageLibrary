@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
 		app = app_;
 		session = session_;
 		
-		setTitle("ImgLibrary - " + session.name);
+		setTitle("ImgLibrary - " + session.name + " - " + session.folder.getAbsolutePath());
 		setSize(600,600);
 		setLocationRelativeTo(null); // center frame on screen
 		addWindowListener(listener);

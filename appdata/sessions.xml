@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_171" class="java.beans.XMLDecoder">
- <array class="java.lang.String" length="2">
+ <array class="java.lang.String" length="3">
   <void index="0">
    <string>foo</string>
   </void>
   <void index="1">
    <string>bla</string>
+  </void>
+  <void index="2">
+   <string>test_sorting_byname</string>
   </void>
  </array>
 </java>

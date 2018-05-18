@@ -5,7 +5,7 @@ import javax.swing.*;
 
 
 public class ImageView extends JPanel {
-	private ImageModel model;
+	public ImageModel model;
 	private JLabel image;
 	
 	ImageView(ImageModel model_) {

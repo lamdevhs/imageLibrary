@@ -119,7 +119,7 @@ public class U {
 		chooser.setDialogType(JFileChooser.OPEN_DIALOG);
 		chooser.setDialogTitle(title);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setCurrentDirectory(new File("/opt/pics"));
+		chooser.setCurrentDirectory(new File("/opt/demo_area.ln"));
 		// if (dir != null) chooser.setCurrentDirectory(dir);
 		// ^ to uncomment in the end
 		
