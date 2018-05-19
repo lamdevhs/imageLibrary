@@ -19,7 +19,7 @@ public class TagsPanel extends JPanel implements Observer {
 	public JScrollPane scroller;
 	private Listener listener = new Listener();
 
-	// westPanel
+	// == tags area
 	private JPanel wrapper = new JPanel();
 	private JPanel aboveTagsBox = new JPanel();
 	private JTextField searchBox = new JTextField(13);
@@ -27,6 +27,11 @@ public class TagsPanel extends JPanel implements Observer {
 	private JPanel tagsPanel = new JPanel();
 	private Box tagsBox = Box.createVerticalBox();
 	
+	// == filters area
+	private JPanel filtersPanel = new JPanel();
+	private Box filtersBox = Box.createVerticalBox();
+	
+	// == menus
 	private JPopupMenu oneTagMenu = new JPopupMenu();
 	private JMenuItem addToSel = new JMenuItem("Add to Selected Images");
 	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
@@ -38,10 +43,6 @@ public class TagsPanel extends JPanel implements Observer {
 	private JButton menuButton = new JButton("Menu");
 	private JPopupMenu generalMenu = new JPopupMenu();
 	private JMenuItem newTag = new JMenuItem("Create New Tag");
-	
-	// eastPanel
-	private JPanel filtersPanel = new JPanel();
-	private Box filtersBox = Box.createVerticalBox();
 	
 	public TagsPanel(Session session_, JFrame frame_) {
 		session = session_;
@@ -79,7 +80,6 @@ public class TagsPanel extends JPanel implements Observer {
 		aboveTagsBox.add(searchBox, BorderLayout.SOUTH);
 		wrapper.add(aboveTagsBox, BorderLayout.CENTER);
 		
-		
 		tagsPanel.setLayout(new BorderLayout());
 		tagsPanel.setBorder(BorderFactory.createTitledBorder("Tags"));
 		tagsPanel.add(padding2, BorderLayout.NORTH);
@@ -98,7 +98,6 @@ public class TagsPanel extends JPanel implements Observer {
 		scroller = new JScrollPane(this);
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//scroller.addComponentListener(listener);
 		
 		this.setBackground(U.Colors.lightBG);
 		filtersPanel.setBackground(U.Colors.lightBG);
@@ -127,7 +126,6 @@ public class TagsPanel extends JPanel implements Observer {
 				tagsBox.add(tagview);
 			}
 		}
-	//	if (tagsBox_isEmpty) tagsBox.add(new JLabel("(empty)"));
 		
 
 		filtersBox.removeAll();
@@ -139,8 +137,6 @@ public class TagsPanel extends JPanel implements Observer {
 			filterview.addMouseListener(listener);
 			filtersBox.add(filterview);
 		}
-		//if (filters.size() == 0);
-			//filtersBox.add(new JLabel("(empty)"));
 		
 		revalidate();
 	}
@@ -220,7 +216,11 @@ public class TagsPanel extends JPanel implements Observer {
 	}
 
 	private class Listener
-	implements DocumentListener, MouseListener, ActionListener, ComponentListener {
+	implements
+		DocumentListener, // to listen to the searchbox
+		MouseListener,
+		ActionListener // button and menus
+	{
 		
 		private Tag selectedTag = null;
 		
@@ -323,36 +323,6 @@ public class TagsPanel extends JPanel implements Observer {
 			// TODO Auto-generated method stub
 			
 		}
-
-
-		@Override
-		public void componentHidden(ComponentEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public void componentMoved(ComponentEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public void componentResized(ComponentEvent arg0) {
-			//refreshLayout();
-			
-		}
-
-
-		@Override
-		public void componentShown(ComponentEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
 	}
 
 }

@@ -14,7 +14,8 @@ public class ImageView extends JPanel {
 		add(image, BorderLayout.CENTER);
 		model = model_;
 		this.setBackground(Color.white);
-		this.setBorder(BorderFactory.createTitledBorder(model.file.getName()));
+		this.setBorder(BorderFactory
+			.createTitledBorder(model.file.getName()));
 	}
 
 	public void display(int imgSize) {
@@ -26,7 +27,8 @@ public class ImageView extends JPanel {
 		double factor = (double)imgSize / maxSize;
 		int width = Math.min(imgSize, (int)(realw * factor));
 		int height = Math.min(imgSize, (int)(realh * factor));
-		Image scaled = model.buffered.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+		Image scaled = model.buffered.getScaledInstance(
+			width, height, Image.SCALE_AREA_AVERAGING);
 		image.setIcon(new ImageIcon(scaled));
 		
 	}

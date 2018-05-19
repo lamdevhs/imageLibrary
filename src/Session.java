@@ -49,7 +49,6 @@ public class Session {
 	public Session(String name_, File folder_) {
 		name = name_;
 		folder = folder_;
-		//for (int i = 0; i < 200; i++) newTag("Tag " + i);
 	}
 
 	public static Session fromData(SessionData data) {
@@ -68,7 +67,7 @@ public class Session {
 			Tag tag = new Tag(tagName);
 			ArrayList<String> imagesKeys = tagsData.get(tagName);
 			for (int i = 0; i < imagesKeys.size(); i++) {
-			// for each image key (== relative path)
+			// for each image key  (aka its relative path)
 				String key = imagesKeys.get(i);
 				ImageModel imodel;
 				if (images.containsKey(key)) {
@@ -126,16 +125,6 @@ public class Session {
 		}
 		return data;
 	}
-
-//	public ArrayList<ImageModel> getAllImages() {
-//		ArrayList<ImageModel> output = new ArrayList<ImageModel>();
-//		Iterator<String> iter = images.keySet().iterator();
-//		while(iter.hasNext()) {
-//			String key = iter.next();
-//			output.add(images.get(key));
-//		}
-//		return output;
-//	}
 
 	private void refreshVisibleImages() {
 		visibleImages.clear();
@@ -231,21 +220,10 @@ public class Session {
 		log("ping addFilter " + tagname);
 		if (tags.containsKey(tagname)) {
 			// ^ should always happen
-			// else
 			filters.put(tagname, new Filter(tags.get(tagname)));
 			refreshVisibleImages();
 		}
 	}
-
-//	private boolean hasFilter(String tagname, boolean negated) {
-//		for (int i = 0; i < filters.size(); i++) {
-//			Filter other = filters.get(i);
-//			//if (other.negated == negated &&
-//			if (other.tag.name == tagname)
-//				return true;
-//		}
-//		return false;
-//	}
 
 	public void removeFilter(String tagName) {
 		if (filters.containsKey(tagName)) {
@@ -262,7 +240,6 @@ public class Session {
 		}
 		if (selection.contains(image)) selection.remove(image);
 		else selection.add(image);
-		//selectionState.
 		selectionState.notifyObservers();
 	}
 
@@ -344,5 +321,12 @@ public class Session {
 		}
 		log("renameTag: report = " + report);
 		return report;
+	}
+
+	public String title() {
+		String s = "[ " + this.name;
+		if (U.checkValidFolder(this.folder) != U.OK)
+			return s; // should not happen
+		return s + " ] - - - [ " + this.folder.getAbsolutePath() + " ]";
 	}
 }

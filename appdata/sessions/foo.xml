@@ -16,6 +16,11 @@
    </void>
   </void>
  </object>
+<void class="java.util.ArrayList" id="ArrayList0">
+ <void method="add">
+  <string>oil.png</string>
+ </void>
+</void>
 <void class="SessionData" id="Field0" method="getField">
  <string>tags</string>
  <void id="HashMap0" method="get">
@@ -41,10 +46,6 @@
    <object class="java.util.ArrayList"/>
   </void>
   <void method="put">
-   <string>Tag 143</string>
-   <object class="java.util.ArrayList"/>
-  </void>
-  <void method="put">
    <string>Tag 144</string>
    <object class="java.util.ArrayList"/>
   </void>
@@ -62,10 +63,6 @@
   </void>
   <void method="put">
    <string>Tag 35</string>
-   <object class="java.util.ArrayList"/>
-  </void>
-  <void method="put">
-   <string>Tag 38</string>
    <object class="java.util.ArrayList"/>
   </void>
   <void method="put">
@@ -110,10 +107,6 @@
   </void>
   <void method="put">
    <string>Tag 159</string>
-   <object class="java.util.ArrayList"/>
-  </void>
-  <void method="put">
-   <string>Ci Size</string>
    <object class="java.util.ArrayList"/>
   </void>
   <void method="put">
@@ -250,10 +243,6 @@
   </void>
   <void method="put">
    <string>Tag 127</string>
-   <object class="java.util.ArrayList"/>
-  </void>
-  <void method="put">
-   <string>City: New York City: New York City: ...</string>
    <object class="java.util.ArrayList"/>
   </void>
   <void method="put">
@@ -677,10 +666,6 @@
    <object class="java.util.ArrayList"/>
   </void>
   <void method="put">
-   <string>Color: red</string>
-   <object class="java.util.ArrayList"/>
-  </void>
-  <void method="put">
    <string>Tag 161</string>
    <object class="java.util.ArrayList"/>
   </void>
@@ -830,11 +815,7 @@
   </void>
   <void method="put">
    <string>Tag 145</string>
-   <object class="java.util.ArrayList">
-    <void method="add">
-     <string>oil.png</string>
-    </void>
-   </object>
+   <object idref="ArrayList0"/>
   </void>
  </void>
 </void>

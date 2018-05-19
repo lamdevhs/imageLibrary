@@ -34,7 +34,6 @@ public class ImagesPanel extends JPanel implements Observer {
 	private int sortedBy = ImageViewList.BY_NAME;
 
 	private ImageInfoBar infoBar = new ImageInfoBar();
-	//private Box infoBar = Box.createHorizontalBox();
 
 	//private int imageSize = 50;
 

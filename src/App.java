@@ -13,13 +13,10 @@ public class App {
 	}
 
 	Model model;
-	//MainFrame mainFrame;
 	
 	App(String rootpath) {
 		Locator locator = new Locator(rootpath);
 		model = new Model(locator);
-		//mainFrame = new MainFrame(this);
-
 		openSessionManager(null);
 	}
 	

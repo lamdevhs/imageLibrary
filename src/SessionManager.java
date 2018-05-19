@@ -59,46 +59,46 @@ public class SessionManager extends JFrame implements Observer {
 		inside.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		// Widgets
-			rename.setPreferredSize(buttonDim);
-			delete.setPreferredSize(buttonDim);
-			create.setPreferredSize(buttonDim);
-			quit.setPreferredSize(buttonDim);
-			open.setPreferredSize(buttonDim);
-			changeFolder.setPreferredSize(buttonDim);
+		rename.setPreferredSize(buttonDim);
+		delete.setPreferredSize(buttonDim);
+		create.setPreferredSize(buttonDim);
+		quit.setPreferredSize(buttonDim);
+		open.setPreferredSize(buttonDim);
+		changeFolder.setPreferredSize(buttonDim);
 
-			rename.addActionListener(listener);
-			delete.addActionListener(listener);
-			create.addActionListener(listener);
-			quit.addActionListener(listener);
-			open.addActionListener(listener);
-			changeFolder.addActionListener(listener);
+		rename.addActionListener(listener);
+		delete.addActionListener(listener);
+		create.addActionListener(listener);
+		quit.addActionListener(listener);
+		open.addActionListener(listener);
+		changeFolder.addActionListener(listener);
 
-			sessions = new JList();
-			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		sessions = new JList();
+		sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// North
-			north.add(text);
-			inside.add(north, BorderLayout.NORTH);
+		north.add(text);
+		inside.add(north, BorderLayout.NORTH);
 
 		// Center
-			sessionsPane = new JScrollPane (sessions);
-			sessionsPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-			inside.add(sessionsPane, BorderLayout.CENTER);
+		sessionsPane = new JScrollPane (sessions);
+		sessionsPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		inside.add(sessionsPane, BorderLayout.CENTER);
 
 		// West
-			west.setLayout(new FlowLayout());
-			west.setPreferredSize(buttonDim);
-			west.add(rename);
-			west.add(delete);
-			west.add(create);
-			west.add(changeFolder);
-			inside.add(west, BorderLayout.WEST);
+		west.setLayout(new FlowLayout());
+		west.setPreferredSize(buttonDim);
+		west.add(rename);
+		west.add(delete);
+		west.add(create);
+		west.add(changeFolder);
+		inside.add(west, BorderLayout.WEST);
 
 		// South
-			south.add(quit);
-			south.add(Box.createGlue());
-			south.add(open);
-			inside.add(south, BorderLayout.SOUTH);
+		south.add(quit);
+		south.add(Box.createGlue());
+		south.add(open);
+		inside.add(south, BorderLayout.SOUTH);
 			
 		model.addObserver(this);
 		readModel();
@@ -114,7 +114,7 @@ public class SessionManager extends JFrame implements Observer {
 	public void createSession() {
 		log("create session");
 		String msg = "Name for the new session :";
-		String name = U.input(SessionManager.this, msg);
+		String name = U.input(this, msg);
 		if (name == null) {
 			log("abandon");
 			return;
@@ -134,7 +134,7 @@ public class SessionManager extends JFrame implements Observer {
 
 		changeSessionFolder(sessionIndex);
 		
-		// nothing to do -- Observer pattern will update
+		// nothing further to do -- Observer pattern will update
 		// `this` session manager
 	}
 
@@ -143,7 +143,7 @@ public class SessionManager extends JFrame implements Observer {
 		if (model.allSessions.size() <= sessionIndex)
 			return; // should never happen!
 
-		String newName = U.input(SessionManager.this,
+		String newName = U.input(this,
 			"Old name: " +
 			U.quoted(model.allSessions.get(sessionIndex).name) +
 			"\n\nNew name:");
@@ -167,7 +167,7 @@ public class SessionManager extends JFrame implements Observer {
 		if (model.allSessions.size() <= sessionIndex)
 			return; // should never happen!
 		
-		int answer = U.confirm(SessionManager.this,
+		int answer = U.confirm(this,
 				"Name of the session: " +
 				  U.quoted(model.allSessions.get(sessionIndex).name) +
 				"\n\nDeleting a session cannot be undone. Proceed?");
@@ -179,8 +179,8 @@ public class SessionManager extends JFrame implements Observer {
 		// else
 		model.deleteSession(sessionIndex);
 		log("deleting done");
-		// the SessionManager dialog should now get refreshed automatically
-		// thanks to the Observer pattern
+		// this SessionManager dialog should now get refreshed
+		// automatically thanks to the Observer pattern
 	}
 
 	public void namingSessionError(int error) {
@@ -201,7 +201,7 @@ public class SessionManager extends JFrame implements Observer {
 		if (U.checkValidFolder(folder) != U.OK)
 		{
 			log("folderDialog -> null");
-			U.error((JFrame)null, "Warning: no valid folder was chosen.");
+			U.error(this, "Warning: no valid folder was chosen.");
 		}
 		else {
 			log("folderDialog -> "+ folder.getAbsolutePath());
@@ -259,7 +259,6 @@ public class SessionManager extends JFrame implements Observer {
 		@Override
 		public void windowClosing(WindowEvent ev) {
 			app.quit(SessionManager.this);
-			//SessionManager.this.setVisible(true);
 		}
 		
 	}

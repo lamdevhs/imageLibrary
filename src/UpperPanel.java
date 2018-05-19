@@ -1,16 +1,18 @@
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.*;
 
 
 public class UpperPanel extends JPanel {
 	private Session session;
-	//private MainFrame view;
 
 	public UpperPanel(Session session_) {
 		super();
 		session = session_;
-		//view = view_;
 
-		add(new JLabel("MainFrame -- Session: " + session.name));
+		add(U.monospaceLabel(session.title(), U.Colors.darkBG, 18));
+		setBackground(U.Colors.lightBG);
 	}
 
 }

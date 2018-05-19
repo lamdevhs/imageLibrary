@@ -18,42 +18,13 @@
  </object>
 <void class="java.util.ArrayList" id="ArrayList0">
  <void method="add">
-  <string>subfolder/stats_area_chart.png</string>
+  <string>subfolder/3d_trash_can_empting-copia.png</string>
  </void>
  <void method="add">
-  <string>subfolder/focus_group.png</string>
+  <string>subfolder/3d_trash_can_full.png</string>
  </void>
  <void method="add">
-  <string>stats_pie_chart.png</string>
- </void>
- <void method="add">
-  <string>stats_histogram.png</string>
- </void>
- <void method="add">
-  <string>subfolder/3d_group.png</string>
- </void>
- <void method="add">
-  <string>subfolder/solution.png</string>
- </void>
- <void method="add">
-  <string>oil.png</string>
- </void>
- <void method="add">
-  <string>subfolder/multimple_solutions.png</string>
- </void>
- <void method="add">
-  <string>subfolder/umbrella.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList1">
- <void method="add">
-  <string>stats_pie_chart.png</string>
- </void>
- <void method="add">
-  <string>stats_histogram.png</string>
- </void>
- <void method="add">
-  <string>subfolder/stats_area_chart.png</string>
+  <string>subfolder/3d_trash_can.png</string>
  </void>
 </void>
 <void class="SessionData" id="Field0" method="getField">
@@ -62,39 +33,67 @@
   <object idref="SessionData0"/>
   <void method="put">
    <string>Charts</string>
-   <object idref="ArrayList1"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>stats_pie_chart.png</string>
+    </void>
+    <void method="add">
+     <string>stats_histogram.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/stats_area_chart.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>Stuff</string>
    <object class="java.util.ArrayList">
     <void method="add">
-     <string>subfolder/solution2.png</string>
+     <string>subfolder/multimple_solutions.png</string>
     </void>
     <void method="add">
      <string>subfolder/solution.png</string>
     </void>
     <void method="add">
-     <string>subfolder/multimple_solutions.png</string>
+     <string>subfolder/solution2.png</string>
     </void>
    </object>
   </void>
   <void method="put">
    <string>Trash</string>
-   <object class="java.util.ArrayList">
-    <void method="add">
-     <string>subfolder/3d_trash_can.png</string>
-    </void>
-    <void method="add">
-     <string>subfolder/3d_trash_can_empting-copia.png</string>
-    </void>
-    <void method="add">
-     <string>subfolder/3d_trash_can_full.png</string>
-    </void>
-   </object>
+   <object idref="ArrayList0"/>
   </void>
   <void method="put">
    <string>Red</string>
-   <object idref="ArrayList0"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>subfolder/multimple_solutions.png</string>
+    </void>
+    <void method="add">
+     <string>stats_pie_chart.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/umbrella.png</string>
+    </void>
+    <void method="add">
+     <string>stats_histogram.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/stats_area_chart.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/focus_group.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/solution.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/3d_group.png</string>
+    </void>
+    <void method="add">
+     <string>oil.png</string>
+    </void>
+   </object>
   </void>
  </void>
 </void>

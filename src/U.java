@@ -13,6 +13,8 @@ import java.util.HashMap;
 import javax.swing.*;
 
 
+// Utility Class full of static methods and values
+// useful for the whole program.
 public class U {
 	public static class Colors {
 		public static Color darkBG = new Color(39,40,34);
@@ -20,6 +22,7 @@ public class U {
 		public static Color lightBlue = new Color(102,217,239);
 		public static Color lightGreen = new Color(166,226,43);
 		public static Color magenta = new Color(249,38,97);
+		public static Color orange = new Color(253, 151, 31);
 	}
 
 	public static int IMPOSSIBLE = -1;
@@ -43,22 +46,9 @@ public class U {
 			JOptionPane.ERROR_MESSAGE);
 	}
 	
-	// public static void error(JDialog owner, String errmsg) {
-	// 	JOptionPane.showMessageDialog(owner, errmsg, "User Error",
-	// 		JOptionPane.ERROR_MESSAGE);
-	// }
-	
 	public static String input(JFrame owner, String msg) {
 		return JOptionPane.showInputDialog(owner, msg);
 	}
-	
-	// public static String input(JDialog owner, String msg) {
-	// 	return JOptionPane.showInputDialog(owner, msg);
-	// }
-
-	// public static int confirm(JFrame owner, String msg) {
-	// 	return JOptionPane.showConfirmDialog(owner, msg);
-	// }
 	
 	public static int confirm(JFrame owner, String msg) {
 		return JOptionPane.showConfirmDialog(owner, msg, "Confirmation",
@@ -76,7 +66,7 @@ public class U {
 			fis = new FileInputStream(path);
 		} catch (FileNotFoundException e1) {
 			U.log("fromXML: FileNotFoundException");
-			//e1.printStackTrace();
+			e1.printStackTrace();
 			return null;
 		}
 		bis = new BufferedInputStream(fis);
@@ -88,7 +78,7 @@ public class U {
 			fis.close();
 		} catch (IOException e) {
 			U.log("fromXML: IOException");
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return o;
 	}
@@ -102,7 +92,7 @@ public class U {
 			fos = new FileOutputStream(path);
 		} catch (FileNotFoundException e) {
 			U.log("toXML: FileNotFoundException");
-			//e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 		bos = new BufferedOutputStream(fos);
@@ -116,7 +106,7 @@ public class U {
 			fos.close();
 		} catch (IOException e) {
 			U.log("toXML: IOException");
-			//e.printStackTrace();
+			e.printStackTrace();
 			return false; // or true?
 		}
 		return true;
@@ -129,7 +119,7 @@ public class U {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setCurrentDirectory(new File("/opt/demo_area.ln"));
 		// if (dir != null) chooser.setCurrentDirectory(dir);
-		// ^ to uncomment in the end
+		// ^ TODO uncomment in the end
 		
 		int report = chooser.showOpenDialog(owner);
 		if (report != JFileChooser.APPROVE_OPTION) return null;

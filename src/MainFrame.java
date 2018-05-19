@@ -18,22 +18,24 @@ public class MainFrame extends JFrame {
 	
 	private TagsPanel tagPanel;
 	private ImagesPanel imagesPanel;
-	//private StatusBar statusBar;
 	private UpperPanel upperPanel;
 
 	MainFrame(App app_, Session session_){
 		app = app_;
 		session = session_;
 		
-		setTitle("ImgLibrary - " + session.name + " - " + session.folder.getAbsolutePath());
+		setTitle("ImgLibrary - - - " + session.title());
 		setSize(1000,800);
-		setLocationRelativeTo(null); // center frame on screen
+		setLocationRelativeTo(null); // center the frame on screen
 		addWindowListener(listener);
 		
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
 		tagPanel = new TagsPanel(session_, this);
 		
-		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tagPanel.scroller, imagesPanel);
+		JSplitPane center = new JSplitPane(
+			JSplitPane.HORIZONTAL_SPLIT,
+			tagPanel.scroller,
+			imagesPanel);
 		
 		add(center, BorderLayout.CENTER);
 		

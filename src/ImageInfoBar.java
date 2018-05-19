@@ -8,22 +8,11 @@ public class ImageInfoBar extends JPanel {
 	private ImageView image = null;
 	
 	ImageInfoBar() {
-		//this.setPreferredSize(new Dimension(0, 25));
 		this.setBackground(U.Colors.darkBG);
 	}
-	
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		if (image == null) return;
-//		Font font = new Font("Sans Serif", Font.PLAIN, 18);
-//		g.setFont(font);
-//		g.drawString(image.model.key, 5, 20);
-//	}
-	
 	public void setImage(ImageView image_) {
 		image = image_;
 		refresh();
-		//this.repaint();
 	}
 	
 	public void refresh() {

@@ -20,11 +20,10 @@ public class ImageModel {
 	public static BufferedImage readImage(File file) {
 		try {
 			BufferedImage bim = ImageIO.read(file);
-			//buffered = buffered_;
 			return bim;
 		}
 		catch (IOException ioe) {
-			return null; // error: file is probably not an image
+			return null; // file is probably not an image
 		}
 		catch (IllegalArgumentException iae) {
 			return null;
@@ -35,18 +34,22 @@ public class ImageModel {
 		String path = file.getAbsolutePath();
 		if (path.startsWith(rootPath)) {
 			return path.substring(rootPath.length() + 1);
-			// ^ to trim the '/' which separates
+			// ^ the (+1) is to trim the '/' which separates
 			// the relative path from the rootPath
 		}
-		else return path; // incase of symlinked images: return absolute path
+		else return path;
 	}
 
 	public String getLocation() {
-		return this.key.substring(0, this.key.length() - this.file.getName().length());
+		return this.key.substring(0,
+			this.key.length()
+			- this.file.getName().length());
 	}
 
 	public String getFullSize() {
 		if (buffered == null) return "";
-		return this.buffered.getWidth() + "x" + this.buffered.getHeight();
+		return this.buffered.getWidth()
+			+ "x"
+			+ this.buffered.getHeight();
 	}
 }

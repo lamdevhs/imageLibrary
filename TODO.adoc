@@ -1,13 +1,14 @@
 = TODO
 
 == Fixes
+- [x] offensive indentation
+- [x] window titles
+- [x] commented code
 - keySet()
-- window titles
 - // TODOes
-- commented code
 - SessionManager.this?
 - check everything at the end
-- offensive indentation
+- condense unused methods
 
 == Minimal objective
 
@@ -19,6 +20,7 @@
 == Optional objectives
 
 - unselect all
+- create new tag from selection
 
 == general
 - [x] SessionUI -> SessionManager

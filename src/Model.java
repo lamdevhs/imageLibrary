@@ -63,8 +63,6 @@ public class Model extends Observable {
 	public int addNewSession(String name, File folder) {
 		// creating new session
 		Session s = new Session(name, folder);
-		// s.name = name;
-		// s.folder = folder;
 
 		int index = allSessions.size();
 		allSessions.add(s);
@@ -114,11 +112,11 @@ public class Model extends Observable {
 	}
 	
 	public void deleteSession(int sessionIndex) {
-		// deleting session file and data
 		Session s = allSessions.get(sessionIndex);
 		allSessions.remove(sessionIndex);
 		File sessionFile = new File(locator.sessionFile(s.name));
 		if (sessionFile.exists()) {
+			// deleting session datafile
 			log("deleteSession: session file exists - deleting it");
 			sessionFile.delete();
 		}
