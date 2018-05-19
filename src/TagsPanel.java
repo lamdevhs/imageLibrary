@@ -24,6 +24,11 @@ public class TagsPanel extends JPanel implements Observer {
 	private JPanel tagsPanel = new JPanel();
 	private Box tagsBox = Box.createVerticalBox();
 	
+	private JPopupMenu tagMenu = new JPopupMenu();
+	private JMenuItem addToSel = new JMenuItem("Add to Selected Images");
+	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
+	private JMenuItem addToVisible = new JMenuItem("Add to Filtered Images");
+	private JMenuItem rmvFromVisible = new JMenuItem("Remove from Filtered Images");
 
 	// eastPanel
 	private JPanel filtersPanel = new JPanel();
@@ -34,6 +39,16 @@ public class TagsPanel extends JPanel implements Observer {
 		JLabel padding =  new JLabel("                               ");
 		JLabel padding2 = new JLabel("                               ");
 		
+		addToSel.addActionListener(listener);
+		addToVisible.addActionListener(listener);
+		rmvFromSel.addActionListener(listener);
+		rmvFromVisible.addActionListener(listener);
+
+		tagMenu.add(addToSel);
+		tagMenu.add(addToVisible);
+		tagMenu.addSeparator();
+		tagMenu.add(rmvFromSel);
+		tagMenu.add(rmvFromVisible);
 		
 		wrapper.setLayout(new BorderLayout());
 		
@@ -115,47 +130,47 @@ public class TagsPanel extends JPanel implements Observer {
 		refresh();
 	}
 	
-	public void refreshLayout() {
-		log("ping refresh layout");
-//		tagsBox.repaint();
-//		tagsBox.revalidate();
-		//wrapper.repaint();
-		//wrapper.revalidate();
-		//scroller.validate();
-		return;
-//		Dimension dim = scroller.getSize();
-//		log("dim --->" + dim.toString() + scroller.getMaximumSize());
-//		this.setPreferredSize(new Dimension(dim.width - 18, dim.height));
-//		//this.tagsBox.setPreferredSize(new Dimension(dim.width - 18 - 5, (int)tagsBox.getPreferredSize().getHeight()));
-//		//westPanel.revalidate();
-//		scroller.validate();
-	}
+	// public void refreshLayout() {
+	// 	log("ping refresh layout");
+	// 	return;
+	// }
 
 	private class Listener
 	implements DocumentListener, MouseListener, ActionListener, ComponentListener {
+		
+		private Tag selectedTag = null;
+		
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
+		public void actionPerformed(ActionEvent ev) {
+			Object source = ev.getSource();
+			if (source == addToSel) {
+				session.addTag(selectedTag, true);
+			}
+			else if (source == rmvFromSel) {
+				session.removeTag(selectedTag, true);
+			}
+			else if (source == addToVisible) {
+				session.addTag(selectedTag, false);
+			}
+			else if (source == rmvFromVisible) {
+				session.removeTag(selectedTag, false);
+			}
 		}
 		
 
 		@Override
 		public void changedUpdate(DocumentEvent arg0) {
-			refresh();
-			
+			refresh(); // searchBox was modified by user
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent arg0) {
-			refresh();
-			
+			refresh(); // searchBox was modified by user
 		}
 
 		@Override
 		public void removeUpdate(DocumentEvent arg0) {
-			refresh();
-			
+			refresh(); // searchBox was modified by user
 		}
 
 		//////////////////////
@@ -163,13 +178,20 @@ public class TagsPanel extends JPanel implements Observer {
 		@Override
 		public void mouseClicked(MouseEvent ev) {
 			Object source = ev.getSource();
-			if (SwingUtilities.isLeftMouseButton(ev)) {
-				if (source instanceof TagView) {
-					TagView tagview = (TagView)source;
+			if (source instanceof TagView) {
+				TagView tagview = (TagView)source;
+				if (SwingUtilities.isLeftMouseButton(ev)) {
 					session.addFilter(tagview.tag.name, false);
 				}
-				else if (source instanceof FilterView) {
-					FilterView filterview = (FilterView)source;
+				else if (SwingUtilities.isRightMouseButton(ev)) {
+					log("ping rightClick on tag");
+					this.selectedTag = tagview.tag;
+					tagMenu.show(ev.getComponent(), ev.getX(), ev.getY());
+				}
+			}
+			else if (source instanceof FilterView) {
+				FilterView filterview = (FilterView)source;
+				if (SwingUtilities.isLeftMouseButton(ev)) {
 					session.removeFilter(filterview.filter);
 				}
 			}
@@ -216,7 +238,7 @@ public class TagsPanel extends JPanel implements Observer {
 
 		@Override
 		public void componentResized(ComponentEvent arg0) {
-			refreshLayout();
+			//refreshLayout();
 			
 		}
 

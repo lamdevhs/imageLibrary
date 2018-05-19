@@ -155,6 +155,7 @@ public class Session {
 				visibleImages.retainAll(filters.get(i).tag.images);
 			}
 		}
+		filteringState.notifyObservers();
 	}
 
 	public ArrayList<ImageModel> keysToImages(ArrayList<String> keys) {
@@ -243,8 +244,6 @@ public class Session {
 			// else
 			filters.add(new Filter(tags.get(tagname)));
 			refreshVisibleImages();
-			//filteringState.setChanged();
-			filteringState.notifyObservers();
 		}
 	}
 
@@ -261,8 +260,6 @@ public class Session {
 	public void removeFilter(Filter filter) {
 		filters.remove(filter);
 		refreshVisibleImages();
-		//this.setChanged();
-		filteringState.notifyObservers();
 	}
 
 	public void changeSelection(ImageModel image) {
@@ -275,5 +272,31 @@ public class Session {
 		else selection.add(image);
 		//selectionState.
 		selectionState.notifyObservers();
+	}
+
+	public void addTag(Tag tag, boolean onlySelectedImages) {
+		if (tag == null || !this.tags.containsKey(tag.name)) {
+			return; // should never happen
+		}
+		if (onlySelectedImages) {
+			tag.images.addAll(selection);
+		}
+		else {
+			tag.images.addAll(visibleImages);
+		}
+		refreshVisibleImages();
+	}
+
+	public void removeTag(Tag tag, boolean onlySelectedImages) {
+		if (tag == null || !this.tags.containsKey(tag.name)) {
+			return; // should never happen
+		}
+		if (onlySelectedImages) {
+			tag.images.removeAll(selection);
+		}
+		else {
+			tag.images.removeAll(visibleImages);
+		}
+		refreshVisibleImages();
 	}
 }
