@@ -33,6 +33,10 @@ public class U {
 	public static void log(String string) {
 		System.out.println("[log]\t" + string);
 	}
+	
+	public static void elog(String string) {
+		System.out.println("[ERROR LOG]\t" + string);
+	}
 
 	public static void error(JFrame owner, String errmsg) {
 		JOptionPane.showMessageDialog(owner, errmsg, "User Error",
@@ -149,16 +153,16 @@ public class U {
 		return wrapper;
 	}
 	
-	public static JLabel label(String s, Color color, int size, int style) {
+	public static JLabel monospaceLabel(String s, Color color, int size, int style) {
 		JLabel label = new JLabel(s);
-		Font font = new Font("Sans Serif", style, size);
+		Font font = new Font(Font.MONOSPACED, style, size);
 		label.setFont(font);
 		label.setForeground(color);
 		return label;
 	}
 	
-	public static JLabel label(String s, Color color, int size) {
-		return U.label(s, color, size, Font.PLAIN);
+	public static JLabel monospaceLabel(String s, Color color, int size) {
+		return U.monospaceLabel(s, color, size, Font.PLAIN);
 	}
 
 }

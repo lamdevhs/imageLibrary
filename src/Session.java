@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 
 
-public class Session extends Observable {
+public class Session {
 	public static void log(String string) {
 		U.log("(Session) " + string);
 	}
@@ -21,19 +22,29 @@ public class Session extends Observable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	public String name;
 	public File folder;
 
 	// writing code in Java is like writing
 	// your phone number in binary...
-	public HashMap<String, ImageModel> images =
+	private HashMap<String, ImageModel> images =
 			new HashMap<String, ImageModel>();
-	public HashMap<String, Tag> tags =
+	private HashMap<String, Tag> tags =
 			new HashMap<String, Tag>();
 	
-	public ArrayList<Filter> filters =
+	private ArrayList<Filter> filters =
 			new ArrayList<Filter>();
+
+	public HashSet<ImageModel> visibleImages =
+			new HashSet<ImageModel>();
+
+	public HashSet<ImageModel> selection =
+			new HashSet<ImageModel>();
+	
+
+	public Observed selectionState = new Observed();
+	public Observed filteringState = new Observed();
+	
 
 	public Session(String name_, File folder_) {
 		name = name_;
@@ -87,12 +98,10 @@ public class Session extends Observable {
 		// else
 		HashMap<String, ImageModel> newImages = new HashMap<String, ImageModel>();
 		readFolder(folder, newImages);
-		//HashMap<String, ImageModel> oldImages = this.images;
 		this.images = newImages;
-		deleteOldImages(); {
-
-		}
+		deleteOldImages();
 		log("readFolder says: " + newImages.toString());
+		refreshVisibleImages();
 		return U.OK;
 	}
 
@@ -128,16 +137,24 @@ public class Session extends Observable {
 		return output;
 	}
 	
-	public ArrayList<ImageModel> getImages(int sortedBy) {
-		ArrayList<ImageModel> r;
-		if (filters.size() == 0) r = getAllImages();
-		else r = new ArrayList<ImageModel>();
-		return r;
-//		ArrayList<String> keys = filters.get(0).tag.images;
-//		for (int i = 0; i < filters.size(); i++) {
-//			intersectKeySets(keys, filters.get(i).tag.images);
-//		}
-//		return keysToImages(keys);
+// 	public ImageModel[] getVisibleImages(int sortedBy) {
+// 		ArrayList<ImageModel> r;
+// //		if (filters.size() == 0) r = getAllImages();
+// //		else r = new ArrayList<ImageModel>();
+// 		return (ImageModel[])visibleImages.toArray();
+// 		//return r;
+// 	}
+
+	private void refreshVisibleImages() {
+		visibleImages.clear();
+		if (filters.size() == 0)
+			visibleImages.addAll(getAllImages());
+		else {
+			visibleImages.addAll(filters.get(0).tag.images);
+			for (int i = 1; i < filters.size(); i++) {
+				visibleImages.retainAll(filters.get(i).tag.images);
+			}
+		}
 	}
 
 	public ArrayList<ImageModel> keysToImages(ArrayList<String> keys) {
@@ -225,16 +242,17 @@ public class Session extends Observable {
 			if (hasFilter(tagname, negated)) return;
 			// else
 			filters.add(new Filter(tags.get(tagname)));
-			this.setChanged();
-			this.notifyObservers();
+			refreshVisibleImages();
+			//filteringState.setChanged();
+			filteringState.notifyObservers();
 		}
 	}
 
 	private boolean hasFilter(String tagname, boolean negated) {
 		for (int i = 0; i < filters.size(); i++) {
 			Filter other = filters.get(i);
-			if (other.negated == negated
-			&& other.tag.name == tagname)
+			//if (other.negated == negated &&
+			if (other.tag.name == tagname)
 				return true;
 		}
 		return false;
@@ -242,8 +260,20 @@ public class Session extends Observable {
 
 	public void removeFilter(Filter filter) {
 		filters.remove(filter);
-		this.setChanged();
-		this.notifyObservers();
+		refreshVisibleImages();
+		//this.setChanged();
+		filteringState.notifyObservers();
 	}
 
+	public void changeSelection(ImageModel image) {
+		if (image == null || !visibleImages.contains(image)
+				|| !visibleImages.contains(image)) {
+			U.elog("Session.addToSelection: invalid argument");
+			return;
+		}
+		if (selection.contains(image)) selection.remove(image);
+		else selection.add(image);
+		//selectionState.
+		selectionState.notifyObservers();
+	}
 }

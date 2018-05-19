@@ -30,9 +30,10 @@ public class ImageInfoBar extends JPanel {
 		if (image == null) return;
 		removeAll();
 		repaint();
-		add(U.label(image.model.getLocation(), U.Colors.lightBlue, 18, Font.ITALIC));
-		add(U.label(image.model.file.getName(), U.Colors.lightGreen, 18));
-		add(U.label(image.model.getFullSize(), U.Colors.magenta, 18));
+		add(U.monospaceLabel(image.model.getLocation(), U.Colors.lightBlue, 18));
+		add(U.monospaceLabel(image.model.file.getName(), U.Colors.lightGreen, 18));
+		add(U.monospaceLabel("-", Color.WHITE, 18));
+		add(U.monospaceLabel(image.model.getFullSize(), U.Colors.magenta, 18));
 		revalidate();
 	}
 }

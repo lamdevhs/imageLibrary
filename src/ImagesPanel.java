@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -77,11 +78,27 @@ public class ImagesPanel extends JPanel implements Observer {
 
 		add(infoBar, BorderLayout.NORTH);
 
-		session.addObserver(this);
-		readSession();
+		session.filteringState.addObserver(this);
+		session.selectionState.addObserver(this);
+		refreshImages();
+	}
+	
+	@Override
+	public void update(Observable whatChanged, Object arg1) {
+		log("ping update");
+		if (whatChanged == session.filteringState) refreshImages();
+		else if (whatChanged == session.selectionState) refreshSelection();
+		
 	}
 
-	public void readSession() {
+	private void refreshSelection() {
+		for (int i = 0; i < images.size(); i++) {
+			ImageView image = images.get(i);
+			image.setSelected(session.selection.contains(image.model));
+		}
+	}
+
+	public void refreshImages() {
 		displayArea.removeAll();
 		displayArea.repaint();
 		getImages();
@@ -91,11 +108,9 @@ public class ImagesPanel extends JPanel implements Observer {
 	
 	public void getImages() {
 		images = new ImageViewList();
-		ArrayList<ImageModel> imodels = session.getImages(this.sortedBy);
-		if (imodels == null) log("imodels null !");
-		else log("imodels not null");
-		for (int i = 0; i < imodels.size(); i++) {
-			ImageView iview = new ImageView(imodels.get(i));
+		Iterator<ImageModel> iter_imodel = session.visibleImages.iterator();
+		while (iter_imodel.hasNext()) {
+			ImageView iview = new ImageView(iter_imodel.next());
 			images.add(iview);
 			displayArea.add(iview);
 			iview.addMouseListener(listener);
@@ -121,6 +136,7 @@ public class ImagesPanel extends JPanel implements Observer {
 			image.setBounds(x, y, imgSize, imgSize);
 			image.revalidate();
 			image.display(imgSize);
+			image.setSelected(session.selection.contains(image.model));
 		}
 		int newHeight;
 		if (images.size() % ncol == 0) // last row of images is full
@@ -129,13 +145,6 @@ public class ImagesPanel extends JPanel implements Observer {
 			newHeight = ((images.size() / ncol) + 1)*(vpadding + imgSize) + vpadding; 
 		displayArea.setPreferredSize(new Dimension(dim.width - 18, newHeight));
 		displayArea.revalidate();
-	}
-
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		readSession();
-		
 	}
 	
 	private class Listener
@@ -205,8 +214,13 @@ public class ImagesPanel extends JPanel implements Observer {
 		}
 
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+		public void mouseClicked(MouseEvent ev) {
+			Object source = ev.getSource();
+			if (SwingUtilities.isLeftMouseButton(ev)
+				&& source instanceof ImageView) {
+				ImageView image = (ImageView)source;
+				session.changeSelection(image.model);
+			}
 			
 		}
 

@@ -13,13 +13,27 @@ public class ImageViewList extends ArrayList<ImageView> {
 	
 	
 	public void quickSort(int criterion) {
-		if (criterion == NONE) return;
+		if (criterion == NONE || this.alreadySorted(criterion)) return;
+		else U.log("quicksort necessary");
 		int inf = 0;
 		int sup = this.size() - 1;
 		if (inf >= sup) return;
 		int pivIx = this.partition(inf, sup, criterion);
 		quickSort(inf, pivIx - 1, criterion);
 		quickSort(pivIx + 1, sup, criterion);
+	}
+	
+	// the quicksort will scramble an already-sorted lists
+	// when some elements are equal based on the chosen criterion,
+	// for the UI it's a pretty bad effect, so we only quickSort
+	// when it hasn't been done already
+	private boolean alreadySorted(int criterion) {
+		for (int i = 1; i < this.size(); i++) {
+			if (compare(this.get(i-1), this.get(i), criterion) > 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private void quickSort(int inf, int sup, int criterion) {
@@ -39,20 +53,20 @@ public class ImageViewList extends ArrayList<ImageView> {
 	// if a > b  --> compare(a,b) >  0
 	// if a <= b --> compare(a,b) <= 0
 	// if a >= b --> compare(a,b) >= 0
+	// if a == b --> compare(a,b) == 0
 	private int compare (ImageView a, ImageView b, int criterion) {
 		if (criterion == BY_NAME) {
 			int cmp = a.model.file.getName()
 				.compareTo(
 					b.model.file.getName());
-			return cmp;
+			
+			if (cmp != 0) return cmp;
+			else
+			// if they're equal: sort them by path
+			// (which should never be equal)
+				return compare(a, b, BY_PATH);
 		}
-		else if (criterion == BY_PATH) {
-			int cmp = a.model.key
-					.compareTo(
-						b.model.key);	
-			return cmp;
-		}
-		else {
+		else if (criterion != BY_PATH) {
 			long aSize, bSize;
 			if (criterion == BY_SIZE) {
 				aSize = ((long)a.model.buffered.getHeight())
@@ -72,9 +86,20 @@ public class ImageViewList extends ArrayList<ImageView> {
 			long cmp = aSize - bSize;
 			if (cmp > 0) return 1;
 			else if (cmp < 0) return -1;
-			else return 0;
+			else
+			// if they're equal: sort them by path
+			// (which should never be equal)
+				return compare(a, b, BY_PATH);
 		}
-		//return 0;
+		else // if (criterion == BY_PATH)
+			// default behavior if the criterion is invalid
+			// which should never happen btw
+		{
+			int cmp = a.model.key
+					.compareTo(
+						b.model.key);	
+			return cmp;
+		}
 		
 	}
 	

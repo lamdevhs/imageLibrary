@@ -69,7 +69,7 @@ public class TagsPanel extends JPanel implements Observer {
 		tagsPanel.setBackground(U.Colors.lightBG);
 		
 		searchBox.getDocument().addDocumentListener(listener);
-		session.addObserver(this);
+		session.filteringState.addObserver(this);
 		refresh();
 	}
 

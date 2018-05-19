@@ -28,5 +28,11 @@ public class ImageView extends JPanel {
 		int height = Math.min(imgSize, (int)(realh * factor));
 		Image scaled = model.buffered.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
 		image.setIcon(new ImageIcon(scaled));
+		
+	}
+
+	public void setSelected(boolean isSelected) {
+		if (isSelected) this.setBackground(U.Colors.lightBG);
+		else this.setBackground(Color.WHITE);
 	}
 }
