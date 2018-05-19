@@ -34,6 +34,7 @@ public class TagsPanel extends JPanel implements Observer {
 		JLabel padding =  new JLabel("                               ");
 		JLabel padding2 = new JLabel("                               ");
 		
+		
 		wrapper.setLayout(new BorderLayout());
 		
 		aboveTagsBox.setLayout(new BorderLayout());
@@ -62,6 +63,10 @@ public class TagsPanel extends JPanel implements Observer {
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		//scroller.addComponentListener(listener);
+		
+		this.setBackground(U.Colors.lightBG);
+		filtersPanel.setBackground(U.Colors.lightBG);
+		tagsPanel.setBackground(U.Colors.lightBG);
 		
 		searchBox.getDocument().addDocumentListener(listener);
 		session.addObserver(this);

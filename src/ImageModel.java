@@ -41,4 +41,12 @@ public class ImageModel {
 		else return path; // incase of symlinked images: return absolute path
 	}
 
+	public String getLocation() {
+		return this.key.substring(0, this.key.length() - this.file.getName().length());
+	}
+
+	public String getFullSize() {
+		if (buffered == null) return "";
+		return this.buffered.getWidth() + "x" + this.buffered.getHeight();
+	}
 }

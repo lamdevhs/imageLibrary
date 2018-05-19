@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -9,15 +10,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class U {
+	public static class Colors {
+		public static Color darkBG = new Color(39,40,34);
+		public static Color lightBG = new Color(219,229,239);
+		public static Color lightBlue = new Color(102,217,239);
+		public static Color lightGreen = new Color(166,226,43);
+		public static Color magenta = new Color(249,38,97);
+	}
+
 	public static int IMPOSSIBLE = -1;
 	public static int INVALID = -2;
 	public static int OK = 0;
@@ -143,6 +147,18 @@ public class U {
 		JPanel wrapper = new JPanel();
 		wrapper.add(component);
 		return wrapper;
+	}
+	
+	public static JLabel label(String s, Color color, int size, int style) {
+		JLabel label = new JLabel(s);
+		Font font = new Font("Sans Serif", style, size);
+		label.setFont(font);
+		label.setForeground(color);
+		return label;
+	}
+	
+	public static JLabel label(String s, Color color, int size) {
+		return U.label(s, color, size, Font.PLAIN);
 	}
 
 }

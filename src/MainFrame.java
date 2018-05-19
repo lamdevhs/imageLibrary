@@ -26,18 +26,15 @@ public class MainFrame extends JFrame {
 		session = session_;
 		
 		setTitle("ImgLibrary - " + session.name + " - " + session.folder.getAbsolutePath());
-		setSize(600,600);
+		setSize(1000,800);
 		setLocationRelativeTo(null); // center frame on screen
 		addWindowListener(listener);
-		
 		
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
 		tagPanel = new TagsPanel(session_);
 		
+		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tagPanel.scroller, imagesPanel);
 		
-		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tagPanel.scroller, imagesPanel.scroller);
-		
-		//add(jsp, BorderLayout.WEST);
 		add(center, BorderLayout.CENTER);
 		
 		upperPanel = new UpperPanel(session_);

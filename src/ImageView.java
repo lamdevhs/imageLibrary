@@ -10,11 +10,16 @@ public class ImageView extends JPanel {
 	
 	ImageView(ImageModel model_) {
 		image = new JLabel();
-		add(image);
+		setLayout(new BorderLayout());
+		add(image, BorderLayout.CENTER);
 		model = model_;
+		this.setBackground(Color.white);
+		this.setBorder(BorderFactory.createTitledBorder(model.file.getName()));
 	}
 
 	public void display(int imgSize) {
+		imgSize -= 10;
+		if (imgSize <= 0) return;
 		int realh = model.buffered.getHeight();
 		int realw = model.buffered.getWidth();
 		double maxSize = Math.max(realh, realw);

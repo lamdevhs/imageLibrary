@@ -14,13 +14,15 @@ public class ImagesPanel extends JPanel implements Observer {
 	
 	private Session session;
 	private ImageViewList images;
-	public Listener listener = new Listener();
+	private Listener listener = new Listener();
 	private int hpadding;
 	private int vpadding;
-	public JScrollPane scroller;
 	private int ncol;
 	// ^ number of columns to use to display the image thumbnails
 	
+	private JPanel displayArea = new JPanel();
+		// ^ where the images are displayed
+	private JScrollPane scroller;
 	private JPopupMenu panelMenu = new JPopupMenu();
 	private JMenuItem sortByName = new JMenuItem("Name");
 	private JMenuItem sortByPath = new JMenuItem("Path");
@@ -30,6 +32,9 @@ public class ImagesPanel extends JPanel implements Observer {
 	
 	private int sortedBy = ImageViewList.BY_NAME;
 
+	private ImageInfoBar infoBar = new ImageInfoBar();
+	//private Box infoBar = Box.createHorizontalBox();
+
 	//private int imageSize = 50;
 
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
@@ -37,14 +42,17 @@ public class ImagesPanel extends JPanel implements Observer {
 		hpadding = hpadding_;
 		vpadding = vpadding_;
 		ncol = ncol_;
+
+		setLayout(new BorderLayout());
 		
-		JMenuItem sortBy = new JMenuItem("Sort by:");
-		sortBy.setEnabled(false);
 		sortByName.addActionListener(listener);
 		sortByPath.addActionListener(listener);
 		sortBySize.addActionListener(listener);
 		sortByHeight.addActionListener(listener);
 		sortByWidth.addActionListener(listener);
+
+		JMenuItem sortBy = new JMenuItem("Sort by:");
+		sortBy.setEnabled(false);
 		panelMenu.add(sortBy);
 		panelMenu.add(sortByName);
 		panelMenu.add(sortByPath);
@@ -52,24 +60,30 @@ public class ImagesPanel extends JPanel implements Observer {
 		panelMenu.add(sortByHeight);
 		panelMenu.add(sortByWidth);
 
-		scroller = new JScrollPane(this);
-		setLayout(null);
-		setBackground(Color.WHITE);
-		session.addObserver(this);
-		
-		readSession();
+		displayArea.setLayout(null);
+		displayArea.setBackground(Color.WHITE);
+		displayArea.addMouseWheelListener(listener);
+		displayArea.addMouseListener(listener);
 
+		scroller = new JScrollPane(displayArea);
 		scroller.addComponentListener(this.listener);
-		this.addMouseWheelListener(listener);
-		this.addMouseListener(listener);
-		this.setPreferredSize(scroller.getPreferredSize());
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		add(scroller, BorderLayout.CENTER);
+		displayArea.setPreferredSize(scroller.getPreferredSize());
+
+		infoBar.setImage(null);
+
+		add(infoBar, BorderLayout.NORTH);
+
+		session.addObserver(this);
+		readSession();
 	}
-	
+
 	public void readSession() {
-		this.removeAll();
-		this.repaint();
+		displayArea.removeAll();
+		displayArea.repaint();
 		getImages();
 		sortImages();
 		refreshLayout();
@@ -83,7 +97,7 @@ public class ImagesPanel extends JPanel implements Observer {
 		for (int i = 0; i < imodels.size(); i++) {
 			ImageView iview = new ImageView(imodels.get(i));
 			images.add(iview);
-			this.add(iview);
+			displayArea.add(iview);
 			iview.addMouseListener(listener);
 		}
 	}
@@ -113,8 +127,8 @@ public class ImagesPanel extends JPanel implements Observer {
 			newHeight = (images.size() / ncol)*(vpadding + imgSize) + vpadding; 
 		else // last row of images is only partially filled
 			newHeight = ((images.size() / ncol) + 1)*(vpadding + imgSize) + vpadding; 
-		setPreferredSize(new Dimension(dim.width - 18, newHeight));
-		revalidate();
+		displayArea.setPreferredSize(new Dimension(dim.width - 18, newHeight));
+		displayArea.revalidate();
 	}
 
 
@@ -197,8 +211,12 @@ public class ImagesPanel extends JPanel implements Observer {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+		public void mouseEntered(MouseEvent ev) {
+			Object source = ev.getSource();
+			if (source instanceof ImageView) {
+				ImageView image = (ImageView)source;
+				infoBar.setImage(image);
+			}
 			
 		}
 
@@ -216,9 +234,11 @@ public class ImagesPanel extends JPanel implements Observer {
 
 		@Override
 		public void mouseReleased(MouseEvent ev) {
-			Object source = ev.getSource();
-			if (SwingUtilities.isRightMouseButton(ev) && source == ImagesPanel.this) {
-				panelMenu.show(ev.getComponent(), ev.getX(), ev.getY());
+			Component source = ev.getComponent();
+			if (SwingUtilities.isRightMouseButton(ev)
+				&& source == displayArea)
+			{
+				panelMenu.show(source, ev.getX(), ev.getY());
 			}
 		}
 		
