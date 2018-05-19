@@ -5,7 +5,7 @@
    <string>name</string>
    <void method="set">
     <object idref="SessionData0"/>
-    <string>test_sorting_byname</string>
+    <string>Test - Sorting by Name</string>
    </void>
   </void>
   <void class="SessionData" method="getField">

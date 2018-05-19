@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
 
@@ -81,6 +82,7 @@ public class Model extends Observable {
 		int report = checkNewSessionName(name, s);
 		
 		if (report == U.OK) { // valid new name
+			s.name = name;
 			File oldSessionFile = new File(locator.sessionFile(oldName));
 			if (oldSessionFile.exists()) {
 				log("renameSession: old file exists");
@@ -89,7 +91,7 @@ public class Model extends Observable {
 			setChanged();
 			notifyObservers();
 		}
-		
+		log("renaming done");
 		return report;
 	}
 

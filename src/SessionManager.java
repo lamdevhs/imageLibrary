@@ -31,6 +31,7 @@ public class SessionManager extends JFrame implements Observer {
 		private JButton rename = new JButton("Rename");
 		private JButton delete = new JButton("Delete");
 		private JButton create = new JButton("New");
+		private JButton changeFolder = new JButton("Change Folder");
 
 	// South
 		private Box south = Box.createHorizontalBox();
@@ -45,10 +46,10 @@ public class SessionManager extends JFrame implements Observer {
 		
 		model = model_;
 		app = app_;
-		Dimension oneButton = new JButton("MMMMM").getPreferredSize();
+		Dimension buttonDim = changeFolder.getPreferredSize();
 
 		setTitle("Session Manager");
-		setSize(300,400);
+		setSize(500,400);
 		setLocationRelativeTo(null); // center frame on screen
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(listener);
@@ -58,17 +59,19 @@ public class SessionManager extends JFrame implements Observer {
 		inside.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		// Widgets
-			rename.setPreferredSize(oneButton);
-			delete.setPreferredSize(oneButton);
-			create.setPreferredSize(oneButton);
-			quit.setPreferredSize(oneButton);
-			open.setPreferredSize(oneButton);
+			rename.setPreferredSize(buttonDim);
+			delete.setPreferredSize(buttonDim);
+			create.setPreferredSize(buttonDim);
+			quit.setPreferredSize(buttonDim);
+			open.setPreferredSize(buttonDim);
+			changeFolder.setPreferredSize(buttonDim);
 
 			rename.addActionListener(listener);
 			delete.addActionListener(listener);
 			create.addActionListener(listener);
 			quit.addActionListener(listener);
 			open.addActionListener(listener);
+			changeFolder.addActionListener(listener);
 
 			sessions = new JList();
 			sessions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -84,10 +87,11 @@ public class SessionManager extends JFrame implements Observer {
 
 		// West
 			west.setLayout(new FlowLayout());
-			west.setPreferredSize(oneButton);
+			west.setPreferredSize(buttonDim);
 			west.add(rename);
 			west.add(delete);
 			west.add(create);
+			west.add(changeFolder);
 			inside.add(west, BorderLayout.WEST);
 
 		// South
@@ -126,19 +130,10 @@ public class SessionManager extends JFrame implements Observer {
 		}
 
 		// else
-		File folder = U.folderDialog(this,
-			"Choose the session's image folder", null);
-		if (U.checkValidFolder(folder) != U.OK)
-		{
-			log("folderDialog -> null");
-			U.error((JFrame)null, "A valid folder is required to " +
-				"create a new session.");
-			return;
-		}
-		// else
-		log("folderDialog -> "+ folder.getAbsolutePath());
-		model.addNewSession(name, folder);
+		int sessionIndex = model.addNewSession(name, null);
 
+		changeSessionFolder(sessionIndex);
+		
 		// nothing to do -- Observer pattern will update
 		// `this` session manager
 	}
@@ -157,8 +152,6 @@ public class SessionManager extends JFrame implements Observer {
 			return;
 		}
 		// else
-		log("renaming done");
-		log("sessionsList: " + Arrays.toString(model.getSessionsNames()));
 		// the SessionManager dialog should now get refreshed automatically
 		// thanks to the Observer pattern
 	}
@@ -188,8 +181,25 @@ public class SessionManager extends JFrame implements Observer {
 		U.error(this, errmsg);
 	}
 
+	public void changeSessionFolder(int sessionIndex) {
+		log("changeSessionFolder");
+		File folder = U.folderDialog(this,
+			"Choose the session's image folder", null);
+		if (U.checkValidFolder(folder) != U.OK)
+		{
+			log("folderDialog -> null");
+			U.error((JFrame)null, "Warning: no valid folder was chosen.");
+		}
+		else {
+			log("folderDialog -> "+ folder.getAbsolutePath());
+		}
+		model.allSessions.get(sessionIndex).folder = folder; // can be null
+
+	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		log("ping update()");
 		readModel();
 	}
 
@@ -226,6 +236,9 @@ public class SessionManager extends JFrame implements Observer {
 				else if (source == open) {
 					log("open");
 					SessionManager.this.app.openSession(SessionManager.this, sessionIndex);
+				}
+				else if (source == changeFolder) {
+					changeSessionFolder(sessionIndex);
 				}
 			}
 		}
