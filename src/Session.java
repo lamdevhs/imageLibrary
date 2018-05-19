@@ -136,14 +136,6 @@ public class Session {
 		}
 		return output;
 	}
-	
-// 	public ImageModel[] getVisibleImages(int sortedBy) {
-// 		ArrayList<ImageModel> r;
-// //		if (filters.size() == 0) r = getAllImages();
-// //		else r = new ArrayList<ImageModel>();
-// 		return (ImageModel[])visibleImages.toArray();
-// 		//return r;
-// 	}
 
 	private void refreshVisibleImages() {
 		visibleImages.clear();
@@ -205,9 +197,9 @@ public class Session {
 				}
 				else {
 					image = new ImageModel(key);
-					image.buffered = buffered;
-					image.file = file;
 				}
+				image.buffered = buffered;
+				image.file = file;
 				
 				// put this image in the new images
 				newImages.put(key, image);

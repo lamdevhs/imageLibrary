@@ -830,7 +830,14 @@
   </void>
   <void method="put">
    <string>Tag 145</string>
-   <object class="java.util.ArrayList"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>oil.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/3d_folder_open.png</string>
+    </void>
+   </object>
   </void>
  </void>
 </void>

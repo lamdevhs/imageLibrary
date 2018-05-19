@@ -26,6 +26,7 @@ public class App {
 	public void quit(JFrame caller) {
 		//int answer = U.confirm(caller, "Are you sure you want to quit?");
 		//if (answer != JOptionPane.YES_OPTION) return;
+		// TODO ^ uncomment
 		model.save();
 		log("quit app");
 		System.exit(0);
@@ -34,14 +35,11 @@ public class App {
 	public void openSessionManager(JFrame caller) {
 		if (caller != null) caller.dispose();
 		log("openSessionManager");
-		// SessionManager sessionManager = 
 		new SessionManager(this, model);
-		// int sessionIndex = sessionManager.open();
 	}
 
 	public void openSession(JFrame caller, int sessionIndex) {
 		log("openSession: sessionIndex = " + sessionIndex);
-			// TODO test sessionIndex is a valid index before getting session
 		Session session = model.allSessions.get(sessionIndex);
 		int report = session.refresh();
 		if (report != U.OK) {
