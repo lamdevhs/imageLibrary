@@ -29,7 +29,7 @@ public class Session {
 	// your phone number in binary...
 	private HashMap<String, ImageModel> images =
 			new HashMap<String, ImageModel>();
-	private HashMap<String, Tag> tags =
+	public HashMap<String, Tag> tags =
 			new HashMap<String, Tag>();
 	
 	public HashMap<String, Filter> filters =
@@ -117,11 +117,10 @@ public class Session {
 	
 	private HashMap<String, ArrayList<String>> saveTags() {
 		HashMap<String,ArrayList<String>> data = new HashMap<String,ArrayList<String>>();
-		Iterator<String> tag_iter = tags.keySet().iterator();
+		Iterator<Tag> tag_iter = tags.values().iterator();
 		while(tag_iter.hasNext()) {
-			String tagName = tag_iter.next();
-			Tag tag = tags.get(tagName);
-			data.put(tagName, tag.data());
+			Tag tag = tag_iter.next();
+			data.put(tag.name, tag.data());
 		}
 		return data;
 	}
@@ -145,16 +144,6 @@ public class Session {
 		ArrayList<ImageModel> output = new ArrayList<ImageModel>();
 		for (int i = 0; i < keys.size(); i++) {
 			output.add(images.get(keys.get(i)));
-		}
-		return output;
-	}
-
-	public ArrayList<Tag> getTags() {
-		ArrayList<Tag> output = new ArrayList<Tag>();
-		Iterator<String> iter = tags.keySet().iterator();
-		while(iter.hasNext()) {
-			String key = iter.next();
-			output.add(tags.get(key));
 		}
 		return output;
 	}

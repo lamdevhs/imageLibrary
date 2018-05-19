@@ -115,12 +115,10 @@ public class TagsPanel extends JPanel implements Observer {
 		
 		tagsBox.removeAll();
 		tagsBox.repaint();
-		boolean tagsBox_isEmpty = true;
-		ArrayList<Tag> tags = session.getTags();
-		for (int i = 0; i < tags.size(); i++) {
-			Tag tag = tags.get(i);
+		Iterator<Tag> tag_iter = session.tags.values().iterator();
+		while (tag_iter.hasNext()) {
+			Tag tag = tag_iter.next();
 			if (tag.name.contains(search)) {
-				tagsBox_isEmpty = false;
 				TagView tagview = new TagView(tag);
 				tagview.addMouseListener(listener);
 				tagsBox.add(tagview);
@@ -130,9 +128,9 @@ public class TagsPanel extends JPanel implements Observer {
 
 		filtersBox.removeAll();
 		filtersBox.repaint();
-		Iterator<String> iter = session.filters.keySet().iterator();
-		while(iter.hasNext()) {
-			Filter filter = session.filters.get(iter.next());
+		Iterator<Filter> filter_iter = session.filters.values().iterator();
+		while(filter_iter.hasNext()) {
+			Filter filter = filter_iter.next();
 			FilterView filterview = new FilterView(filter);
 			filterview.addMouseListener(listener);
 			filtersBox.add(filterview);
