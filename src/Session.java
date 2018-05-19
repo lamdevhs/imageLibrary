@@ -297,8 +297,7 @@ public class Session {
 			return U.INVALID;
 		}
 		
-		// Checks the name isn't taken already
-		int i;
+		// Checks the name isn't taken already (by another tag)
 		if (tags.containsKey(name) && tags.get(name) != tag) {
 			return U.IMPOSSIBLE;
 		}
@@ -321,6 +320,29 @@ public class Session {
 		}
 		tags.remove(tag.name);
 		removeFilter(tag.name);
-		filteringState.notifyObservers();
+	}
+
+	public int renameTag(String newName, Tag tag) {
+		if (!tags.containsKey(tag.name))
+			return 42; // should never happen
+
+		String oldName = tag.name;
+		int report = checkNewTagName(name, tag);
+		
+		if (report == U.OK) { // new name is valid
+			tag.name = newName; // we do the renaming
+			tags.remove(oldName);
+			tags.put(newName, tag);
+			if (filters.containsKey(oldName)) {
+				removeFilter(oldName);
+				addFilter(newName, false);
+				// ^ will notifyObservers() by itself
+			}
+			else {
+				filteringState.notifyObservers();
+			}
+		}
+		log("renameTag: report = " + report);
+		return report;
 	}
 }

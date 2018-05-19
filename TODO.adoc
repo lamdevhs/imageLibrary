@@ -1,5 +1,14 @@
 = TODO
 
+== Fixes
+- keySet()
+- window titles
+- // TODOes
+- commented code
+- SessionManager.this?
+- check everything at the end
+- offensive indentation
+
 == Minimal objective
 
 - add/remove/create/delete tags -- requires selecting images

@@ -16,11 +16,6 @@
    </void>
   </void>
  </object>
-<void class="java.util.ArrayList" id="ArrayList0">
- <void method="add">
-  <string>oil.png</string>
- </void>
-</void>
 <void class="SessionData" id="Field0" method="getField">
  <string>tags</string>
  <void id="HashMap0" method="get">
@@ -835,7 +830,11 @@
   </void>
   <void method="put">
    <string>Tag 145</string>
-   <object idref="ArrayList0"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>oil.png</string>
+    </void>
+   </object>
   </void>
  </void>
 </void>

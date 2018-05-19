@@ -140,7 +140,13 @@ public class SessionManager extends JFrame implements Observer {
 
 	public void renameSession(int sessionIndex) {
 		log("rename");
-		String newName = U.input(SessionManager.this, "New name for the session :");
+		if (model.allSessions.size() <= sessionIndex)
+			return; // should never happen!
+
+		String newName = U.input(SessionManager.this,
+			"Old name: " +
+			U.quoted(model.allSessions.get(sessionIndex).name) +
+			"\n\nNew name:");
 		if (newName == null) {
 			log("abandon");
 			return;
@@ -178,7 +184,7 @@ public class SessionManager extends JFrame implements Observer {
 	}
 
 	public void namingSessionError(int error) {
-		String errmsg = "A user error was encountered.";
+		String errmsg = "An unknown error was encountered.";
 		if (error == U.IMPOSSIBLE) {
 			errmsg = "A session with that name already exists.";
 		}

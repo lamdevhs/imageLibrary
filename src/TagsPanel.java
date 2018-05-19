@@ -32,6 +32,7 @@ public class TagsPanel extends JPanel implements Observer {
 	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
 	private JMenuItem addToVisible = new JMenuItem("Add to Filtered Images");
 	private JMenuItem rmvFromVisible = new JMenuItem("Remove from Filtered Images");
+	private JMenuItem renameTag = new JMenuItem("Rename Tag");
 	private JMenuItem delTag = new JMenuItem("Delete Tag");
 
 	private JButton menuButton = new JButton("Menu");
@@ -52,6 +53,7 @@ public class TagsPanel extends JPanel implements Observer {
 		addToVisible.addActionListener(listener);
 		rmvFromSel.addActionListener(listener);
 		rmvFromVisible.addActionListener(listener);
+		renameTag.addActionListener(listener);
 		delTag.addActionListener(listener);
 
 		newTag.addActionListener(listener);
@@ -61,6 +63,8 @@ public class TagsPanel extends JPanel implements Observer {
 		oneTagMenu.addSeparator();
 		oneTagMenu.add(rmvFromSel);
 		oneTagMenu.add(rmvFromVisible);
+		oneTagMenu.addSeparator();
+		oneTagMenu.add(renameTag);
 		oneTagMenu.addSeparator();
 		oneTagMenu.add(delTag);
 		
@@ -171,8 +175,25 @@ public class TagsPanel extends JPanel implements Observer {
 		// `this` TagsPanel
 	}
 
+	private void renameTag(Tag tag) {
+		log("ping: renameTag");
+		String newName = U.input(frame,
+			"Old name: " + U.quoted(tag.name) +
+			"\n\nNew name:");
+		if (newName == null) {
+			log("abandon");
+			return;
+		}
+		// else
+		int report = session.renameTag(newName, tag);
+		if (report != U.OK) {
+			namingTagError(report);
+			return;
+		}
+	}
+
 	private void namingTagError(int error) {
-		String errmsg = "A user error was encountered.";
+		String errmsg = "An unknown error was encountered.";
 		if (error == U.IMPOSSIBLE) {
 			errmsg = "A tag with that name already exists.";
 		}
@@ -196,8 +217,6 @@ public class TagsPanel extends JPanel implements Observer {
 		// else
 		session.deleteTag(tag);
 		log("deleteTag done");
-		// the SessionManager dialog should now get refreshed automatically
-		// thanks to the Observer pattern
 	}
 
 	private class Listener
@@ -227,6 +246,9 @@ public class TagsPanel extends JPanel implements Observer {
 			}
 			else if (source == rmvFromVisible) {
 				session.removeImagesToTag(selectedTag, false);
+			}
+			else if (source == renameTag) {
+				renameTag(selectedTag);
 			}
 			else if (source == delTag) {
 				deleteTag(selectedTag);
