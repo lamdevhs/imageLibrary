@@ -155,6 +155,7 @@ public class Session {
 				visibleImages.retainAll(filters.get(i).tag.images);
 			}
 		}
+		selection.retainAll(visibleImages);
 		filteringState.notifyObservers();
 	}
 
