@@ -224,11 +224,16 @@ public class Session {
 	public void changeSelection(ImageModel image) {
 		if (image == null || !visibleImages.contains(image)
 				|| !visibleImages.contains(image)) {
-			U.elog("Session.addToSelection: invalid argument");
+			U.elog("Session.changeSelection: invalid argument");
 			return;
 		}
 		if (selection.contains(image)) selection.remove(image);
 		else selection.add(image);
+		selectionState.notifyObservers();
+	}
+
+	public void selectNone() {
+		selection.clear();
 		selectionState.notifyObservers();
 	}
 

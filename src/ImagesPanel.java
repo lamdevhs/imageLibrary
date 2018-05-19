@@ -30,6 +30,7 @@ public class ImagesPanel extends JPanel implements Observer {
 	private JMenuItem sortBySize = new JMenuItem("Size");
 	private JMenuItem sortByHeight = new JMenuItem("Height");
 	private JMenuItem sortByWidth = new JMenuItem("Width");
+	private JMenuItem selectNone = new JMenuItem("Select None");
 	
 	private int sortedBy = ImageViewList.BY_NAME;
 
@@ -50,9 +51,12 @@ public class ImagesPanel extends JPanel implements Observer {
 		sortBySize.addActionListener(listener);
 		sortByHeight.addActionListener(listener);
 		sortByWidth.addActionListener(listener);
+		selectNone.addActionListener(listener);
 
 		JMenuItem sortBy = new JMenuItem("Sort by:");
 		sortBy.setEnabled(false);
+		panelMenu.add(selectNone);
+		panelMenu.addSeparator();
 		panelMenu.add(sortBy);
 		panelMenu.add(sortByName);
 		panelMenu.add(sortByPath);
@@ -178,6 +182,9 @@ public class ImagesPanel extends JPanel implements Observer {
 				sortedBy = ImageViewList.BY_WIDTH;
 				sortImages();
 				refreshLayout();
+			}
+			else if (source == selectNone) {
+				session.selectNone();
 			}
 		}
 
