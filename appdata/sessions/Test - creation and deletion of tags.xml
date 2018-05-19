@@ -21,7 +21,7 @@
   <string>subfolder/stats_area_chart.png</string>
  </void>
  <void method="add">
-  <string>subfolder/multimple_solutions.png</string>
+  <string>subfolder/focus_group.png</string>
  </void>
  <void method="add">
   <string>stats_pie_chart.png</string>
@@ -36,32 +36,24 @@
   <string>subfolder/solution.png</string>
  </void>
  <void method="add">
-  <string>subfolder/umbrella.png</string>
- </void>
- <void method="add">
-  <string>subfolder/focus_group.png</string>
- </void>
- <void method="add">
   <string>oil.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/multimple_solutions.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/umbrella.png</string>
  </void>
 </void>
 <void class="java.util.ArrayList" id="ArrayList1">
  <void method="add">
-  <string>3d_file.png</string>
+  <string>stats_pie_chart.png</string>
  </void>
  <void method="add">
-  <string>subfolder/3d_folder_open.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList2">
- <void method="add">
-  <string>subfolder/solution2.png</string>
+  <string>stats_histogram.png</string>
  </void>
  <void method="add">
-  <string>subfolder/solution.png</string>
- </void>
- <void method="add">
-  <string>subfolder/multimple_solutions.png</string>
+  <string>subfolder/stats_area_chart.png</string>
  </void>
 </void>
 <void class="SessionData" id="Field0" method="getField">
@@ -69,38 +61,34 @@
  <void id="HashMap0" method="get">
   <object idref="SessionData0"/>
   <void method="put">
-   <string>Antelope</string>
+   <string>Charts</string>
    <object idref="ArrayList1"/>
   </void>
   <void method="put">
-   <string>Charts</string>
+   <string>Stuff</string>
    <object class="java.util.ArrayList">
     <void method="add">
-     <string>subfolder/stats_area_chart.png</string>
+     <string>subfolder/solution2.png</string>
     </void>
     <void method="add">
-     <string>stats_pie_chart.png</string>
+     <string>subfolder/solution.png</string>
     </void>
     <void method="add">
-     <string>stats_histogram.png</string>
+     <string>subfolder/multimple_solutions.png</string>
     </void>
    </object>
-  </void>
-  <void method="put">
-   <string>Stuff</string>
-   <object idref="ArrayList2"/>
   </void>
   <void method="put">
    <string>Trash</string>
    <object class="java.util.ArrayList">
     <void method="add">
+     <string>subfolder/3d_trash_can.png</string>
+    </void>
+    <void method="add">
      <string>subfolder/3d_trash_can_empting-copia.png</string>
     </void>
     <void method="add">
      <string>subfolder/3d_trash_can_full.png</string>
-    </void>
-    <void method="add">
-     <string>subfolder/3d_trash_can.png</string>
     </void>
    </object>
   </void>

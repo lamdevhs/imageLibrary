@@ -11,9 +11,14 @@
 
 == Minimal objective
 
-- add/remove/create/delete tags -- requires selecting images
-- show images' names
-- sort images by name/extension/size
+- [x] add/remove/create/delete tags
+- [x] selecting images
+- [x] show images' names
+- [x] sort images by name/size
+
+== Optional objectives
+
+- unselect all
 
 == general
 - [x] SessionUI -> SessionManager

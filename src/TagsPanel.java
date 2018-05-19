@@ -292,6 +292,11 @@ public class TagsPanel extends JPanel implements Observer {
 				if (SwingUtilities.isLeftMouseButton(ev)) {
 					session.removeFilter(filterview.filter.tag.name);
 				}
+				else if (SwingUtilities.isRightMouseButton(ev)) {
+					log("ping rightClick on filter");
+					this.selectedTag = filterview.filter.tag;
+					oneTagMenu.show(ev.getComponent(), ev.getX(), ev.getY());
+				}
 			}
 		}
 
