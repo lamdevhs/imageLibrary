@@ -165,4 +165,8 @@ public class U {
 		return U.monospaceLabel(s, color, size, Font.PLAIN);
 	}
 
+	public static String quoted(String name) {
+		return "\"" + name + "\"";
+	}
+
 }

@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,6 +32,7 @@ public class TagsPanel extends JPanel implements Observer {
 	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
 	private JMenuItem addToVisible = new JMenuItem("Add to Filtered Images");
 	private JMenuItem rmvFromVisible = new JMenuItem("Remove from Filtered Images");
+	private JMenuItem delTag = new JMenuItem("Delete Tag");
 
 	private JButton menuButton = new JButton("Menu");
 	private JPopupMenu generalMenu = new JPopupMenu();
@@ -50,6 +52,7 @@ public class TagsPanel extends JPanel implements Observer {
 		addToVisible.addActionListener(listener);
 		rmvFromSel.addActionListener(listener);
 		rmvFromVisible.addActionListener(listener);
+		delTag.addActionListener(listener);
 
 		newTag.addActionListener(listener);
 
@@ -58,6 +61,8 @@ public class TagsPanel extends JPanel implements Observer {
 		oneTagMenu.addSeparator();
 		oneTagMenu.add(rmvFromSel);
 		oneTagMenu.add(rmvFromVisible);
+		oneTagMenu.addSeparator();
+		oneTagMenu.add(delTag);
 		
 		wrapper.setLayout(new BorderLayout());
 		
@@ -123,14 +128,13 @@ public class TagsPanel extends JPanel implements Observer {
 
 		filtersBox.removeAll();
 		filtersBox.repaint();
-		ArrayList<Filter> filters = session.getFilters();
-		for (int i = 0; i < filters.size(); i++) {
-			Filter filter = filters.get(i);
+		Iterator<String> iter = session.filters.keySet().iterator();
+		while(iter.hasNext()) {
+			Filter filter = session.filters.get(iter.next());
 			FilterView filterview = new FilterView(filter);
 			filterview.addMouseListener(listener);
 			filtersBox.add(filterview);
 		}
-		
 		//if (filters.size() == 0);
 			//filtersBox.add(new JLabel("(empty)"));
 		
@@ -142,7 +146,7 @@ public class TagsPanel extends JPanel implements Observer {
 		refresh();
 	}
 	
-	public void createNewTag() {
+	private void createNewTag() {
 		log("ping: createNewTag");
 		String msg = "Name for the new tag :";
 		String name = U.input(frame, msg);
@@ -178,6 +182,24 @@ public class TagsPanel extends JPanel implements Observer {
 		U.error(frame, errmsg);
 	}
 
+	private void deleteTag(Tag tag) {
+		log("deleteTag");
+		int answer = U.confirm(frame,
+			"Name of the tag: " +
+			  U.quoted(tag.name) +
+			"\n\nDeleting a tag cannot be undone, " +
+			"however no image will be deleted. Proceed?");
+		if (answer != JOptionPane.YES_OPTION) {
+			log("(abandon)");
+			return;
+		}
+		// else
+		session.deleteTag(tag);
+		log("deleteTag done");
+		// the SessionManager dialog should now get refreshed automatically
+		// thanks to the Observer pattern
+	}
+
 	private class Listener
 	implements DocumentListener, MouseListener, ActionListener, ComponentListener {
 		
@@ -205,6 +227,9 @@ public class TagsPanel extends JPanel implements Observer {
 			}
 			else if (source == rmvFromVisible) {
 				session.removeImagesToTag(selectedTag, false);
+			}
+			else if (source == delTag) {
+				deleteTag(selectedTag);
 			}
 		}
 		
@@ -243,7 +268,7 @@ public class TagsPanel extends JPanel implements Observer {
 			else if (source instanceof FilterView) {
 				FilterView filterview = (FilterView)source;
 				if (SwingUtilities.isLeftMouseButton(ev)) {
-					session.removeFilter(filterview.filter);
+					session.removeFilter(filterview.filter.tag.name);
 				}
 			}
 		}

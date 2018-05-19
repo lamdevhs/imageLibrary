@@ -17,7 +17,7 @@
    <string>Test - Error Invalid Folder</string>
   </void>
   <void index="5">
-   <string>Test - creation of tags</string>
+   <string>Test - creation and deletion of tags</string>
   </void>
  </array>
 </java>

@@ -5,7 +5,7 @@
    <string>name</string>
    <void method="set">
     <object idref="SessionData0"/>
-    <string>Test - creation of tags</string>
+    <string>Test - creation and deletion of tags</string>
    </void>
   </void>
   <void class="SessionData" method="getField">
@@ -18,72 +18,31 @@
  </object>
 <void class="java.util.ArrayList" id="ArrayList0">
  <void method="add">
-  <string>subfolder/stats_area_chart.png</string>
- </void>
- <void method="add">
-  <string>stats_histogram.png</string>
- </void>
- <void method="add">
-  <string>stats_pie_chart.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList1">
- <void method="add">
   <string>subfolder/solution.png</string>
- </void>
- <void method="add">
-  <string>subfolder/solution2.png</string>
- </void>
- <void method="add">
-  <string>subfolder/multimple_solutions.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList2">
- <void method="add">
-  <string>subfolder/3d_trash_can_empting-copia.png</string>
- </void>
- <void method="add">
-  <string>subfolder/3d_trash_can_full.png</string>
- </void>
- <void method="add">
-  <string>subfolder/3d_trash_can.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList3">
- <void method="add">
-  <string>subfolder/3d_folder_open.png</string>
- </void>
- <void method="add">
-  <string>3d_file.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList4">
- <void method="add">
-  <string>stats_pie_chart.png</string>
  </void>
  <void method="add">
   <string>oil.png</string>
  </void>
  <void method="add">
-  <string>subfolder/stats_area_chart.png</string>
+  <string>stats_histogram.png</string>
  </void>
  <void method="add">
-  <string>subfolder/focus_group.png</string>
- </void>
- <void method="add">
-  <string>subfolder/solution.png</string>
+  <string>stats_pie_chart.png</string>
  </void>
  <void method="add">
   <string>subfolder/3d_group.png</string>
  </void>
  <void method="add">
-  <string>stats_histogram.png</string>
+  <string>subfolder/stats_area_chart.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/multimple_solutions.png</string>
  </void>
  <void method="add">
   <string>subfolder/umbrella.png</string>
  </void>
  <void method="add">
-  <string>subfolder/multimple_solutions.png</string>
+  <string>subfolder/focus_group.png</string>
  </void>
 </void>
 <void class="SessionData" id="Field0" method="getField">
@@ -92,23 +51,60 @@
   <object idref="SessionData0"/>
   <void method="put">
    <string>Puzzle</string>
-   <object idref="ArrayList1"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>subfolder/solution.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/multimple_solutions.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/solution2.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>Charts</string>
-   <object idref="ArrayList0"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>stats_histogram.png</string>
+    </void>
+    <void method="add">
+     <string>stats_pie_chart.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/stats_area_chart.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>Folders</string>
-   <object idref="ArrayList3"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>subfolder/3d_folder_open.png</string>
+    </void>
+    <void method="add">
+     <string>3d_file.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>Trash</string>
-   <object idref="ArrayList2"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>subfolder/3d_trash_can_empting-copia.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/3d_trash_can.png</string>
+    </void>
+    <void method="add">
+     <string>subfolder/3d_trash_can_full.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>Red</string>
-   <object idref="ArrayList4"/>
+   <object idref="ArrayList0"/>
   </void>
  </void>
 </void>

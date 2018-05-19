@@ -32,8 +32,8 @@ public class Session {
 	private HashMap<String, Tag> tags =
 			new HashMap<String, Tag>();
 	
-	private ArrayList<Filter> filters =
-			new ArrayList<Filter>();
+	public HashMap<String, Filter> filters =
+			new HashMap<String, Filter>();
 
 	public HashSet<ImageModel> visibleImages =
 			new HashSet<ImageModel>();
@@ -127,24 +127,25 @@ public class Session {
 		return data;
 	}
 
-	public ArrayList<ImageModel> getAllImages() {
-		ArrayList<ImageModel> output = new ArrayList<ImageModel>();
-		Iterator<String> iter = images.keySet().iterator();
-		while(iter.hasNext()) {
-			String key = iter.next();
-			output.add(images.get(key));
-		}
-		return output;
-	}
+//	public ArrayList<ImageModel> getAllImages() {
+//		ArrayList<ImageModel> output = new ArrayList<ImageModel>();
+//		Iterator<String> iter = images.keySet().iterator();
+//		while(iter.hasNext()) {
+//			String key = iter.next();
+//			output.add(images.get(key));
+//		}
+//		return output;
+//	}
 
 	private void refreshVisibleImages() {
 		visibleImages.clear();
-		if (filters.size() == 0)
-			visibleImages.addAll(getAllImages());
+		Iterator<Filter> iter = filters.values().iterator();
+		if (!iter.hasNext())
+			visibleImages.addAll(images.values());
 		else {
-			visibleImages.addAll(filters.get(0).tag.images);
-			for (int i = 1; i < filters.size(); i++) {
-				visibleImages.retainAll(filters.get(i).tag.images);
+			visibleImages.addAll(iter.next().tag.images);
+			while (iter.hasNext()) {
+				visibleImages.retainAll(iter.next().tag.images);
 			}
 		}
 		selection.retainAll(visibleImages);
@@ -225,34 +226,32 @@ public class Session {
 			tag.images.removeAll(toRemove);
 		}
 	}
-
-	public ArrayList<Filter> getFilters() {
-		return filters;
-	}
 	
 	public void addFilter(String tagname, boolean negated) {
+		log("ping addFilter " + tagname);
 		if (tags.containsKey(tagname)) {
 			// ^ should always happen
-			if (hasFilter(tagname, negated)) return;
 			// else
-			filters.add(new Filter(tags.get(tagname)));
+			filters.put(tagname, new Filter(tags.get(tagname)));
 			refreshVisibleImages();
 		}
 	}
 
-	private boolean hasFilter(String tagname, boolean negated) {
-		for (int i = 0; i < filters.size(); i++) {
-			Filter other = filters.get(i);
-			//if (other.negated == negated &&
-			if (other.tag.name == tagname)
-				return true;
-		}
-		return false;
-	}
+//	private boolean hasFilter(String tagname, boolean negated) {
+//		for (int i = 0; i < filters.size(); i++) {
+//			Filter other = filters.get(i);
+//			//if (other.negated == negated &&
+//			if (other.tag.name == tagname)
+//				return true;
+//		}
+//		return false;
+//	}
 
-	public void removeFilter(Filter filter) {
-		filters.remove(filter);
-		refreshVisibleImages();
+	public void removeFilter(String tagName) {
+		if (filters.containsKey(tagName)) {
+			filters.remove(tagName);
+			refreshVisibleImages();
+		}
 	}
 
 	public void changeSelection(ImageModel image) {
@@ -312,9 +311,16 @@ public class Session {
 	public void addNewTag(String name) {
 		// creating new tag
 		Tag t = new Tag(name);
-
 		tags.put(name, t);
-		
+		filteringState.notifyObservers();
+	}
+
+	public void deleteTag(Tag tag) {
+		if (tag == null || !tags.containsValue(tag)) {
+			return; // should never happen
+		}
+		tags.remove(tag.name);
+		removeFilter(tag.name);
 		filteringState.notifyObservers();
 	}
 }

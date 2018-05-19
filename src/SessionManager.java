@@ -158,7 +158,14 @@ public class SessionManager extends JFrame implements Observer {
 
 	public void deleteSession(int sessionIndex) {
 		log("delete");
-		int answer = U.confirm(SessionManager.this, "Deleting a session cannot be undone. Proceed?");
+		if (model.allSessions.size() <= sessionIndex)
+			return; // should never happen!
+		
+		int answer = U.confirm(SessionManager.this,
+				"Name of the session: " +
+				  U.quoted(model.allSessions.get(sessionIndex).name) +
+				"\n\nDeleting a session cannot be undone. Proceed?");
+				
 		if (answer != JOptionPane.YES_OPTION) {
 			log("abandon");
 			return;
