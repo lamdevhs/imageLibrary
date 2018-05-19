@@ -296,7 +296,13 @@ public class Session {
 			return; // should never happen
 		}
 		tags.remove(tag.name);
-		removeFilter(tag.name);
+		if (filters.containsKey(tag.name)) {
+			removeFilter(tag.name);
+			// ^ will notifyObservers() by itself
+		}
+		else {
+			filteringState.notifyObservers();
+		}
 	}
 
 	public int renameTag(String newName, Tag tag) {
