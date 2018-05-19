@@ -834,9 +834,6 @@
     <void method="add">
      <string>oil.png</string>
     </void>
-    <void method="add">
-     <string>subfolder/3d_folder_open.png</string>
-    </void>
    </object>
   </void>
  </void>

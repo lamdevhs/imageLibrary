@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_171" class="java.beans.XMLDecoder">
- <array class="java.lang.String" length="5">
+ <array class="java.lang.String" length="6">
   <void index="0">
    <string>foo</string>
   </void>
@@ -15,6 +15,9 @@
   </void>
   <void index="4">
    <string>Test - Error Invalid Folder</string>
+  </void>
+  <void index="5">
+   <string>Test - creation of tags</string>
   </void>
  </array>
 </java>

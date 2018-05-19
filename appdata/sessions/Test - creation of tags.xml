@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_171" class="java.beans.XMLDecoder">
+ <object class="SessionData" id="SessionData0">
+  <void class="SessionData" method="getField">
+   <string>name</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>Test - creation of tags</string>
+   </void>
+  </void>
+  <void class="SessionData" method="getField">
+   <string>folder</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>/opt/demo_area.ln/pics</string>
+   </void>
+  </void>
+ </object>
+<void class="java.util.ArrayList" id="ArrayList0">
+ <void method="add">
+  <string>subfolder/stats_area_chart.png</string>
+ </void>
+ <void method="add">
+  <string>stats_histogram.png</string>
+ </void>
+ <void method="add">
+  <string>stats_pie_chart.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList1">
+ <void method="add">
+  <string>subfolder/solution.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/solution2.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/multimple_solutions.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList2">
+ <void method="add">
+  <string>subfolder/3d_trash_can_empting-copia.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/3d_trash_can_full.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/3d_trash_can.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList3">
+ <void method="add">
+  <string>subfolder/3d_folder_open.png</string>
+ </void>
+ <void method="add">
+  <string>3d_file.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList4">
+ <void method="add">
+  <string>stats_pie_chart.png</string>
+ </void>
+ <void method="add">
+  <string>oil.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/stats_area_chart.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/focus_group.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/solution.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/3d_group.png</string>
+ </void>
+ <void method="add">
+  <string>stats_histogram.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/umbrella.png</string>
+ </void>
+ <void method="add">
+  <string>subfolder/multimple_solutions.png</string>
+ </void>
+</void>
+<void class="SessionData" id="Field0" method="getField">
+ <string>tags</string>
+ <void id="HashMap0" method="get">
+  <object idref="SessionData0"/>
+  <void method="put">
+   <string>Puzzle</string>
+   <object idref="ArrayList1"/>
+  </void>
+  <void method="put">
+   <string>Charts</string>
+   <object idref="ArrayList0"/>
+  </void>
+  <void method="put">
+   <string>Folders</string>
+   <object idref="ArrayList3"/>
+  </void>
+  <void method="put">
+   <string>Trash</string>
+   <object idref="ArrayList2"/>
+  </void>
+  <void method="put">
+   <string>Red</string>
+   <object idref="ArrayList4"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap0"/>
+</java>

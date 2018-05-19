@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 		addWindowListener(listener);
 		
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
-		tagPanel = new TagsPanel(session_);
+		tagPanel = new TagsPanel(session_, this);
 		
 		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tagPanel.scroller, imagesPanel);
 		

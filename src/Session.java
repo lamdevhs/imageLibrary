@@ -267,7 +267,7 @@ public class Session {
 		selectionState.notifyObservers();
 	}
 
-	public void addTag(Tag tag, boolean onlySelectedImages) {
+	public void addImagesToTag(Tag tag, boolean onlySelectedImages) {
 		if (tag == null || !this.tags.containsKey(tag.name)) {
 			return; // should never happen
 		}
@@ -280,7 +280,7 @@ public class Session {
 		refreshVisibleImages();
 	}
 
-	public void removeTag(Tag tag, boolean onlySelectedImages) {
+	public void removeImagesToTag(Tag tag, boolean onlySelectedImages) {
 		if (tag == null || !this.tags.containsKey(tag.name)) {
 			return; // should never happen
 		}
@@ -291,5 +291,30 @@ public class Session {
 			tag.images.removeAll(visibleImages);
 		}
 		refreshVisibleImages();
+	}
+
+	public int checkNewTagName(String name, Tag tag) {
+		if (name == null || name.compareTo("") == 0) {
+			return U.INVALID;
+		}
+		
+		// Checks the name isn't taken already
+		int i;
+		if (tags.containsKey(name) && tags.get(name) != tag) {
+			return U.IMPOSSIBLE;
+		}
+		
+		return U.OK;
+	}
+
+	// this function should never be called without first
+	// having checked the validity of name and folder.
+	public void addNewTag(String name) {
+		// creating new tag
+		Tag t = new Tag(name);
+
+		tags.put(name, t);
+		
+		filteringState.notifyObservers();
 	}
 }

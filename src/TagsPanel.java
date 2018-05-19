@@ -12,8 +12,10 @@ public class TagsPanel extends JPanel implements Observer {
 	private static void log(String s) {
 		U.log("(TagsPanel) " + s);
 	}
-	Session session;
-	public JScrollPane scroller; 
+	private Session session;
+	private JFrame frame;
+	
+	public JScrollPane scroller;
 	private Listener listener = new Listener();
 
 	// westPanel
@@ -24,18 +26,23 @@ public class TagsPanel extends JPanel implements Observer {
 	private JPanel tagsPanel = new JPanel();
 	private Box tagsBox = Box.createVerticalBox();
 	
-	private JPopupMenu tagMenu = new JPopupMenu();
+	private JPopupMenu oneTagMenu = new JPopupMenu();
 	private JMenuItem addToSel = new JMenuItem("Add to Selected Images");
 	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
 	private JMenuItem addToVisible = new JMenuItem("Add to Filtered Images");
 	private JMenuItem rmvFromVisible = new JMenuItem("Remove from Filtered Images");
 
+	private JButton menuButton = new JButton("Menu");
+	private JPopupMenu generalMenu = new JPopupMenu();
+	private JMenuItem newTag = new JMenuItem("Create New Tag");
+	
 	// eastPanel
 	private JPanel filtersPanel = new JPanel();
 	private Box filtersBox = Box.createVerticalBox();
 	
-	public TagsPanel(Session session_) {
+	public TagsPanel(Session session_, JFrame frame_) {
 		session = session_;
+		frame = frame_;
 		JLabel padding =  new JLabel("                               ");
 		JLabel padding2 = new JLabel("                               ");
 		
@@ -44,16 +51,21 @@ public class TagsPanel extends JPanel implements Observer {
 		rmvFromSel.addActionListener(listener);
 		rmvFromVisible.addActionListener(listener);
 
-		tagMenu.add(addToSel);
-		tagMenu.add(addToVisible);
-		tagMenu.addSeparator();
-		tagMenu.add(rmvFromSel);
-		tagMenu.add(rmvFromVisible);
+		newTag.addActionListener(listener);
+
+		oneTagMenu.add(addToSel);
+		oneTagMenu.add(addToVisible);
+		oneTagMenu.addSeparator();
+		oneTagMenu.add(rmvFromSel);
+		oneTagMenu.add(rmvFromVisible);
 		
 		wrapper.setLayout(new BorderLayout());
 		
+		menuButton.addActionListener(listener);
+		generalMenu.add(newTag);
+
 		aboveTagsBox.setLayout(new BorderLayout());
-		//aboveTagsBox.add(U.centered(new JButton("New")), BorderLayout.NORTH);
+		aboveTagsBox.add(U.centered(menuButton), BorderLayout.NORTH);
 		aboveTagsBox.add(U.centered(new JLabel("Search:")), BorderLayout.CENTER);
 		aboveTagsBox.add(searchBox, BorderLayout.SOUTH);
 		wrapper.add(aboveTagsBox, BorderLayout.CENTER);
@@ -130,10 +142,41 @@ public class TagsPanel extends JPanel implements Observer {
 		refresh();
 	}
 	
-	// public void refreshLayout() {
-	// 	log("ping refresh layout");
-	// 	return;
-	// }
+	public void createNewTag() {
+		log("ping: createNewTag");
+		String msg = "Name for the new tag :";
+		String name = U.input(frame, msg);
+		if (name == null) {
+			log("abandon");
+			return;
+		}
+		// else
+		log("name chosen: " + name);
+
+		int report = session.checkNewTagName(name, null);
+		log("report on name chosen: " + report);
+		if (report != U.OK) {
+			namingTagError(report);
+			return;
+		}
+
+		// else
+		session.addNewTag(name);
+		
+		// nothing to do -- Observer pattern will update
+		// `this` TagsPanel
+	}
+
+	private void namingTagError(int error) {
+		String errmsg = "A user error was encountered.";
+		if (error == U.IMPOSSIBLE) {
+			errmsg = "A tag with that name already exists.";
+		}
+		else if (error == U.INVALID) {
+			errmsg = "The given name is not a valid tag name.";
+		}
+		U.error(frame, errmsg);
+	}
 
 	private class Listener
 	implements DocumentListener, MouseListener, ActionListener, ComponentListener {
@@ -143,17 +186,25 @@ public class TagsPanel extends JPanel implements Observer {
 		@Override
 		public void actionPerformed(ActionEvent ev) {
 			Object source = ev.getSource();
-			if (source == addToSel) {
-				session.addTag(selectedTag, true);
+			if (source == menuButton) {
+				generalMenu.show((Component)source,
+					0, menuButton.getHeight());
+			}
+			else if (source == newTag) {
+				createNewTag();
+			}
+		// oneTagMenu:
+			else if (source == addToSel) {
+				session.addImagesToTag(selectedTag, true);
 			}
 			else if (source == rmvFromSel) {
-				session.removeTag(selectedTag, true);
+				session.removeImagesToTag(selectedTag, true);
 			}
 			else if (source == addToVisible) {
-				session.addTag(selectedTag, false);
+				session.addImagesToTag(selectedTag, false);
 			}
 			else if (source == rmvFromVisible) {
-				session.removeTag(selectedTag, false);
+				session.removeImagesToTag(selectedTag, false);
 			}
 		}
 		
@@ -186,7 +237,7 @@ public class TagsPanel extends JPanel implements Observer {
 				else if (SwingUtilities.isRightMouseButton(ev)) {
 					log("ping rightClick on tag");
 					this.selectedTag = tagview.tag;
-					tagMenu.show(ev.getComponent(), ev.getX(), ev.getY());
+					oneTagMenu.show(ev.getComponent(), ev.getX(), ev.getY());
 				}
 			}
 			else if (source instanceof FilterView) {
