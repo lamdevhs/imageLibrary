@@ -118,7 +118,9 @@ public class LeftSidePanel extends JPanel implements Observer {
 		Iterator<Tag> tag_iter = session.tags.values().iterator();
 		while (tag_iter.hasNext()) {
 			Tag tag = tag_iter.next();
-			if (tag.name.contains(search)) {
+			if (tag.name.contains(search)
+			&& !session.filters.containsKey(tag.name))
+			{
 				TagView tagview = new TagView(tag);
 				tagview.addMouseListener(listener);
 				tagsBox.add(tagview);
