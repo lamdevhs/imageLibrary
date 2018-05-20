@@ -4,10 +4,6 @@ import javax.swing.*;
 
 
 public class App {
-	public static void main(String[] args) {
-		new App("appdata");
-	}
-
 	public static void log(String string) {
 		U.log("(App) " + string);
 	}
