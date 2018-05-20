@@ -228,6 +228,13 @@ public class Session {
 			refreshVisibleImages();
 		}
 	}
+	
+	public void renameFilter(String oldName, String newName) {
+		if (filters.containsKey(oldName)) {
+			filters.put(newName, filters.remove(oldName));
+			refreshVisibleImages();
+		}
+	}
 
 	// add or remove image to selection (toggle behavior)
 	public void changeSelection(ImageModel image) {
@@ -282,9 +289,10 @@ public class Session {
 		if (name == null || name.compareTo("") == 0) {
 			return U.INVALID;
 		}
-		
+		log("name to check = " + name);
 		// Checks the name isn't taken already (by another tag)
 		if (tags.containsKey(name) && tags.get(name) != tag) {
+			log("name impossible!");
 			return U.IMPOSSIBLE;
 		}
 		
@@ -320,15 +328,16 @@ public class Session {
 			return 42; // should never happen
 
 		String oldName = tag.name;
-		int report = checkNewTagName(name, tag);
+		int report = checkNewTagName(newName, tag);
+		log("renameTag: report checkNewTagName = " + report);
 		
 		if (report == U.OK) { // new name is valid
+			log("report is OK!");
 			tag.name = newName; // we do the renaming
 			tags.remove(oldName);
 			tags.put(newName, tag);
 			if (filters.containsKey(oldName)) {
-				removeFilter(oldName);
-				addFilter(newName, false);
+				renameFilter(oldName, newName);
 				// ^ will notifyObservers() by itself
 			}
 			else {

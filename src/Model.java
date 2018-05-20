@@ -74,13 +74,13 @@ public class Model extends Observable {
 	}
 
 	// The output is a report on potential failure.
-	public int renameSession(String name, int sessionIndex) {
+	public int renameSession(String newName, int sessionIndex) {
 		Session s = allSessions.get(sessionIndex);
 		String oldName = s.name;
-		int report = checkNewSessionName(name, s);
+		int report = checkNewSessionName(newName, s);
 		
 		if (report == U.OK) { // valid new name
-			s.name = name; // we do the renaming
+			s.name = newName; // we do the renaming
 			File oldSessionFile = new File(locator.sessionFile(oldName));
 			if (oldSessionFile.exists()) {
 				log("renameSession: old file exists");
