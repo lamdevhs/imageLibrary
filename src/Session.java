@@ -100,7 +100,7 @@ public class Session {
 		HashMap<String, ImageModel> newImages = new HashMap<String, ImageModel>();
 		readFolder(folder, newImages);
 		this.images = newImages;
-		deleteOldImages();
+		removeInvalidImageModels();
 		log("readFolder says: " + newImages.toString());
 		refreshVisibleImages();
 		return U.OK;
@@ -118,7 +118,8 @@ public class Session {
 	}
 	
 	private HashMap<String, ArrayList<String>> saveTags() {
-		HashMap<String,ArrayList<String>> data = new HashMap<String,ArrayList<String>>();
+		HashMap<String,ArrayList<String>> data =
+			new HashMap<String,ArrayList<String>>();
 		Iterator<Tag> tag_iter = tags.values().iterator();
 		while(tag_iter.hasNext()) {
 			Tag tag = tag_iter.next();
@@ -188,7 +189,11 @@ public class Session {
 		}
 	}
 	
-	private void deleteOldImages() {
+	// The session data file can reference tags
+	// containing images that in reality don't exist anymore
+	// this function gets rid of those ImageModels from the Tag.images
+	// fields of all tags that contain them.
+	private void removeInvalidImageModels() {
 		Iterator<String> tag_iter = tags.keySet().iterator();
 		while(tag_iter.hasNext()) {
 		// for each tag: remove all images which don't exist anymore
@@ -223,6 +228,7 @@ public class Session {
 		}
 	}
 
+	// add or remove image to selection (toggle behavior)
 	public void changeSelection(ImageModel image) {
 		if (image == null || !visibleImages.contains(image)
 				|| !visibleImages.contains(image)) {
@@ -252,7 +258,7 @@ public class Session {
 		refreshVisibleImages();
 	}
 
-	public void removeImagesToTag(Tag tag, boolean onlySelectedImages) {
+	public void removeImagesFromTag(Tag tag, boolean onlySelectedImages) {
 		if (tag == null || !this.tags.containsKey(tag.name)) {
 			return; // should never happen
 		}

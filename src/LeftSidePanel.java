@@ -239,13 +239,13 @@ public class LeftSidePanel extends JPanel implements Observer {
 				session.addImagesToTag(selectedTag, true);
 			}
 			else if (source == rmvFromSel) {
-				session.removeImagesToTag(selectedTag, true);
+				session.removeImagesFromTag(selectedTag, true);
 			}
 			else if (source == addToVisible) {
 				session.addImagesToTag(selectedTag, false);
 			}
 			else if (source == rmvFromVisible) {
-				session.removeImagesToTag(selectedTag, false);
+				session.removeImagesFromTag(selectedTag, false);
 			}
 			else if (source == renameTag) {
 				renameTag(selectedTag);

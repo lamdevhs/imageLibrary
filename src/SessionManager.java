@@ -8,7 +8,8 @@ import java.util.Observer;
 import javax.swing.*;
 import javax.swing.border.*;
 
-
+// Dialog box used to open/create/delete/rename/fix a Session,
+// and of course quit the application.
 public class SessionManager extends JFrame implements Observer {
 	public static void log(String string) {
 		U.log("(SessionManager) " + string);

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_171" class="java.beans.XMLDecoder">
+ <object class="SessionData" id="SessionData0">
+  <void class="SessionData" method="getField">
+   <string>name</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>Wallpapers</string>
+   </void>
+  </void>
+  <void class="SessionData" method="getField">
+   <string>folder</string>
+   <void method="set">
+    <object idref="SessionData0"/>
+    <string>/opt/demo_area.ln/wallpapers</string>
+   </void>
+  </void>
+ </object>
+<void class="java.util.ArrayList" id="ArrayList0">
+ <void method="add">
+  <string>swamp on a clear day.jpg</string>
+ </void>
+ <void method="add">
+  <string>ladybug.jpg</string>
+ </void>
+ <void method="add">
+  <string>tree of fire.jpg</string>
+ </void>
+ <void method="add">
+  <string>whiskers.jpg</string>
+ </void>
+ <void method="add">
+  <string>are you nuts.jpg</string>
+ </void>
+ <void method="add">
+  <string>waterfall-dark.jpg</string>
+ </void>
+ <void method="add">
+  <string>tortoise.jpg</string>
+ </void>
+ <void method="add">
+  <string>aspic.jpg</string>
+ </void>
+ <void method="add">
+  <string>waterfall-blue-sky.jpg</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList1">
+ <void method="add">
+  <string>paris.jpg</string>
+ </void>
+ <void method="add">
+  <string>water under the bridge.jpg</string>
+ </void>
+ <void method="add">
+  <string>bridge.jpg</string>
+ </void>
+ <void method="add">
+  <string>out-for-a-walk2.jpg</string>
+ </void>
+ <void method="add">
+  <string>dark street.jpg</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList2">
+ <void method="add">
+  <string>piano.jpg</string>
+ </void>
+ <void method="add">
+  <string>guitarre.jpg</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList3">
+ <void method="add">
+  <string>swamp on a clear day.jpg</string>
+ </void>
+ <void method="add">
+  <string>water under the bridge.jpg</string>
+ </void>
+ <void method="add">
+  <string>lighthouse.jpg</string>
+ </void>
+ <void method="add">
+  <string>waterfall-blue-sky.jpg</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList4">
+ <void method="add">
+  <string>werewolf.jpg</string>
+ </void>
+ <void method="add">
+  <string>dark street.jpg</string>
+ </void>
+</void>
+<void class="SessionData" id="Field0" method="getField">
+ <string>tags</string>
+ <void id="HashMap0" method="get">
+  <object idref="SessionData0"/>
+  <void method="put">
+   <string>Bridges</string>
+   <object class="java.util.ArrayList"/>
+  </void>
+  <void method="put">
+   <string>Water</string>
+   <object idref="ArrayList3"/>
+  </void>
+  <void method="put">
+   <string>Nature</string>
+   <object idref="ArrayList0"/>
+  </void>
+  <void method="put">
+   <string>Urban</string>
+   <object idref="ArrayList1"/>
+  </void>
+  <void method="put">
+   <string>Animals</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>ladybug.jpg</string>
+    </void>
+    <void method="add">
+     <string>whiskers.jpg</string>
+    </void>
+    <void method="add">
+     <string>are you nuts.jpg</string>
+    </void>
+    <void method="add">
+     <string>tortoise.jpg</string>
+    </void>
+    <void method="add">
+     <string>aspic.jpg</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Night</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>dark street.jpg</string>
+    </void>
+    <void method="add">
+     <string>colosseum.jpg</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Dawn</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>paris.jpg</string>
+    </void>
+    <void method="add">
+     <string>bridge.jpg</string>
+    </void>
+    <void method="add">
+     <string>tree of fire.jpg</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Insects</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>ladybug.jpg</string>
+    </void>
+    <void method="add">
+     <string>aspic.jpg</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Music</string>
+   <object idref="ArrayList2"/>
+  </void>
+  <void method="put">
+   <string>Moonlight</string>
+   <object idref="ArrayList4"/>
+  </void>
+  <void method="put">
+   <string>Space</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>werewolf.jpg</string>
+    </void>
+    <void method="add">
+     <string>water under the bridge.jpg</string>
+    </void>
+    <void method="add">
+     <string>bridge.jpg</string>
+    </void>
+    <void method="add">
+     <string>out-for-a-walk2.jpg</string>
+    </void>
+    <void method="add">
+     <string>nebula.jpg</string>
+    </void>
+    <void method="add">
+     <string>out-for-a-walk.jpg</string>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="HashMap0"/>
+</java>

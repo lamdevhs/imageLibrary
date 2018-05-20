@@ -8,6 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+// Intermediate class used to store the long-term important
+// data of a Session before writing it to its datafile.
+// Reversely, is also the class used to read the data from a
+// session datafile before creating a Session object from it,
+// using Session.fromData()
 public class SessionData implements Serializable {
 	/**
 	 * 

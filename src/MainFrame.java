@@ -4,7 +4,9 @@ import java.io.File;
 
 import javax.swing.*;
 
-
+// The application's main frame, which displays the images 
+// of the folder of the opened session, along with offering
+// tag-based options of filtering, and several kinds of sorting.
 public class MainFrame extends JFrame {
 
 	public static void log(String string) {
