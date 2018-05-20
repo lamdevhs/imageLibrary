@@ -340,9 +340,9 @@ public class Session {
 	}
 
 	public String title() {
-		String s = "[ " + this.name;
+		String s = this.name;
 		if (U.checkValidFolder(this.folder) != U.OK)
 			return s; // should not happen
-		return s + " ] - - - [ " + this.folder.getAbsolutePath() + " ]";
+		return s + "  ||  " + this.folder.getAbsolutePath();
 	}
 }

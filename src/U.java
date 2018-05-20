@@ -165,4 +165,10 @@ public class U {
 		return "\"" + name + "\"";
 	}
 
+	public static JMenuItem deadMenu(String string) {
+		JMenuItem item = new JMenuItem(string);
+		item.setEnabled(false);
+		return item;
+	}
+
 }

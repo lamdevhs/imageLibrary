@@ -33,10 +33,10 @@ public class LeftSidePanel extends JPanel implements Observer {
 	
 	// == menus
 	private JPopupMenu oneTagMenu = new JPopupMenu();
-	private JMenuItem addToSel = new JMenuItem("Add to Selected Images");
-	private JMenuItem rmvFromSel = new JMenuItem("Remove from Selected Images");
-	private JMenuItem addToVisible = new JMenuItem("Add to Filtered Images");
-	private JMenuItem rmvFromVisible = new JMenuItem("Remove from Filtered Images");
+	private JMenuItem addToSel = new JMenuItem("Selected Images");
+	private JMenuItem rmvFromSel = new JMenuItem("Selected Images");
+	private JMenuItem addToVisible = new JMenuItem("All Images");
+	private JMenuItem rmvFromVisible = new JMenuItem("All Images");
 	private JMenuItem renameTag = new JMenuItem("Rename Tag");
 	private JMenuItem delTag = new JMenuItem("Delete Tag");
 
@@ -51,17 +51,26 @@ public class LeftSidePanel extends JPanel implements Observer {
 		JLabel padding2 = new JLabel("                               ");
 		
 		addToSel.addActionListener(listener);
+		addToSel.setToolTipText("Add this tag to all the selected images on the right side.");
 		addToVisible.addActionListener(listener);
+		addToVisible.setToolTipText("Add this tag to all the filtered images. "
+				+ "The filtered images are those displayed on the right side");
 		rmvFromSel.addActionListener(listener);
+		rmvFromSel.setToolTipText("Remove this tag from all the selected images on the right side.");
 		rmvFromVisible.addActionListener(listener);
+		rmvFromVisible.setToolTipText("Remove this tag from all the filtered images. "
+				+ "The filtered images are those displayed on the right side");
 		renameTag.addActionListener(listener);
 		delTag.addActionListener(listener);
 
 		newTag.addActionListener(listener);
 
+		oneTagMenu.add(U.deadMenu("Add Tag to Images:"));
 		oneTagMenu.add(addToSel);
 		oneTagMenu.add(addToVisible);
 		oneTagMenu.addSeparator();
+
+		oneTagMenu.add(U.deadMenu("Remove Tag from Images:"));
 		oneTagMenu.add(rmvFromSel);
 		oneTagMenu.add(rmvFromVisible);
 		oneTagMenu.addSeparator();

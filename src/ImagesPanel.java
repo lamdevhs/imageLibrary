@@ -53,11 +53,9 @@ public class ImagesPanel extends JPanel implements Observer {
 		sortByWidth.addActionListener(listener);
 		selectNone.addActionListener(listener);
 
-		JMenuItem sortBy = new JMenuItem("Sort by:");
-		sortBy.setEnabled(false);
 		panelMenu.add(selectNone);
 		panelMenu.addSeparator();
-		panelMenu.add(sortBy);
+		panelMenu.add(U.deadMenu("Sort by:"));
 		panelMenu.add(sortByName);
 		panelMenu.add(sortByPath);
 		panelMenu.add(sortBySize);
