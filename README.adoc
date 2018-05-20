@@ -1,4 +1,66 @@
-= ImgLibrary
+= Gestionnaire d’une banque d’images - Projet Java
 [2017 2018] [L2 Info] [Nathanael Bayard]
 
 Bibliothèque d'images gérée par tags, écrite en Java.
+
+== Comment lancer la démo
+
+Au démarrage, la fenêtre de gestion des sessions s'ouvre, et propose une liste de sessions à ouvrir.
+Les dossiers associés aux sessions préexistantes (un dossier par session) dans cette liste ne seront pas là où l'application les attend. Il vous faudra donc changer le dossier de chaque session en choisissant le dossier dans demo_area/ qui porte le même nom que la session en question.
+
+Exemple : Avant d'ouvrir la session 'Wallpaper', sélectionnez-la et faites "Change Folder", puis choisissez "demo_area/wallpaper". Si vous ne le faîtes pas avant de tenter d'ouvrir la session, une fenêtre popup d'erreur s'affichera, et la session ne s'ouvrira pas.
+
+== Description Générale
+
+Liste des Fonctionalités Implémentées::
+- Données conservées entre deux ouvertures
+- Gestion de plusieurs sessions: création, suppression, renommage
+- Le changement du dossier d'une session est possible pour l'utilisateur, en cas de déplacement/renomage de celui-ci
+- Un seul dossier par session, cependant les images des sous-dossiers sont aussi prises en compte par l'application
+- Création/Suppression/Renommage de tags, qui correspondent à des ensembles (mathématiques) d'images, sans hiérarchie (par contraste avec les modes de classement par répertoires)
+- Recherche dans la liste les tags par zone de texte, mise à jour instantanée des résultats au fur et à mesure de la saisie
+- Association d'images aux tags, et l'opération inverse évidemment
+- Filtrage par intersection de tags: à tout instant, les images visibles dans la zone centrale (le panneau d'images) sont celles qui sont associées à tous les tags de la liste des filtres (zone supérieure du panneau latéral de la fenêtre principale)
+- Tri des images filtrées possible par nom/chemin relatif/taille/largeur/hauteur
+- Différents niveaux de zoom sur les images
+
+Mécanismes de l'UI::
+- Le bouton Menu du panneau de gauche ouvre un menu qui permet de créer un nouveau tag.
+- La suppression et le renommage de tags se font par clic droit sur le tag en question
+- L'association d'une image sélectionnée, ou de toutes les images filtrées à un tag se fait aussi par clic droit sur le tag en question ; de même que l'opération inverse de séparation
+- Les filtres sont ajoutés ou retirés par clic gauche sur un tag, dans le panneau de gauche
+- Les images sont sélectionnées par clic gauche sur l'image, désélectionnées de la même manière
+- Clic droit dans le panneau des images permet de choisir le mode de tri, et de désélectionner toutes les images
+- Le zoom est géré par molette de souris lorsque le curseur est au dessus du panneau des images.
+- Les informations d'une image survolée par le curseur (chemin, nom, taille) sont affichées dans la barre d'informations juste au dessus de la zone centrale
+
+== Architecture de l'Application
+
+L'architecture est de type MVC au sens de la séparation entre l'UI et les données internes qui définissent l'état abstrait de l'application.
+
+La gestion des évènements graphiques est faite au travers du mécanisme bien pratiques de classes internes, ce qui permet un accès direct (interne) aux composants graphiques des classes qui gèrent l'UI, depuis l'intérieur des méthodes des classes internes qui répondent aux évènements générés par l'UI, sans pour autant mélanger la gestion graphique et la gestion évènementielle.
+
+La mise à jour de l'UI en fonction des changements que subit la partie Modèle est gérée avec le pattern Observable-Observer. Trois instances de Observables sont d'ailleurs utilisés dans Session, au lieu d'une seule, pour minimiser les mises à jour inutiles et séparer les types de changements que peut subir la partie Modèle de l'application.
+
+== Structure Interne de l'Application
+
+Classes principales de la partie "Modèle" de l'application::
+- Model: représente le modèle de toute l'application. Elle contient une liste de Session. Elle est Observée par la JFrame SessionManage.
+- Session: représente le modèle d'une seule session, et de tout ce qui s'y rapporte : tags, images sélectionnées, etc. Elle est observée par le LeftSidePanel et l'ImagesPanel.
+- ImageModel: le modèle représentant une seule image
+- Tag: le modèle représentant un tag, et contenant un ensemble d'images.
+
+
+Classes principales de la partie "UI" de l'application::
+- SessionManager: Gestionnaire des sessions. Observe la classe Model. Première JFrame affichée au démarrage de l'application. Fermer cette fenêtre provoque la fermeture de l'application.
+- MainFrame: Fenêtre principale, qui remplace le SessionManager lorsque l'utilisateur ouvre une session. Permet d'afficher, de classer et de trier les images contenues dans le dossier de la session, et de ses sous-dossiers. Les données importantes sont automatiquement enregistrées lors de la fermeture de l'application. Fermer cette fenêtre provoque le réaffichage du SessionManager. Les données éphémères (liste des filtres, images sélectionnées, mode de classement) sont conservées jusqu'à la fermeture totale de l'application (depuis la fenêtre du SessionManager).
+- ImagesPanel: C'est la zone centrale de la MainFrame, comprenant la zone où sont affichées les images (displayArea), et la barre d'infos au NORD (ImageInfoBar)
+- LeftSidePanel: C'est la zone de filtrage (le panneau de gauche de la MainFrame), où l'utilisateur peut créer/détruire des tags, les renommer, les associer avec des images, et les placer dans la liste des filtres pour n'afficher dans le panneau des images que les images qui sont taggés par tous les filtres (intersection).
+
+La classe App gère la création et destruction de fenêtres, et est responsable de la gestion des évènements qui concernent toute l'application: ouverture/fermeture d'une session, fermeture de l'application. C'est donc la classe de Contrôle principale de l'application.
+
+La classe Locator est utilisée pour déterminer le chemin des fichiers de configurations de l'application (qui sont dans appdata/). C'est un moyen d'éviter d'inscrire directement dans le code là où ces fichiers sont censés être.
+
+La classe ImageViewList est une extension de ArrayList<ImageView> qui permet de trier par algorithme quicksort "en place", et par différents critères (nom, taille, etc), une liste de vues d'images (ImageView).
+
+Le fichier appdata/sessions.xml contient une liste de sessions connues de l'application. Les fichiers dans appdata/sessions/ sont les fichiers de données de chaque session, créés à partir de la sérialisation de SessionData, qui est une classe intermédiaire entre la classe Session (qui représente une session en activité) et les données de celle-ci choisies pour être conservées sur fichier entre deux ouvertures de l'application.

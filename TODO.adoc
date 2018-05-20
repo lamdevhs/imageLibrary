@@ -4,11 +4,17 @@
 - [x] offensive indentation
 - [x] window titles
 - [x] commented code
-- keySet()
+- [x] keySet()
+- (x] SessionManager.this?
+- [x] rename TagsPanel
+- [x] class Main
+- [ ] good demos
+
+Final::
+- [ ] delete peripheral files, like this one (then go back here to check this box)
+- [ ] clean up logging
 - // TODOes
-- SessionManager.this?
-- check everything at the end
-- condense unused methods
+- check everything works at the end
 
 == Minimal objective
 
@@ -19,10 +25,25 @@
 
 == Optional objectives
 
-- unselect all
-- create new tag from selection
+- [x] unselect all
+- [ ] new tag from selection
+- [ ] sort tags by name
+- [ ] something async to read images, instead of buffered?
+- [ ] app icon?
 
-== general
+== TODO in README
+
+What to mention.
+
+- Layout (WrapLayout too)
+- structure of app (MVC, etc)
+- Functionalities (esp: popup menus)
+- appdata + how to try the demo
+- explain locator + quicksort
+- basic program flow
+
+== Misc Todoes
+
 - [x] SessionUI -> SessionManager
 - [x] get rid of sessionsList: redundancy is evil
 - [x] TODO remove sessionIndex argument from nameSession()
@@ -30,18 +51,10 @@
 - [x] move "new" button of SessionManager to West panel
 - [x] put all_sessions.xml outside sessions / folder
 - [x] ? all_sessions.xml -> sessions.xml
-- [ ] ? write accessor to get a session from its index? (and return null if fails)
-- [ ] model must check all_sessions.xml doesn contain twice the same session name
-- [ ] friendly message to guide the user in the session manager
-- [ ] add button in session manager to change a session's folder
-- [ ] check validity of SessionData before creating a session out of it!!!
-- [ ] only add images whose relative paths truly put them in the given folder (aka no symlinks) +
-  or... make so the relative path is the key unless it is a symlinked image
-  (in which case we give its absolute path)
-- [ ] create a demo_area, put the pics inside
-
+- [x] add button in session manager to change a session's folder
+- [x] create a demo_area, put the pics inside
 - [x] user can choose zoom value
-- [ ] remove TagsPanel.refreshLayout() and the corresponding Listener if not used in the end
+- [x] remove TagsPanel.refreshLayout() and the corresponding Listener if not used in the end
 
 == Model
 
@@ -56,41 +69,11 @@
 
 - [x] folders
 - [x] add/delete
-- [ ] fix folders
+- [x] fix folders
 - [x] warning when a folder can't be read
-- [ ] ? view to manage folders
-- [x] images from folders
-
-== ImageModel
-
-- [x] maybe allow ImageModels to know of the tags they are tagged with.
-  It would make deleteOldImages() much more efficient,
-  and it'll probably be useful at some further point.
-
-
-== View
-
-- SessionManager
-** Model Observer
-
-- MainFrame
-** layout
-** menus
-** Picture View
-
-- Picture info window
+- [x] get images from folders
 
 == Global (app-wise)
 
 - [x] class App
-- [x] class Paths
-
-== README
-
-What to mention.
-
-- Layout (WrapLayout too)
-- structure of app (MVC, etc)
-- Functionalities (esp: popup menus)
-- appdata + how to try the demo
-- basic program flow
+- [x] class Locator
