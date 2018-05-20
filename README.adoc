@@ -27,7 +27,7 @@ Liste des Fonctionalités Implémentées::
 Mécanismes de l'UI::
 - Le bouton Menu du panneau de gauche ouvre un menu qui permet de créer un nouveau tag.
 - La suppression et le renommage de tags se font par clic droit sur le tag en question
-- L'association d'une image sélectionnée, ou de toutes les images filtrées à un tag se fait aussi par clic droit sur le tag en question ; de même que l'opération inverse de séparation
+- L'association d'une image sélectionnée (ou de toutes les images filtrées) avec un tag, se fait aussi par clic droit sur le tag en question ; de même que l'opération inverse de 'dissociation' (retirer le tag des images)
 - Les filtres sont ajoutés ou retirés par clic gauche sur un tag, dans le panneau de gauche
 - Les images sont sélectionnées par clic gauche sur l'image, désélectionnées de la même manière
 - Clic droit dans le panneau des images permet de choisir le mode de tri, et de désélectionner toutes les images
