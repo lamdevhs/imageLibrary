@@ -24,49 +24,19 @@
    <string>Start Here</string>
    <object class="java.util.ArrayList">
     <void method="add">
-     <string>128x128/places/start-here-sabayon.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-knoppix.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-kubuntu.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-debian.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-freebsd.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-slax.png</string>
-    </void>
-    <void method="add">
      <string>128x128/places/start-here-mageia.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-gentoo.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-pardus.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-mandriva.png</string>
     </void>
     <void method="add">
      <string>128x128/places/start-here-mepis.png</string>
     </void>
     <void method="add">
-     <string>128x128/places/start-here-aptosid.png</string>
+     <string>128x128/places/start-here-pardus.png</string>
     </void>
     <void method="add">
-     <string>128x128/places/start-here-pclinuxos.png</string>
+     <string>128x128/places/start-here-gentoo.png</string>
     </void>
     <void method="add">
-     <string>128x128/places/start-here-suse.png</string>
-    </void>
-    <void method="add">
-     <string>128x128/places/start-here-arch.png</string>
+     <string>128x128/places/start-here-mandriva.png</string>
     </void>
     <void method="add">
      <string>128x128/places/start-here-fedora.png</string>
@@ -75,16 +45,46 @@
      <string>128x128/places/start-here-kde.png</string>
     </void>
     <void method="add">
-     <string>128x128/places/start-here-mint.png</string>
+     <string>128x128/places/start-here-kubuntu.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-arch.png</string>
     </void>
     <void method="add">
      <string>128x128/places/start-here-chakra.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-sabayon.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-knoppix.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-aptosid.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-mint.png</string>
     </void>
     <void method="add">
      <string>128x128/places/start-here-frugalware.png</string>
     </void>
     <void method="add">
      <string>128x128/places/start-here-slackware.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-slax.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-debian.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-pclinuxos.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-freebsd.png</string>
+    </void>
+    <void method="add">
+     <string>128x128/places/start-here-suse.png</string>
     </void>
    </object>
   </void>

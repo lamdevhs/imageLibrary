@@ -18,16 +18,58 @@
  </object>
 <void class="java.util.ArrayList" id="ArrayList0">
  <void method="add">
-  <string>BackToSchool_IconSet/coffee.png</string>
+  <string>BackToSchool_IconSet/ramen.png</string>
  </void>
  <void method="add">
-  <string>BackToSchool_IconSet/nutri-grain.png</string>
+  <string>BackToSchool_IconSet/coffee.png</string>
  </void>
  <void method="add">
   <string>BackToSchool_IconSet/bfast.png</string>
  </void>
  <void method="add">
-  <string>BackToSchool_IconSet/ramen.png</string>
+  <string>BackToSchool_IconSet/nutri-grain.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList1">
+ <void method="add">
+  <string>BackToSchool_IconSet/ps.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/ai.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/dw.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList2">
+ <void method="add">
+  <string>some subfolder/3d_group.png</string>
+ </void>
+ <void method="add">
+  <string>some subfolder/client_user.png</string>
+ </void>
+ <void method="add">
+  <string>some subfolder/focus_group.png</string>
+ </void>
+</void>
+<void class="java.util.ArrayList" id="ArrayList3">
+ <void method="add">
+  <string>BackToSchool_IconSet/note.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/mail.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/printer.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/doc.png</string>
+ </void>
+ <void method="add">
+  <string>some subfolder/task.png</string>
+ </void>
+ <void method="add">
+  <string>BackToSchool_IconSet/typeddoc.png</string>
  </void>
 </void>
 <void class="SessionData" id="Field0" method="getField">
@@ -36,40 +78,11 @@
   <object idref="SessionData0"/>
   <void method="put">
    <string>Papers</string>
-   <object class="java.util.ArrayList">
-    <void method="add">
-     <string>BackToSchool_IconSet/note.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/typeddoc.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/mail.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/doc.png</string>
-    </void>
-    <void method="add">
-     <string>some subfolder/task.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/printer.png</string>
-    </void>
-   </object>
+   <object idref="ArrayList3"/>
   </void>
   <void method="put">
    <string>People</string>
-   <object class="java.util.ArrayList">
-    <void method="add">
-     <string>some subfolder/3d_group.png</string>
-    </void>
-    <void method="add">
-     <string>some subfolder/focus_group.png</string>
-    </void>
-    <void method="add">
-     <string>some subfolder/client_user.png</string>
-    </void>
-   </object>
+   <object idref="ArrayList2"/>
   </void>
   <void method="put">
    <string>Trash</string>
@@ -78,19 +91,19 @@
      <string>some subfolder/3d_trash_can.png</string>
     </void>
     <void method="add">
-     <string>some subfolder/service_waste_disposal.png</string>
+     <string>some subfolder/3d_trash_can_full.png</string>
     </void>
     <void method="add">
-     <string>some subfolder/3d_trash_can_empting-copia.png</string>
+     <string>some subfolder/service_waste_disposal.png</string>
     </void>
     <void method="add">
      <string>BackToSchool_IconSet/trash_full.png</string>
     </void>
     <void method="add">
-     <string>BackToSchool_IconSet/trash_empty.png</string>
+     <string>some subfolder/3d_trash_can_empting-copia.png</string>
     </void>
     <void method="add">
-     <string>some subfolder/3d_trash_can_full.png</string>
+     <string>BackToSchool_IconSet/trash_empty.png</string>
     </void>
    </object>
   </void>
@@ -100,17 +113,7 @@
   </void>
   <void method="put">
    <string>Applications</string>
-   <object class="java.util.ArrayList">
-    <void method="add">
-     <string>BackToSchool_IconSet/ps.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/ai.png</string>
-    </void>
-    <void method="add">
-     <string>BackToSchool_IconSet/dw.png</string>
-    </void>
-   </object>
+   <object idref="ArrayList1"/>
   </void>
  </void>
 </void>

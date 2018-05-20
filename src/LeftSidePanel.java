@@ -105,6 +105,7 @@ public class LeftSidePanel extends JPanel implements Observer {
 		
 		searchBox.getDocument().addDocumentListener(listener);
 		session.filteringState.addObserver(this);
+		session.tagsState.addObserver(this);
 		refresh();
 	}
 

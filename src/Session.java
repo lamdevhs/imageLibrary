@@ -45,6 +45,7 @@ public class Session {
 
 	public Observed selectionState = new Observed();
 	public Observed filteringState = new Observed();
+	public Observed tagsState = new Observed();
 	
 
 	public Session(String name_, String folderPath_, File folder_) {
@@ -255,7 +256,10 @@ public class Session {
 		else {
 			tag.images.addAll(visibleImages);
 		}
-		refreshVisibleImages();
+		if (filters.containsKey(tag.name))
+			refreshVisibleImages();
+		else
+			tagsState.notifyObservers();
 	}
 
 	public void removeImagesFromTag(Tag tag, boolean onlySelectedImages) {
@@ -268,7 +272,10 @@ public class Session {
 		else {
 			tag.images.removeAll(visibleImages);
 		}
-		refreshVisibleImages();
+		if (filters.containsKey(tag.name))
+			refreshVisibleImages();
+		else
+			tagsState.notifyObservers();
 	}
 
 	public int checkNewTagName(String name, Tag tag) {
@@ -290,7 +297,7 @@ public class Session {
 		// creating new tag
 		Tag t = new Tag(name);
 		tags.put(name, t);
-		filteringState.notifyObservers();
+		tagsState.notifyObservers();
 	}
 
 	public void deleteTag(Tag tag) {
@@ -300,10 +307,11 @@ public class Session {
 		tags.remove(tag.name);
 		if (filters.containsKey(tag.name)) {
 			removeFilter(tag.name);
-			// ^ will notifyObservers() by itself
+			// ^ will call filteringState.notifyObservers()
+			// by itself
 		}
 		else {
-			filteringState.notifyObservers();
+			tagsState.notifyObservers();
 		}
 	}
 
@@ -324,7 +332,7 @@ public class Session {
 				// ^ will notifyObservers() by itself
 			}
 			else {
-				filteringState.notifyObservers();
+				tagsState.notifyObservers();
 			}
 		}
 		log("renameTag: report = " + report);
