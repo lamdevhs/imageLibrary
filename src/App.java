@@ -19,9 +19,8 @@ public class App {
 	}
 	
 	public void quit(JFrame caller) {
-		//int answer = U.confirm(caller, "Are you sure you want to quit?");
-		//if (answer != JOptionPane.YES_OPTION) return;
-		// TODO ^ uncomment
+		int answer = U.confirm(caller, "Are you sure you want to quit?");
+		if (answer != JOptionPane.YES_OPTION) return;
 		model.save();
 		log("quit app");
 		System.exit(0);

@@ -24,24 +24,24 @@ public class SessionManager extends JFrame implements Observer {
 	private Listener listener = new Listener();
 	
 	// Center
-		private JScrollPane sessionsPane;
-		private JList sessions;
+	private JScrollPane sessionsPane;
+	private JList sessions;
 
 	// West
-		private JPanel west = new JPanel();
-		private JButton rename = new JButton("Rename");
-		private JButton delete = new JButton("Delete");
-		private JButton create = new JButton("New");
-		private JButton changeFolder = new JButton("Change Folder");
+	private JPanel west = new JPanel();
+	private JButton rename = new JButton("Rename");
+	private JButton delete = new JButton("Delete");
+	private JButton create = new JButton("New");
+	private JButton changeFolder = new JButton("Change Folder");
 
 	// South
-		private Box south = Box.createHorizontalBox();
-		private JButton quit = new JButton("Quit");
-		private JButton open = new JButton("Open");
+	private Box south = Box.createHorizontalBox();
+	private JButton quit = new JButton("Quit");
+	private JButton open = new JButton("Open");
 
 	// North
-		private JPanel north = new JPanel();
-		private JLabel text = new JLabel("Session Manager");
+	private JPanel north = new JPanel();
+	private JLabel text = new JLabel("Session Manager");
 	
 	public SessionManager(App app_, Model model_) {
 		
@@ -201,7 +201,7 @@ public class SessionManager extends JFrame implements Observer {
 	public void changeSessionFolder(int sessionIndex) {
 		log("changeSessionFolder");
 		File folder = U.folderDialog(this,
-			"Choose the session's image folder", null);
+			"Choose the session's image folder", "./");
 		if (U.checkValidFolder(folder) != U.OK)
 		{
 			log("folderDialog -> is null ? " + (folder == null));

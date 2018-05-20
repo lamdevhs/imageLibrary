@@ -120,14 +120,14 @@ public class U {
 		return true;
 	}
 
-	public static File folderDialog(JFrame owner, String title, File dir) {
+	public static File folderDialog(JFrame owner, String title, String dir) {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogType(JFileChooser.OPEN_DIALOG);
 		chooser.setDialogTitle(title);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setCurrentDirectory(new File("/opt/demo_area.ln"));
-		// if (dir != null) chooser.setCurrentDirectory(dir);
-		// ^ TODO uncomment in the end
+		// chooser.setCurrentDirectory(new File("/opt/demo_area.ln"));
+		// TODO ^ delete
+		if (dir != null) chooser.setCurrentDirectory(new File(dir));
 		
 		int report = chooser.showOpenDialog(owner);
 		if (report != JFileChooser.APPROVE_OPTION) return null;

@@ -8,7 +8,7 @@
 - (x] SessionManager.this?
 - [x] rename TagsPanel
 - [x] class Main
-- [ ] good demos
+- [x] good demos
 
 Final::
 - [ ] delete peripheral files, like this one (then go back here to check this box)
