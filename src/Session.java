@@ -167,7 +167,7 @@ public class Session {
 			}
 			else {
 				// is it an image?
-				BufferedImage buffered = ImageModel.readImage(file);
+				BufferedImage buffered = U.readImage(file);
 				if (buffered == null) continue;
 				
 				// else: it's an image
@@ -343,6 +343,6 @@ public class Session {
 		String s = this.name;
 		if (U.checkValidFolder(this.folder) != U.OK)
 			return s; // should not happen
-		return s + "  ||  " + this.folder.getAbsolutePath();
+		return s + "  -  " + this.folder.getAbsolutePath();
 	}
 }

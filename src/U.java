@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -10,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -169,6 +171,19 @@ public class U {
 		JMenuItem item = new JMenuItem(string);
 		item.setEnabled(false);
 		return item;
+	}
+	
+	public static BufferedImage readImage(File file) {
+		try {
+			BufferedImage bim = ImageIO.read(file);
+			return bim;
+		}
+		catch (IOException ioe) {
+			return null; // file is probably not an image
+		}
+		catch (IllegalArgumentException iae) {
+			return null;
+		}
 	}
 
 }

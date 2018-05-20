@@ -47,9 +47,12 @@ public class SessionManager extends JFrame implements Observer {
 		
 		model = model_;
 		app = app_;
+		
+		app.setIcon(this);
+		
 		Dimension buttonDim = changeFolder.getPreferredSize();
 
-		setTitle("Session Manager");
+		setTitle("Image Library  -  Session Manager");
 		setSize(500,400);
 		setLocationRelativeTo(null); // center frame on screen
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

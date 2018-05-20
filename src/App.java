@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.*;
@@ -9,9 +10,10 @@ public class App {
 	}
 
 	Model model;
+	Locator locator;
 	
 	App(String rootpath) {
-		Locator locator = new Locator(rootpath);
+		locator = new Locator(rootpath);
 		model = new Model(locator);
 		openSessionManager(null);
 	}
@@ -52,6 +54,11 @@ public class App {
 		if (caller != null) caller.dispose();
 		log("close session");
 		openSessionManager(null);
+	}
+
+	public void setIcon(JFrame frame) {
+		BufferedImage icon = U.readImage(new File(locator.app_icon));
+		if (icon != null) frame.setIconImage(icon);
 	}
 
 

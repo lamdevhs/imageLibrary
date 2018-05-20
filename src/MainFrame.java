@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.*;
@@ -26,7 +27,8 @@ public class MainFrame extends JFrame {
 		app = app_;
 		session = session_;
 		
-		setTitle("ImgLibrary - - - " + session.title());
+		app.setIcon(this);
+		setTitle("Image Library  -  " + session.title());
 		setSize(1000,800);
 		setLocationRelativeTo(null); // center the frame on screen
 		addWindowListener(listener);

@@ -16,19 +16,6 @@ public class ImageModel {
 	public ImageModel(String key_) {
 		key = key_;
 	}
-	
-	public static BufferedImage readImage(File file) {
-		try {
-			BufferedImage bim = ImageIO.read(file);
-			return bim;
-		}
-		catch (IOException ioe) {
-			return null; // file is probably not an image
-		}
-		catch (IllegalArgumentException iae) {
-			return null;
-		}
-	}
 
 	public static String getImageKey(String rootPath, File file) {
 		String path = file.getAbsolutePath();

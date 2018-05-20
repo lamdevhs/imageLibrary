@@ -7,11 +7,13 @@ public class Locator {
 	public String root;
 	public String sessionsFolder = "sessions";
 	public String all_sessions = "sessions.xml";
+	public String app_icon = "app_icon.png";
 	
 	Locator(String root_) {
 		root = root_;
 		sessionsFolder = U.catPaths(root, sessionsFolder);
 		all_sessions = U.catPaths(root, all_sessions);
+		app_icon = U.catPaths(root, app_icon);
 	}
 	
 	// returns the path of the datafile of the session whose

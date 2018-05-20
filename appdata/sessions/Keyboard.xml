@@ -16,196 +16,6 @@
    </void>
   </void>
  </object>
-<void class="java.util.ArrayList" id="ArrayList0">
- <void method="add">
-  <string>j.png</string>
- </void>
- <void method="add">
-  <string>p.png</string>
- </void>
- <void method="add">
-  <string>folder_a/q.png</string>
- </void>
- <void method="add">
-  <string>m.png</string>
- </void>
- <void method="add">
-  <string>o.png</string>
- </void>
- <void method="add">
-  <string>folder_a/y.png</string>
- </void>
- <void method="add">
-  <string>folder_a/u.png</string>
- </void>
- <void method="add">
-  <string>f.png</string>
- </void>
- <void method="add">
-  <string>k.png</string>
- </void>
- <void method="add">
-  <string>a.png</string>
- </void>
- <void method="add">
-  <string>folder_a/s.png</string>
- </void>
- <void method="add">
-  <string>folder_a/z.png</string>
- </void>
- <void method="add">
-  <string>d.png</string>
- </void>
- <void method="add">
-  <string>folder_a/w.png</string>
- </void>
- <void method="add">
-  <string>folder_a/t.png</string>
- </void>
- <void method="add">
-  <string>l.png</string>
- </void>
- <void method="add">
-  <string>folder_a/v.png</string>
- </void>
- <void method="add">
-  <string>folder_a/r.png</string>
- </void>
- <void method="add">
-  <string>g.png</string>
- </void>
- <void method="add">
-  <string>h.png</string>
- </void>
- <void method="add">
-  <string>i.png</string>
- </void>
- <void method="add">
-  <string>b.png</string>
- </void>
- <void method="add">
-  <string>folder_a/x.png</string>
- </void>
- <void method="add">
-  <string>n.png</string>
- </void>
- <void method="add">
-  <string>c.png</string>
- </void>
- <void method="add">
-  <string>e.png</string>
- </void>
-</void>
-<void class="java.util.ArrayList" id="ArrayList1">
- <void method="add">
-  <string>4.png</string>
- </void>
- <void method="add">
-  <string>j.png</string>
- </void>
- <void method="add">
-  <string>p.png</string>
- </void>
- <void method="add">
-  <string>9.png</string>
- </void>
- <void method="add">
-  <string>folder_a/q.png</string>
- </void>
- <void method="add">
-  <string>m.png</string>
- </void>
- <void method="add">
-  <string>o.png</string>
- </void>
- <void method="add">
-  <string>2.png</string>
- </void>
- <void method="add">
-  <string>folder_a/y.png</string>
- </void>
- <void method="add">
-  <string>folder_a/u.png</string>
- </void>
- <void method="add">
-  <string>f.png</string>
- </void>
- <void method="add">
-  <string>k.png</string>
- </void>
- <void method="add">
-  <string>a.png</string>
- </void>
- <void method="add">
-  <string>folder_a/s.png</string>
- </void>
- <void method="add">
-  <string>6.png</string>
- </void>
- <void method="add">
-  <string>8.png</string>
- </void>
- <void method="add">
-  <string>folder_a/z.png</string>
- </void>
- <void method="add">
-  <string>d.png</string>
- </void>
- <void method="add">
-  <string>folder_a/w.png</string>
- </void>
- <void method="add">
-  <string>folder_a/t.png</string>
- </void>
- <void method="add">
-  <string>1.png</string>
- </void>
- <void method="add">
-  <string>l.png</string>
- </void>
- <void method="add">
-  <string>folder_a/v.png</string>
- </void>
- <void method="add">
-  <string>folder_a/r.png</string>
- </void>
- <void method="add">
-  <string>g.png</string>
- </void>
- <void method="add">
-  <string>h.png</string>
- </void>
- <void method="add">
-  <string>5.png</string>
- </void>
- <void method="add">
-  <string>i.png</string>
- </void>
- <void method="add">
-  <string>b.png</string>
- </void>
- <void method="add">
-  <string>folder_a/x.png</string>
- </void>
- <void method="add">
-  <string>n.png</string>
- </void>
- <void method="add">
-  <string>c.png</string>
- </void>
- <void method="add">
-  <string>0.png</string>
- </void>
- <void method="add">
-  <string>3.png</string>
- </void>
- <void method="add">
-  <string>7.png</string>
- </void>
- <void method="add">
-  <string>e.png</string>
- </void>
-</void>
 <void class="SessionData" id="Field0" method="getField">
  <string>tags</string>
  <void id="HashMap0" method="get">
@@ -217,13 +27,13 @@
      <string>droite.png</string>
     </void>
     <void method="add">
-     <string>gauche.png</string>
-    </void>
-    <void method="add">
      <string>haut.png</string>
     </void>
     <void method="add">
      <string>bas.png</string>
+    </void>
+    <void method="add">
+     <string>gauche.png</string>
     </void>
    </object>
   </void>
@@ -231,7 +41,13 @@
    <string>numbers</string>
    <object class="java.util.ArrayList">
     <void method="add">
+     <string>0.png</string>
+    </void>
+    <void method="add">
      <string>9.png</string>
+    </void>
+    <void method="add">
+     <string>6.png</string>
     </void>
     <void method="add">
      <string>5.png</string>
@@ -246,29 +62,211 @@
      <string>4.png</string>
     </void>
     <void method="add">
-     <string>0.png</string>
-    </void>
-    <void method="add">
      <string>7.png</string>
     </void>
     <void method="add">
-     <string>6.png</string>
+     <string>8.png</string>
     </void>
     <void method="add">
      <string>3.png</string>
-    </void>
-    <void method="add">
-     <string>8.png</string>
     </void>
    </object>
   </void>
   <void method="put">
    <string>alphadecimal</string>
-   <object idref="ArrayList1"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>e.png</string>
+    </void>
+    <void method="add">
+     <string>2.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/v.png</string>
+    </void>
+    <void method="add">
+     <string>h.png</string>
+    </void>
+    <void method="add">
+     <string>0.png</string>
+    </void>
+    <void method="add">
+     <string>g.png</string>
+    </void>
+    <void method="add">
+     <string>l.png</string>
+    </void>
+    <void method="add">
+     <string>f.png</string>
+    </void>
+    <void method="add">
+     <string>6.png</string>
+    </void>
+    <void method="add">
+     <string>k.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/r.png</string>
+    </void>
+    <void method="add">
+     <string>m.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/x.png</string>
+    </void>
+    <void method="add">
+     <string>c.png</string>
+    </void>
+    <void method="add">
+     <string>7.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/w.png</string>
+    </void>
+    <void method="add">
+     <string>3.png</string>
+    </void>
+    <void method="add">
+     <string>b.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/u.png</string>
+    </void>
+    <void method="add">
+     <string>d.png</string>
+    </void>
+    <void method="add">
+     <string>n.png</string>
+    </void>
+    <void method="add">
+     <string>5.png</string>
+    </void>
+    <void method="add">
+     <string>o.png</string>
+    </void>
+    <void method="add">
+     <string>a.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/z.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/s.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/t.png</string>
+    </void>
+    <void method="add">
+     <string>9.png</string>
+    </void>
+    <void method="add">
+     <string>j.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/q.png</string>
+    </void>
+    <void method="add">
+     <string>p.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/y.png</string>
+    </void>
+    <void method="add">
+     <string>i.png</string>
+    </void>
+    <void method="add">
+     <string>1.png</string>
+    </void>
+    <void method="add">
+     <string>8.png</string>
+    </void>
+    <void method="add">
+     <string>4.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>letters</string>
-   <object idref="ArrayList0"/>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <string>e.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/v.png</string>
+    </void>
+    <void method="add">
+     <string>h.png</string>
+    </void>
+    <void method="add">
+     <string>g.png</string>
+    </void>
+    <void method="add">
+     <string>l.png</string>
+    </void>
+    <void method="add">
+     <string>f.png</string>
+    </void>
+    <void method="add">
+     <string>k.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/r.png</string>
+    </void>
+    <void method="add">
+     <string>m.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/x.png</string>
+    </void>
+    <void method="add">
+     <string>c.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/w.png</string>
+    </void>
+    <void method="add">
+     <string>b.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/u.png</string>
+    </void>
+    <void method="add">
+     <string>d.png</string>
+    </void>
+    <void method="add">
+     <string>n.png</string>
+    </void>
+    <void method="add">
+     <string>o.png</string>
+    </void>
+    <void method="add">
+     <string>a.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/z.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/s.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/t.png</string>
+    </void>
+    <void method="add">
+     <string>j.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/q.png</string>
+    </void>
+    <void method="add">
+     <string>p.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/y.png</string>
+    </void>
+    <void method="add">
+     <string>i.png</string>
+    </void>
+   </object>
   </void>
   <void method="put">
    <string>symbols</string>
@@ -277,49 +275,28 @@
      <string>dollar.png</string>
     </void>
     <void method="add">
-     <string>cube.png</string>
-    </void>
-    <void method="add">
-     <string>1.png</string>
-    </void>
-    <void method="add">
      <string>+.png</string>
-    </void>
-    <void method="add">
-     <string>4.png</string>
-    </void>
-    <void method="add">
-     <string>folder_b/pourcentage.png</string>
-    </void>
-    <void method="add">
-     <string>folder_a/slash.png</string>
-    </void>
-    <void method="add">
-     <string>micro.png</string>
-    </void>
-    <void method="add">
-     <string>interrogation.png</string>
-    </void>
-    <void method="add">
-     <string>exclamation.png</string>
-    </void>
-    <void method="add">
-     <string>9.png</string>
-    </void>
-    <void method="add">
-     <string>degree.png</string>
-    </void>
-    <void method="add">
-     <string>folder_a/trema.png</string>
     </void>
     <void method="add">
      <string>5.png</string>
     </void>
     <void method="add">
+     <string>cube.png</string>
+    </void>
+    <void method="add">
      <string>2.png</string>
     </void>
     <void method="add">
+     <string>micro.png</string>
+    </void>
+    <void method="add">
      <string>carre.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/trema.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/slash.png</string>
     </void>
     <void method="add">
      <string>folder_a/puissance 1.png</string>
@@ -328,19 +305,40 @@
      <string>0.png</string>
     </void>
     <void method="add">
-     <string>7.png</string>
-    </void>
-    <void method="add">
-     <string>3.png</string>
-    </void>
-    <void method="add">
-     <string>6.png</string>
+     <string>folder_b/pourcentage.png</string>
     </void>
     <void method="add">
      <string>folder_b/point.png</string>
     </void>
     <void method="add">
+     <string>9.png</string>
+    </void>
+    <void method="add">
+     <string>6.png</string>
+    </void>
+    <void method="add">
+     <string>interrogation.png</string>
+    </void>
+    <void method="add">
+     <string>degree.png</string>
+    </void>
+    <void method="add">
+     <string>1.png</string>
+    </void>
+    <void method="add">
+     <string>4.png</string>
+    </void>
+    <void method="add">
      <string>8.png</string>
+    </void>
+    <void method="add">
+     <string>7.png</string>
+    </void>
+    <void method="add">
+     <string>exclamation.png</string>
+    </void>
+    <void method="add">
+     <string>3.png</string>
     </void>
    </object>
   </void>
@@ -348,37 +346,22 @@
    <string>specials</string>
    <object class="java.util.ArrayList">
     <void method="add">
-     <string>folder_b/page up.png</string>
-    </void>
-    <void method="add">
-     <string>inser.png</string>
-    </void>
-    <void method="add">
-     <string>page down.png</string>
-    </void>
-    <void method="add">
      <string>droite.png</string>
-    </void>
-    <void method="add">
-     <string>impr ecran.png</string>
-    </void>
-    <void method="add">
-     <string>esc.png</string>
     </void>
     <void method="add">
      <string>alt gr.png</string>
     </void>
     <void method="add">
+     <string>folder_a/retour arriere.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/verr num.png</string>
+    </void>
+    <void method="add">
+     <string>haut.png</string>
+    </void>
+    <void method="add">
      <string>alt.png</string>
-    </void>
-    <void method="add">
-     <string>maj.png</string>
-    </void>
-    <void method="add">
-     <string>gauche.png</string>
-    </void>
-    <void method="add">
-     <string>debut.png</string>
     </void>
     <void method="add">
      <string>fin.png</string>
@@ -387,31 +370,46 @@
      <string>espace.png</string>
     </void>
     <void method="add">
-     <string>folder_a/verr num.png</string>
-    </void>
-    <void method="add">
-     <string>ctrl.png</string>
-    </void>
-    <void method="add">
-     <string>folder_a/retour arriere.png</string>
-    </void>
-    <void method="add">
-     <string>folder_a/tab.png</string>
-    </void>
-    <void method="add">
-     <string>haut.png</string>
-    </void>
-    <void method="add">
      <string>entree.png</string>
+    </void>
+    <void method="add">
+     <string>inser.png</string>
+    </void>
+    <void method="add">
+     <string>impr ecran.png</string>
     </void>
     <void method="add">
      <string>bas.png</string>
     </void>
     <void method="add">
-     <string>folder_b/pause attn.png</string>
+     <string>gauche.png</string>
+    </void>
+    <void method="add">
+     <string>folder_a/tab.png</string>
+    </void>
+    <void method="add">
+     <string>ctrl.png</string>
+    </void>
+    <void method="add">
+     <string>maj.png</string>
     </void>
     <void method="add">
      <string>folder_a/verr maj.png</string>
+    </void>
+    <void method="add">
+     <string>folder_b/pause attn.png</string>
+    </void>
+    <void method="add">
+     <string>debut.png</string>
+    </void>
+    <void method="add">
+     <string>esc.png</string>
+    </void>
+    <void method="add">
+     <string>page down.png</string>
+    </void>
+    <void method="add">
+     <string>folder_b/page up.png</string>
     </void>
    </object>
   </void>
