@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 
 	private Listener listener = new Listener();
 	
-	private TagsPanel tagPanel;
+	private LeftSidePanel leftSidePanel;
 	private ImagesPanel imagesPanel;
 	private UpperPanel upperPanel;
 
@@ -30,11 +30,11 @@ public class MainFrame extends JFrame {
 		addWindowListener(listener);
 		
 		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
-		tagPanel = new TagsPanel(session_, this);
+		leftSidePanel = new LeftSidePanel(session_, this);
 		
 		JSplitPane center = new JSplitPane(
 			JSplitPane.HORIZONTAL_SPLIT,
-			tagPanel.scroller,
+			leftSidePanel.scroller,
 			imagesPanel);
 		
 		add(center, BorderLayout.CENTER);

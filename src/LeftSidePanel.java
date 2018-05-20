@@ -9,9 +9,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 
-public class TagsPanel extends JPanel implements Observer {
+public class LeftSidePanel extends JPanel implements Observer {
 	private static void log(String s) {
-		U.log("(TagsPanel) " + s);
+		U.log("(LeftSidePanel) " + s);
 	}
 	private Session session;
 	private JFrame frame;
@@ -44,7 +44,7 @@ public class TagsPanel extends JPanel implements Observer {
 	private JPopupMenu generalMenu = new JPopupMenu();
 	private JMenuItem newTag = new JMenuItem("Create New Tag");
 	
-	public TagsPanel(Session session_, JFrame frame_) {
+	public LeftSidePanel(Session session_, JFrame frame_) {
 		session = session_;
 		frame = frame_;
 		JLabel padding =  new JLabel("                               ");
@@ -166,7 +166,7 @@ public class TagsPanel extends JPanel implements Observer {
 		session.addNewTag(name);
 		
 		// nothing to do -- Observer pattern will update
-		// `this` TagsPanel
+		// `this` LeftSidePanel
 	}
 
 	private void renameTag(Tag tag) {
