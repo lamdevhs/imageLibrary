@@ -24,6 +24,7 @@ public class Session {
 
 	public String name;
 	public File folder;
+	public String folderPath;
 
 	// writing code in Java is like writing
 	// your phone number in binary...
@@ -46,14 +47,15 @@ public class Session {
 	public Observed filteringState = new Observed();
 	
 
-	public Session(String name_, File folder_) {
+	public Session(String name_, String folderPath_, File folder_) {
 		name = name_;
+		folderPath = folderPath_;
 		folder = folder_;
 	}
 
 	public static Session fromData(SessionData data) {
 		File sessionFolder = (data.folder == null) ? null : new File(data.folder);
-		Session s = new Session(data.name, sessionFolder);
+		Session s = new Session(data.name, data.folder, sessionFolder);
 		s.readTagsData(data.tags);
 		return s;
 	}
@@ -107,10 +109,10 @@ public class Session {
 	public SessionData data() {
 		SessionData data = new SessionData();
 		data.name = name;
-		if (folder != null && U.checkValidFolder(folder) == U.OK)
+		if (U.checkValidFolder(folder) == U.OK)
 			data.folder = folder.getAbsolutePath();
 		else
-			data.folder = null;
+			data.folder = folderPath;
 		data.tags = saveTags();
 		return data;
 	}

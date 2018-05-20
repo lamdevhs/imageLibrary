@@ -88,10 +88,10 @@ public class SessionManager extends JFrame implements Observer {
 		// West
 		west.setLayout(new FlowLayout());
 		west.setPreferredSize(buttonDim);
+		west.add(changeFolder);
 		west.add(rename);
 		west.add(delete);
 		west.add(create);
-		west.add(changeFolder);
 		inside.add(west, BorderLayout.WEST);
 
 		// South
@@ -130,7 +130,7 @@ public class SessionManager extends JFrame implements Observer {
 		}
 
 		// else
-		int sessionIndex = model.addNewSession(name, null);
+		int sessionIndex = model.addNewSession(name, null, null);
 
 		changeSessionFolder(sessionIndex);
 		
@@ -200,14 +200,16 @@ public class SessionManager extends JFrame implements Observer {
 			"Choose the session's image folder", null);
 		if (U.checkValidFolder(folder) != U.OK)
 		{
-			log("folderDialog -> null");
-			U.error(this, "Warning: no valid folder was chosen.");
+			log("folderDialog -> is null ? " + (folder == null));
+			U.warning(this, "Warning: no valid folder was chosen.");
 		}
 		else {
 			log("folderDialog -> "+ folder.getAbsolutePath());
 		}
-		model.allSessions.get(sessionIndex).folder = folder; // can be null
 
+		Session session = model.allSessions.get(sessionIndex);
+		session.folderPath = (folder == null) ? null : folder.getAbsolutePath();
+		session.folder = folder; // can be null
 	}
 
 	@Override

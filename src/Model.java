@@ -60,9 +60,9 @@ public class Model extends Observable {
 
 	// this function should never be called without first
 	// having checked the validity of name and folder.
-	public int addNewSession(String name, File folder) {
+	public int addNewSession(String name, String folderPath, File folder) {
 		// creating new session
-		Session s = new Session(name, folder);
+		Session s = new Session(name, folderPath, folder);
 
 		int index = allSessions.size();
 		allSessions.add(s);

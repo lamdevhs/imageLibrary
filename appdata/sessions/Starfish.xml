@@ -5,14 +5,7 @@
    <string>name</string>
    <void method="set">
     <object idref="SessionData0"/>
-    <string>Test - Sorting by Name</string>
-   </void>
-  </void>
-  <void class="SessionData" method="getField">
-   <string>folder</string>
-   <void method="set">
-    <object idref="SessionData0"/>
-    <string>/opt/demo_area.ln/clavier</string>
+    <string>Starfish</string>
    </void>
   </void>
  </object>

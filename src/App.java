@@ -37,7 +37,10 @@ public class App {
 		int report = session.refresh();
 		if (report != U.OK) {
 			U.error(caller, "The folder of this session is invalid. "
-				+ "You must fix it from the Session Manager before opening it.");
+				+ (session.folderPath != null ?
+					"\nFolder path: " + session.folderPath
+				  :  "")
+				+ "\nYou must fix it from the Session Manager before opening it.");
 			return;
 		}
 		// else

@@ -19,7 +19,7 @@ public class ImageView extends JPanel {
 	}
 
 	public void display(int imgSize) {
-		imgSize -= 10;
+		imgSize -= 20;
 		if (imgSize <= 0) return;
 		int realh = model.buffered.getHeight();
 		int realw = model.buffered.getWidth();

@@ -46,6 +46,11 @@ public class U {
 		JOptionPane.showMessageDialog(owner, errmsg, "User Error",
 			JOptionPane.ERROR_MESSAGE);
 	}
+
+	public static void warning(JFrame owner, String errmsg) {
+		JOptionPane.showMessageDialog(owner, errmsg, "Warning",
+			JOptionPane.WARNING_MESSAGE);
+	}
 	
 	public static String input(JFrame owner, String msg) {
 		return JOptionPane.showInputDialog(owner, msg);
