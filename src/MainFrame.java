@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null); // center the frame on screen
 		addWindowListener(listener);
 		
-		imagesPanel = new ImagesPanel(session_, 3, 20, 20);
+		imagesPanel = new ImagesPanel(session_, 3, 15, 15);
 		leftSidePanel = new LeftSidePanel(session_, this);
 		
 		JSplitPane center = new JSplitPane(

@@ -19,6 +19,7 @@ public class U {
 	public static class Colors {
 		public static Color darkBG = new Color(39,40,34);
 		public static Color lightBG = new Color(219,229,239);
+		public static Color mediumBG = new Color(148,213,239);
 		public static Color lightBlue = new Color(102,217,239);
 		public static Color lightGreen = new Color(166,226,43);
 		public static Color magenta = new Color(249,38,97);

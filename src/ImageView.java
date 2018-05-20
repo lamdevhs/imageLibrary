@@ -25,16 +25,15 @@ public class ImageView extends JPanel {
 		int realw = model.buffered.getWidth();
 		double maxSize = Math.max(realh, realw);
 		double factor = (double)imgSize / maxSize;
-		int width = Math.min(imgSize, (int)(realw * factor));
-		int height = Math.min(imgSize, (int)(realh * factor));
+		int width = Math.min(Math.min(imgSize, (int)(realw * factor)), realw);
+		int height = Math.min(Math.min(imgSize, (int)(realh * factor)), realh);
 		Image scaled = model.buffered.getScaledInstance(
 			width, height, Image.SCALE_AREA_AVERAGING);
 		image.setIcon(new ImageIcon(scaled));
-		
 	}
 
 	public void setSelected(boolean isSelected) {
-		if (isSelected) this.setBackground(U.Colors.lightBG);
+		if (isSelected) this.setBackground(U.Colors.mediumBG);
 		else this.setBackground(Color.WHITE);
 	}
 }

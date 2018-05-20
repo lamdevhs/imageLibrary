@@ -221,13 +221,6 @@ public class ImagesPanel extends JPanel implements Observer {
 
 		@Override
 		public void mouseClicked(MouseEvent ev) {
-			Object source = ev.getSource();
-			if (SwingUtilities.isLeftMouseButton(ev)
-				&& source instanceof ImageView) {
-				ImageView image = (ImageView)source;
-				session.changeSelection(image.model);
-			}
-			
 		}
 
 		@Override
@@ -255,10 +248,14 @@ public class ImagesPanel extends JPanel implements Observer {
 		@Override
 		public void mouseReleased(MouseEvent ev) {
 			Component source = ev.getComponent();
-			if (SwingUtilities.isRightMouseButton(ev)
-				&& source == displayArea)
+			if (SwingUtilities.isRightMouseButton(ev))
 			{
 				panelMenu.show(source, ev.getX(), ev.getY());
+			}
+			else if (SwingUtilities.isLeftMouseButton(ev)
+				&& source instanceof ImageView) {
+				ImageView image = (ImageView)source;
+				session.changeSelection(image.model);
 			}
 		}
 		
