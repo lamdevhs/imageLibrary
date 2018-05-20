@@ -126,7 +126,6 @@ public class U {
 		chooser.setDialogTitle(title);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		// chooser.setCurrentDirectory(new File("/opt/demo_area.ln"));
-		// TODO ^ delete
 		if (dir != null) chooser.setCurrentDirectory(new File(dir));
 		
 		int report = chooser.showOpenDialog(owner);

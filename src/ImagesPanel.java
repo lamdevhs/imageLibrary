@@ -36,8 +36,6 @@ public class ImagesPanel extends JPanel implements Observer {
 
 	private ImageInfoBar infoBar = new ImageInfoBar();
 
-	//private int imageSize = 50;
-
 	public ImagesPanel(Session session_, int ncol_, int hpadding_, int vpadding_) {
 		session = session_;
 		hpadding = hpadding_;
